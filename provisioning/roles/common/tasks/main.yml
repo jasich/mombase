@@ -8,11 +8,3 @@
   apt: pkg=git state=present
   sudo: yes
   tags: common
-
-- name: Common | Create frontend directory 
-  command: chdir={{src_root}} mkdir {{web_project_name}}
-  tags: common
-
-- name: Common | Create express project directory
-  command: chdir={{src_root}} mkdir {{express_project_name}}
-  tags: common
