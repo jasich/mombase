@@ -1,0 +1,10 @@
+---
+- name: Express | Install Express
+  sudo: yes
+  npm: name=express global=yes
+  tags: express
+
+- name: Express | Initialize express application
+  sudo: yes
+  command: chdir={{src_root}}/{{express_project_name}} express .
+  tags: express

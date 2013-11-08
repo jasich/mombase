@@ -1,0 +1,11 @@
+---
+- hosts: all
+  user: vagrant
+
+  roles:
+    - common
+    - nodejs
+    - mongodb
+    - yo
+    - express
+    - nginx
