@@ -58,4 +58,13 @@ angular.module('webApp', [
       .otherwise({
         redirectTo: '/'
       });
-  });
+  })
+    .run(['$rootScope', '$location', '$http', '$cookies', function ($scope, $location, $http, $cookies) {
+        $scope.$on('$locationChangeStart', function (event) {
+          if(!($scope.isLoggedIn)){
+            return $location.path('login');
+          }
+        });
+
+       
+ }]);
