@@ -20,7 +20,14 @@ var volunteerSchema = mongoose.Schema({
   restrictions: [String],
   // Based on ISO-639-2  ( http://www.loc.gov/standards/iso639-2/php/code_list.php )
   languages: [String],
-  availability: [Date],
+
+  availability: [{
+    day: { type: Number, required: true},
+    // Time in seconds into the day (from midnight)
+    start: { type: Number, required: true},
+    end: Number
+  }],
+
   homeVisitLiason: Boolean
 });
 
