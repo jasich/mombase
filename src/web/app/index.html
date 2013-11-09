@@ -25,8 +25,15 @@
       <script src="bower_components/json3/lib/json3.min.js"></script>
     <![endif]-->
 
+    <div ng-controller="NavigationCtrl">
+        <div ng-include="'views/shared/navigation.html'"></div>
+    </div>
+
     <!-- Add your site or application content here -->
-    <div class="container" ng-view=""></div>
+    <div class="container" ng-view="">
+
+    </div>
+
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
@@ -67,6 +74,18 @@
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/login.js"></script>
+        <script src="scripts/controllers/register.js"></script>
+        <script src="scripts/controllers/mothers.js"></script>
+        <script src="scripts/controllers/mothers/new.js"></script>
+        <script src="scripts/controllers/mothers/edit.js"></script>
+        <script src="scripts/controllers/users.js"></script>
+        <script src="scripts/controllers/users/new.js"></script>
+        <script src="scripts/controllers/users/edit.js"></script>
+        <script src="scripts/controllers/volunteers.js"></script>
+        <script src="scripts/controllers/volunteers/new.js"></script>
+        <script src="scripts/controllers/volunteers/edit.js"></script>
+        <script src="scripts/controllers/navigation.js"></script>
+        <script src="scripts/directives/mbGo.js"></script>
         <!-- endbuild -->
 </body>
 </html>
