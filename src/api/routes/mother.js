@@ -8,7 +8,7 @@ exports.create = function( req, res ){
   var body = req.body;
 
   motherService.save( body, function( err, mother ) {
-    if ( err ) { return res.set( 500 ).send( ); }
+    if ( err ) return res.send( 500, 'failure');
 
     res.send(mother);
   });

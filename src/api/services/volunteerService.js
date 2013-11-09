@@ -16,7 +16,13 @@ VolunteerService.prototype = {
 	},
 	save: function( body, cb ) {
 		var volunteer = new Volunteer(body);
-		volunteer.save(cb);
+		Volunteer.findOne( { email: volunteer.email }, function( err, result ) {
+			if( result ) {
+				cb && cb( new Error('Duplicate Volunteer') );
+			} else {
+				volunteer.save(cb);
+			}
+		});
 	},
 	get: function( id, cb ) {
 		Volunteer.findOne( { _id: id }, cb );

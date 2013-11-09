@@ -51,15 +51,15 @@ app.get('/', routes.index);
 app.post('/api/users/login', user.login);
 app.post('/api/volunteer/create', volunteer.create);
 
-app.get('/api/mother', mother.get);
-app.post('/api/mother', mother.create);
-app.del('/api/mother', mother.del);
-app.post('/api/mother/search', mother.search);
+app.get('/api/mothers', mother.get);
+app.post('/api/mothers', mother.create);
+app.del('/api/mothers', mother.del);
+app.post('/api/mothers/search', mother.search);
 
-app.get('/api/volunteer', volunteer.get);
-app.post('/api/volunteer', volunteer.create);
-app.del('/api/volunteer', volunteer.del);
-app.post('/api/volunteer/search', volunteer.search);
+app.get('/api/volunteers', volunteer.get);
+app.post('/api/volunteers', volunteer.create);
+app.del('/api/volunteers', volunteer.del);
+app.post('/api/volunteers/search', volunteer.search);
 
 module.exports = app;
 

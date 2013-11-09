@@ -17,7 +17,14 @@ MotherService.prototype = {
   },
   save: function( data, cb ) {
     var mother = new Mother( data );
-    mother.save( cb );
+
+    Mother.findOne( { email: mother.email }, function( err, result ) {
+      if( result ) {
+        cb && cb( new Error('Duplicate Mother') );
+      } else {
+        mother.save( cb );
+      }
+    });
   },
   get: function( id, cb ) {
     Mother.findOne( { _id: id }, cb );
