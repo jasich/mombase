@@ -5,3 +5,4 @@ node_modules
 .sudo_as_admin_successful
 .cache
 .bash_history
+.npm
