@@ -6,8 +6,8 @@
     "grunt-cli": "latest"
   },
   "devDependencies": {
-  	"grunt-mocha-test":"latest"
-    "bcrypt": "0.7.7"
-    "mocha":"1.14.0"
+  	"grunt-mocha-test":"latest",
+    "bcrypt": "0.7.7",
+    "mocha": "1.14.0"
   }
 }
