@@ -8,3 +8,13 @@
   apt: pkg=git state=present
   sudo: yes
   tags: common
+
+- name: Common | Install ruby
+  apt: pkg=ruby
+  sudo: yes
+  tags: common
+
+- name: Common | Install compass
+  sudo: yes
+  gem: name=compass
+  tags: common
