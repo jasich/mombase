@@ -8,7 +8,6 @@ var that = null;
 
 MotherService.prototype = {
   save: function(data, cb) {
-    console.dir(data);
     var mother = new Mother(data);
 
     mother.save(cb);

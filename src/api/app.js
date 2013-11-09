@@ -12,6 +12,7 @@ var path = require('path');
 var mongoose = require('mongoose');
 var User = require('../lib/documents/user');
 var mother = require('./routes/mother');
+var volunteer = require('./routes/volunteer');
 
 mongoose.connect('mongodb://127.0.0.1:27017/momsbloom');
 
@@ -41,6 +42,9 @@ app.post('/api/volunteer/create', volunteer.create);
 
 app.get('/api/mother', mother.get);
 app.post('/api/mother', mother.create);
+
+app.get('/api/volunteer', volunteer.get);
+app.post('/api/volunteer', volunteer.create);
 
 exports.app = app;
 
