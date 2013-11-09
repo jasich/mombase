@@ -2,11 +2,11 @@ var assert = require("assert")
   , mongoose = require('mongoose')
   , User = require('../../lib/documents/user');
 
-mongoose.connect('mongodb://localhost/momtest');
 
 describe('User', function(){
 
   before(function() {
+    mongoose.connect('mongodb://localhost/momtest');
     User.collection.drop();
   });
 
@@ -26,6 +26,10 @@ describe('User', function(){
         done();
       });
     });
+  });
+
+  after(function(){
+    mongoose.disconnect();
   });
 
 });
