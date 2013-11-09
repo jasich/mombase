@@ -42,6 +42,8 @@ app.post('/api/volunteer/create', volunteer.create);
 
 app.get('/api/mother', mother.get);
 app.post('/api/mother', mother.create);
+app.del('/api/mother', mother.del);
+app.post('/api/mother/search', mother.search);
 
 app.get('/api/volunteer', volunteer.get);
 app.post('/api/volunteer', volunteer.create);

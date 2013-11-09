@@ -8,7 +8,7 @@ var Volunteer = require('../../lib/documents/volunteer'),
 exports.create = function(req, res){
 	var body = req.body;
 	volunteerService.save(body, function(err, result) {
-		if(err) throw err;
+		if ( err ) return res.set( 500 ).send( );
 		res.send(result);
 	});
 };
@@ -19,7 +19,7 @@ exports.create = function(req, res){
 exports.get = function(req, res){
 	var body = req.query;
 	volunteerService.get( body.id, function ( err, result ) {
-		if ( err ) throw err;
+		if ( err ) return res.set( 500 ).send( );
 		res.send( result );
 	});
 };
@@ -30,11 +30,14 @@ exports.get = function(req, res){
 exports.del = function(req, res){
 	var body = req.body;
 	volunteerService.delete(body.id, function(err, result) {
-		if(err) throw err;
+		if ( err ) return res.set( 500 ).send( );
 		res.send('success');
 	});
 };
 
+/**
+ * Search route
+ */
 exports.search = function(req, res) {
 	var body = req.body;
 	var i;
@@ -56,7 +59,7 @@ exports.search = function(req, res) {
 	}
 
 	volunteerService.all(filter, sort, body.offset, body.take, function(err, result) {
-		if(err) throw err;
+		if ( err ) return res.set( 500 ).send( );
 		res.send(result);
 	});
 }
