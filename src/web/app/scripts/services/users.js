@@ -1,7 +1,11 @@
-/**
- * Created with JetBrains PhpStorm.
- * User: rivardja
- * Date: 11/8/13
- * Time: 9:54 PM
- * To change this template use File | Settings | File Templates.
- */
+'use strict';
+
+angular.module('webApp')
+  .service('Users', function Users($resource, apiService) {
+    // AngularJS will instantiate a singleton by calling "new" on this function
+        var resource = $resource("api/users/:id/:action");
+
+        var service = apiService(resource, 'user');
+
+
+  });
