@@ -1,15 +1,19 @@
 ---
-- name: Node.js | Package prerequisites for node.js
-  apt: pkg=python-software-properties state=present
+- name: Node.js Install GNU-make
   sudo: yes
-  tags: nodejs
+  command: apt-get -y install make
 
-- name: Node.js | Add the Node.js PPA
-  apt_repository: repo='ppa:chris-lea/node.js' state=present
+- name: Node.js Install g++
   sudo: yes
-  tags: nodejs
+  command: apt-get -y install g++
 
-- name: Node.js | Install Node.js and npm
-  apt: pkg=nodejs update-cache=yes
+- name: Node.js Download node.js
+  command: wget http://nodejs.org/dist/v0.10.21/node-v0.10.21.tar.gz
+
+- name: Extract node
+  command: tar -xzf node-v0.10.21.tar.gz
+
+- name: Configure, make install
   sudo: yes
-  tags: nodejs
+  shell: cd ./node-v0.10.21;./configure;make;make install
+
