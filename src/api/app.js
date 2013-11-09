@@ -45,6 +45,7 @@ app.post('/api/mother', mother.create);
 
 app.get('/api/volunteer', volunteer.get);
 app.post('/api/volunteer', volunteer.create);
+app.del('/api/volunteer', volunteer.del);
 
 exports.app = app;
 

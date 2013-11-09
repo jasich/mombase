@@ -23,3 +23,14 @@ exports.get = function(req, res){
 		res.send(result);
 	});
 };
+
+/**
+ * Delete route
+ */
+exports.del = function(req, res){
+	var body = req.body;
+	volunteerService.delete(body.id, function(err, result) {
+		if(err) throw err;
+		res.send('success');
+	});
+};
