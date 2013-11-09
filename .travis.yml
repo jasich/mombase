@@ -10,5 +10,10 @@ before_script:
     - npm install mocha
     - cd src
     - npm install
+    - cd api
+    - npm install
+    - cd ../web
+    - npm install
+    - cd ../..
 
 script: mocha --recursive src/test/
