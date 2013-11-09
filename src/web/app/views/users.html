@@ -1,1 +1,40 @@
-<p>This is the users view.</p>
+
+
+<div class='page-header'>
+    <h1 class='page-title'>Users</h1>
+    <p class='page-description'>
+        This is a list of users
+    </p>
+</div>
+<div class='page-body'>
+    <div class='clearfix list-actions text-right'>
+        <a href='#/users/new' class='btn btn-primary'>New User</a>
+    </div>
+    <table class='table table-striped'>
+        <thead>
+        <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Active</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat='user in users'>
+            <td>{{user.username}}</td>
+            <td>
+                <a href='mailto:{{user.email}}'>{{user.email}}</a>
+            </td>
+            <td>{{user.active}}</td>
+            <td class='text-right'>
+                <a class='btn' ng-href='#/users/edit/{{user.id}}'>
+                    Edit
+                </a>
+                <a class='btn text-danger' confirm-click='Are you sure you want to delete this user?' ng-click='deleteUser(user.id)'>
+                    Delete
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

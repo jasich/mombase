@@ -1,1 +1,37 @@
-<p>This is the users/new view.</p>
+<div class='page-header'>
+    <h1 class='page-title'>Create New User</h1>
+    <p class='page-description'>
+        Use the form below to create a new user
+    </p>
+</div>
+<div class='page-body'>
+    <form name='newUser' novalidate="" ng-submit='save()'>
+        <div class='form-group'>
+            <label class='checkbox'>
+                <input type='checkbox' ng-model='user.active'/>
+                Is Active
+            </label>
+        </div>
+        <div class='form-group' ng-class='{"has-error": isFieldInvalid("username")}'>
+            <label>Username</label>
+            <input type='text' name='username' ng-required='true' class='form-control' ng-model='user.username'/>
+        </div>
+        <div class='form-group' ng-class='{"has-error": isFieldInvalid("email")}'>
+            <label>Email</label>
+            <input type='email' name='email' ng-required='true' class='form-control' ng-model='user.email'/>
+        </div>
+        <div class='form-group' ng-class='{"has-error": isFieldInvalid("password")}'>
+            <label>Password</label>
+            <input type='password' name='password' ng-required='true' class='form-control' ng-model='user.password'/>
+        </div>
+        <div class='form-group' ng-class='{"has-error": isFieldInvalid("confirmPassword")}'>
+            <label>Confirm Password</label>
+            <input type='password' name='confirmPassword' ng-required='true' same-as='user.password' class='form-control' ng-model='user.confirmPassword'/>
+        </div>
+
+        <div class='form-actions'>
+            <button class='btn btn-primary' ng-disabled='!isFormValid()'>Save User</button>
+            <a class='btn btn-link margin-left-5' href="#/users">Cancel</a>
+        </div>
+    </form>
+</div>

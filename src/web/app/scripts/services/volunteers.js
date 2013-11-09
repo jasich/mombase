@@ -1,7 +1,6 @@
-/**
- * Created with JetBrains PhpStorm.
- * User: rivardja
- * Date: 11/8/13
- * Time: 9:54 PM
- * To change this template use File | Settings | File Templates.
- */
+'use strict';
+
+angular.module('webApp')
+  .service('Volunteers', function Volunteers() {
+    // AngularJS will instantiate a singleton by calling "new" on this function
+  });
