@@ -1,5 +1,4 @@
-Getting MEAN with Vagrant and Ansible
-=====================================
+#Getting MEAN with Vagrant and Ansible [![Build Status](https://secure.travis-ci.org/OSTUSA/mombase.png?branch=master)](https://travis-ci.org/OSTUSA/mombase)
 
 This configuration will install the latest versions of MongoDB, Nginx, Node.js, Express, Yeoman, and the Yeoman Angular.js generator.
 
