@@ -67,6 +67,10 @@ angular.module('webApp', [
         templateUrl: 'views/volunteers/edit.html',
         controller: 'VolunteersEditCtrl'
       })
+      .when('/match', {
+        templateUrl: 'views/match.html',
+        controller: 'MatchCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
