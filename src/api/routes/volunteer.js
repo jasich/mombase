@@ -18,17 +18,10 @@ exports.create = function(req, res){
  */
 exports.get = function(req, res){
 	var body = req.query;
-	if ( body.id ) {
-		volunteerService.get( body.id, function ( err, result ) {
-			if ( err ) throw err;
-			res.send( result );
-		});
-	} else {
-		volunteerService.all( body.filter, body.sort, body.offset, body.take, function ( err, results ) {
-			if ( err ) throw err;
-			res.send( results );
-		});
-	}
+	volunteerService.get( body.id, function ( err, result ) {
+		if ( err ) throw err;
+		res.send( result );
+	});
 };
 
 /**
@@ -41,3 +34,20 @@ exports.del = function(req, res){
 		res.send('success');
 	});
 };
+
+exports.search = function(req, res) {
+	var body = req.body;
+	var filter = { };
+	var filterKeys = ['firstName', 'lastName'];
+	for(var i = filterKeys.length; i--;) {
+		if(body['filter.' + filterKeys[i]]) {
+			filter[filterKeys[i]] = body['filter.' + filterKeys[i]];
+		}
+	}
+	console.log(filter);
+
+	volunteerService.all(filter, body.sort, body.offset, body.take, function(err, result) {
+		if(err) throw err;
+		res.send(result);
+	});
+}

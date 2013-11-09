@@ -12,6 +12,7 @@ VolunteerService.prototype = {
 		var _filter = { }; if ( filter ) _filter = filter;
 		var _sort = { }; if ( sort ) _sort = sort;
 
+		console.log( _filter );
 		Volunteer.find( _filter, _sort, { skip: _offset, limit: _take }, cb );
 	},
 	save: function(body, cb) {
