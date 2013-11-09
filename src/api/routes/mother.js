@@ -15,7 +15,6 @@ exports.create = function(req, res){
 };
 
 exports.get = function(req, res) {
-
   motherService.get(function(err, mother){
     if (err) { return res.set(500).send(); }
 
