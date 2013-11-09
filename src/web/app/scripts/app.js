@@ -27,19 +27,7 @@ angular.module('webApp', [
         templateUrl: 'views/mothers/new.html',
         controller: 'MothersNewCtrl'
       })
-      .when('/donors', {
-        templateUrl: 'views/donors.html',
-        controller: 'DonorsCtrl'
-      })
-      .when('/donors/new', {
-        templateUrl: 'views/donors/new.html',
-        controller: 'DonorsNewCtrl'
-      })
-      .when('/donors/edit', {
-        templateUrl: 'views/donors/edit.html',
-        controller: 'DonorsEditCtrl'
-      })
-      .when('/mothers/edit', {
+      .when('/mothers/edit/:id', {
         templateUrl: 'views/mothers/edit.html',
         controller: 'MothersEditCtrl'
       })
@@ -51,7 +39,7 @@ angular.module('webApp', [
         templateUrl: 'views/users/new.html',
         controller: 'UsersNewCtrl'
       })
-      .when('/users/edit', {
+      .when('/users/edit/:id', {
         templateUrl: 'views/users/edit.html',
         controller: 'UsersEditCtrl'
       })
@@ -63,7 +51,7 @@ angular.module('webApp', [
         templateUrl: 'views/volunteers/new.html',
         controller: 'VolunteersNewCtrl'
       })
-      .when('/volunteers/edit', {
+      .when('/volunteers/edit/:id', {
         templateUrl: 'views/volunteers/edit.html',
         controller: 'VolunteersEditCtrl'
       })

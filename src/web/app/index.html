@@ -29,6 +29,9 @@
         <div ng-include="'views/shared/navigation.html'"></div>
     </div>
 
+    <div ng-include="'views/shared/alerts.html'"></div>
+
+
     <!-- Add your site or application content here -->
     <div class="container" ng-view="">
 
@@ -85,13 +88,20 @@
         <script src="scripts/controllers/volunteers/new.js"></script>
         <script src="scripts/controllers/volunteers/edit.js"></script>
         <script src="scripts/controllers/navigation.js"></script>
-        <script src="scripts/directives/mbGo.js"></script>
         <script src="scripts/controllers/match.js"></script>
         <script src="scripts/services/geoLocation.js"></script>
         <script src="scripts/services/error-handler.js"></script>
-        <script src="scripts/controllers/mom-map.js"></script>
+        <script src="scripts/services/mothers.js"></script>
+        <script src="scripts/services/volunteers.js"></script>
+        <script src="scripts/services/users.js"></script>
+        <script src="scripts/services/authentication.js"></script>
+        <script src="scripts/services/messenger.js"></script>
+        <script src="scripts/services/api-service.js"></script>
+        <script src="scripts/services/alerts.js"></script>
+        <script src="scripts/directives/confirm-click.js"></script>
+        <script src="scripts/directives/same-as.js"></script>
+        <script src="scripts/services/us-states.js"></script>
         <!-- endbuild -->
 
-	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 </body>
 </html>

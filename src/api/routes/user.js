@@ -31,8 +31,12 @@ passport.deserializeUser(function(id, done) {
  * Login route
  */
 exports.login = function(req, res){
-    passport.authenticate('local', { 
-        successRedirect: '/',
-        failureRedirect: '/login',
-        failureFlash: true });
+  passport.authenticate('local', function(err, user, info) {
+    if (err) { return next(err); }
+    if (!user) { return res.status(401).send(); }
+    req.logIn(user, function(err) {
+      if (err) { return next(err); }
+      res.send(user);
+    });
+  })(req, res, next);
 };
