@@ -1,4 +1,7 @@
 .vagrant
 vagrant_ansible_inventory_default
 node_modules
-
+.idea
+.sudo_as_admin_successful
+.cache
+.bash_history

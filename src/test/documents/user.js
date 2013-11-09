@@ -28,6 +28,14 @@ describe('User', function(){
         done();
       });
     });
+
+    it('should have a virtual id', function(done) {
+      var user = User.findOne({email:'brian@email.com'}, function(err, u) {
+        if (err) throw err;
+        assert.ok(u.id);
+        done();
+      });
+    });
   });
 
   describe('#comparePassword()', function() {
