@@ -14,7 +14,7 @@ var motherSchema = mongoose.Schema({
     zip : { type: Number },
     city : { type: String },
     state : { type: String }
-  },  
+  },
   // Children
   children: [ {
     firstName: { type: String, required: true },
