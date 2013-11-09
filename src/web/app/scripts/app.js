@@ -59,15 +59,20 @@ angular.module('webApp', [
         redirectTo: '/'
       });
   })
-    .run(['$rootScope', '$location', '$http', '$cookies', function ($scope, $location, $http, $cookies) {
-        $scope.$on('$locationChangeStart', function (event) {
+    .run(['$rootScope', '$location', '$http', '$cookies', function ($scope, $location, $http, $cookies) {   
+        $scope.$on('$routeChangeStart', function (event) {
           if(!($scope.isLoggedIn)){
-            return $location.path('login');
+            return $location.path('/login');
           }
         });
 
         $scope.Logout = function(){
           $scope.isLoggedIn = false;
-          return $location.path("login");
+          return $location.path('/login');
         }
+
+        if(!($scope.isLoggedIn)){
+            return $location.path('/login');
+        }
+
  }]);

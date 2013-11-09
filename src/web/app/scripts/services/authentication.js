@@ -6,7 +6,7 @@ angular.module('webApp')
 
     	function Login(){
     		$rootScope.isLoggedIn = true;
-    		return $location.path("/");
+    		return $location.path('/');
     	}
 
     	function Logout(){
