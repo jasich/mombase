@@ -8,5 +8,6 @@ services:
 
 before_script:
     - npm install mocha
+    - npm install mongoose
 
 script: mocha --recursive src/test/
