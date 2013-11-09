@@ -6,6 +6,7 @@
 var express = require('express');
 var routes = require('./routes');
 var user = require('./routes/user');
+var volunteer = require('./routes/volunteer');
 var http = require('http');
 var path = require('path');
 
@@ -18,6 +19,7 @@ app.set('view engine', 'jade');
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.json());
+app.use(express.bodyParser());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(app.router);
@@ -31,6 +33,7 @@ if ('development' == app.get('env')) {
 app.get('/api', routes.index);
 app.get('/', routes.index);
 app.post('/api/users/login', user.login);
+app.post('/api/volunteer/create', volunteer.create);
 
 exports.app = app;
 
