@@ -8,7 +8,7 @@ var Volunteer = require('../../lib/documents/volunteer'),
 exports.create = function(req, res){
 	var body = req.body;
 	volunteerService.save(body, function(err, result) {
-		if(err) throw err;
+		if ( err ) return res.set( 500 ).send( );
 		res.send(result);
 	});
 };
@@ -17,9 +17,49 @@ exports.create = function(req, res){
  * Get route
  */
 exports.get = function(req, res){
-	var body = req.body;
-	volunteerService.get(body, function(err, result) {
-		if(err) throw err;
-		res.send(result);
+	var body = req.query;
+	volunteerService.get( body.id, function ( err, result ) {
+		if ( err ) return res.set( 500 ).send( );
+		res.send( result );
 	});
 };
+
+/**
+ * Delete route
+ */
+exports.del = function(req, res){
+	var body = req.body;
+	volunteerService.delete(body.id, function(err, result) {
+		if ( err ) return res.set( 500 ).send( );
+		res.send('success');
+	});
+};
+
+/**
+ * Search route
+ */
+exports.search = function(req, res) {
+	var body = req.body;
+	var i;
+
+	var filter = { };
+	var filterKeys = [ 'firstName', 'lastName' ];
+	for ( i = filterKeys.length; i--; ) {
+		if ( body[ 'filter.' + filterKeys[ i ] ] ) {
+			filter [ filterKeys[ i ] ] = body[ 'filter.' + filterKeys[ i ] ];
+		}
+	}
+
+	var sort = { };
+	var sortKeys = [ 'firstName', 'lastName' ];
+	for ( i = sortKeys.length; i--; ) {
+		if ( body[ 'sort.' + sortKeys[ i ] ] ) {
+			sort [ sortKeys[ i ] ] = body[ 'sort.' + sortKeys[ i ] ];
+		}
+	}
+
+	volunteerService.all(filter, sort, body.offset, body.take, function(err, result) {
+		if ( err ) return res.set( 500 ).send( );
+		res.send(result);
+	});
+}
