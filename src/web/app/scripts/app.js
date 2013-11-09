@@ -66,5 +66,8 @@ angular.module('webApp', [
           }
         });
 
-       
+        $scope.Logout = function(){
+          $scope.isLoggedIn = false;
+          return $location.path("login");
+        }
  }]);
