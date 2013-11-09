@@ -1,4 +1,4 @@
-// Generated on 2013-11-08 using generator-angular 0.5.1
+// Generated on 2013-10-24 using generator-angular 0.5.1
 'use strict';
 
 // # Globbing
@@ -6,10 +6,16 @@
 // 'test/spec/{,*/}*.js'
 // use this if you want to recursively match all subfolders:
 // 'test/spec/**/*.js'
+var proxySnippet = require('grunt-connect-proxy/lib/utils').proxyRequest;
+var mountFolder = function (connect, dir) {
+  return connect.static(require('path').resolve(dir));
+};
 
 module.exports = function (grunt) {
   require('load-grunt-tasks')(grunt);
   require('time-grunt')(grunt);
+
+  grunt.loadNpmTasks('grunt-connect-proxy');
 
   grunt.initConfig({
     yeoman: {
@@ -64,13 +70,31 @@ module.exports = function (grunt) {
         hostname: 'localhost',
         livereload: 35729
       },
+      proxies: [
+        {
+          context: '/api',
+          host: '192.168.111.222',
+          port: 80,
+          https: false,
+          changeOrigin: false,
+          xforward: false
+        }
+      ],
       livereload: {
         options: {
           open: true,
           base: [
             '.tmp',
             '<%= yeoman.app %>'
-          ]
+          ],
+          middleware: function (connect) {
+            return [
+              proxySnippet,
+              //lrSnippet,
+              mountFolder(connect, '.tmp'),
+              mountFolder(connect, 'app')
+            ];
+          }
         }
       },
       test: {
@@ -159,8 +183,8 @@ module.exports = function (grunt) {
     // not used since Uglify task does concat,
     // but still available if needed
     /*concat: {
-      dist: {}
-    },*/
+     dist: {}
+     },*/
     rev: {
       dist: {
         files: {
@@ -223,14 +247,14 @@ module.exports = function (grunt) {
       dist: {
         options: {
           /*removeCommentsFromCDATA: true,
-          // https://github.com/yeoman/grunt-usemin/issues/44
-          //collapseWhitespace: true,
-          collapseBooleanAttributes: true,
-          removeAttributeQuotes: true,
-          removeRedundantAttributes: true,
-          useShortDoctype: true,
-          removeEmptyAttributes: true,
-          removeOptionalTags: true*/
+           // https://github.com/yeoman/grunt-usemin/issues/44
+           //collapseWhitespace: true,
+           collapseBooleanAttributes: true,
+           removeAttributeQuotes: true,
+           removeRedundantAttributes: true,
+           useShortDoctype: true,
+           removeEmptyAttributes: true,
+           removeOptionalTags: true*/
         },
         files: [{
           expand: true,
@@ -332,6 +356,7 @@ module.exports = function (grunt) {
       'clean:server',
       'concurrent:server',
       'autoprefixer',
+      'configureProxies',
       'connect:livereload',
       'watch'
     ]);
@@ -355,7 +380,7 @@ module.exports = function (grunt) {
     'cdnify',
     'ngmin',
     'cssmin',
-    'uglify',
+    //'uglify',
     'rev',
     'usemin'
   ]);
