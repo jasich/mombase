@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "mongoose":"3.8.0",
+    "bcrypt": "0.7.7"
+  }
+}
