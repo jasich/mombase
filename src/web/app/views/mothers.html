@@ -1,0 +1,32 @@
+
+
+<div class='page-header'>
+    <h1 class='page-title'>Mothers</h1>
+    <p class='page-description'>
+        This is a list of mom's
+    </p>
+</div>
+<div class='page-body'>
+    <table class='table table-striped'>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Address</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat='mom in moms'>
+            <td>{{mom.name}}</td>
+            <td>{{mom.age}} years old</td>
+            <td>{{mom.address}}</td>
+            <td>
+                <a class='btn'>
+                    Edit
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

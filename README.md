@@ -1,7 +1,6 @@
-Getting MEAN with Vagrant and Ansible
-=====================================
+#Mombase [![Build Status](https://secure.travis-ci.org/OSTUSA/mombase.png?branch=master)](https://travis-ci.org/OSTUSA/mombase)
 
-This configuration will install the latest versions of MongoDB, Nginx, Node.js, Express, Yeoman, and the Yeoman Angular.js generator.
+This is a volunteer/mother coordinate database application built for Grand Rapids Give Camp 2013
 
 Installation
 ------------
