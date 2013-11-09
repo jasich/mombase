@@ -7,7 +7,6 @@ services:
     - mongodb
 
 before_script:
-    - npm install mocha
     - cd src
     - npm install
     - cd api
@@ -15,5 +14,3 @@ before_script:
     - cd ../web
     - npm install
     - cd ../..
-
-script: mocha --recursive src/test/
