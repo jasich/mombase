@@ -17,11 +17,18 @@ exports.create = function(req, res){
  * Get route
  */
 exports.get = function(req, res){
-	var body = req.body;
-	volunteerService.get(body, function(err, result) {
-		if(err) throw err;
-		res.send(result);
-	});
+	var body = req.query;
+	if ( body.id ) {
+		volunteerService.get( body.id, function ( err, result ) {
+			if ( err ) throw err;
+			res.send( result );
+		});
+	} else {
+		volunteerService.all( body.filter, body.sort, body.offset, body.take, function ( err, results ) {
+			if ( err ) throw err;
+			res.send( results );
+		});
+	}
 };
 
 /**
