@@ -7,7 +7,7 @@ services:
     - mongodb
 
 before_script:
-    - npm install mocha
-    - npm install mongoose
+    - cd src
+    - npm install
 
 script: mocha --recursive src/test/
