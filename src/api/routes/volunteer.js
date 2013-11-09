@@ -8,7 +8,7 @@ var Volunteer = require('../../lib/documents/volunteer'),
 exports.create = function(req, res){
 	var body = req.body;
 	volunteerService.save(body, function(err, result) {
-		if ( err ) return res.set( 500 ).send( );
+		if ( err ) return res.send( 500, 'failure' );
 		res.send(result);
 	});
 };
