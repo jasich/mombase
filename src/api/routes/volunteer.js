@@ -37,16 +37,25 @@ exports.del = function(req, res){
 
 exports.search = function(req, res) {
 	var body = req.body;
+	var i;
+
 	var filter = { };
-	var filterKeys = ['firstName', 'lastName'];
-	for(var i = filterKeys.length; i--;) {
-		if(body['filter.' + filterKeys[i]]) {
-			filter[filterKeys[i]] = body['filter.' + filterKeys[i]];
+	var filterKeys = [ 'firstName', 'lastName' ];
+	for ( i = filterKeys.length; i--; ) {
+		if ( body[ 'filter.' + filterKeys[ i ] ] ) {
+			filter [ filterKeys[ i ] ] = body[ 'filter.' + filterKeys[ i ] ];
 		}
 	}
-	console.log(filter);
 
-	volunteerService.all(filter, body.sort, body.offset, body.take, function(err, result) {
+	var sort = { };
+	var sortKeys = [ 'firstName', 'lastName' ];
+	for ( i = sortKeys.length; i--; ) {
+		if ( body[ 'sort.' + sortKeys[ i ] ] ) {
+			sort [ sortKeys[ i ] ] = body[ 'sort.' + sortKeys[ i ] ];
+		}
+	}
+
+	volunteerService.all(filter, sort, body.offset, body.take, function(err, result) {
 		if(err) throw err;
 		res.send(result);
 	});
