@@ -9,6 +9,11 @@ var user = require('./routes/user');
 var volunteer = require('./routes/volunteer');
 var http = require('http');
 var path = require('path');
+var mongoose = require('mongoose');
+var User = require('../lib/documents/user');
+var mother = require('./routes/mother');
+
+mongoose.connect('mongodb://127.0.0.1:27017/momsbloom');
 
 var app = express();
 
@@ -30,10 +35,12 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/api', routes.index);
 app.get('/', routes.index);
 app.post('/api/users/login', user.login);
 app.post('/api/volunteer/create', volunteer.create);
+
+app.get('/api/mother', mother.get);
+app.post('/api/mother', mother.create);
 
 exports.app = app;
 
