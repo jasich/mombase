@@ -7,6 +7,7 @@ services:
     - mongodb
 
 before_script:
+    - npm install mocha
     - cd src
     - npm install
 
