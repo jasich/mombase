@@ -1,11 +1,11 @@
 ---
 - name: Node.js Install GNU-make
   sudo: yes
-  command: apt-get install make
+  command: apt-get -y install make
 
 - name: Node.js Install g++
   sudo: yes
-  command: apt-get install g++
+  command: apt-get -y install g++
 
 - name: Node.js Download node.js
   command: wget http://nodejs.org/dist/v0.10.21/node-v0.10.21.tar.gz
