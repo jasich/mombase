@@ -15,7 +15,7 @@ exports.create = function( req, res ){
 };
 
 exports.get = function( req, res ) {
-  var body = req.query;
+  var body = req.params;
   motherService.get( body.id, function( err, mother ) {
     if ( err ) { return res.set( 500 ).send( ); }
     res.send(mother);

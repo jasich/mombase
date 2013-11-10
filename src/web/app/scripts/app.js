@@ -55,11 +55,30 @@ angular.module('webApp', [
         templateUrl: 'views/volunteers/edit.html',
         controller: 'VolunteersEditCtrl'
       })
-      .when('/match', {
+      .when('/match/:id', {
         templateUrl: 'views/match.html',
         controller: 'MatchCtrl'
       })
       .otherwise({
         redirectTo: '/'
       });
-  });
+  })
+    .run(['$rootScope', '$location', '$http', '$cookies', function ($scope, $location, $http, $cookies) {
+
+        $scope.isLoggedIn = true;
+
+        $scope.Logout = function(){
+          $scope.isLoggedIn = false;
+          return $location.path('/login');
+        }
+
+        $scope.$on('$routeChangeStart', function (event) {
+          if(!($scope.isLoggedIn)){
+            //return $location.path('/login');
+          }
+        });
+
+        if(!($scope.isLoggedIn)){
+            //return $location.path('/login');
+        }
+ }]);
