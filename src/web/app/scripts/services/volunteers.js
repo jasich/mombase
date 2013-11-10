@@ -5,6 +5,7 @@ angular.module('webApp')
         var resource = $resource("api/volunteers/:id/:action",
             {id: '@id', action: '@action'},
             {
+                update: {method:'PUT'},
                 search: {method: 'POST', isArray: true, params: {action: 'search'}}
             });
 

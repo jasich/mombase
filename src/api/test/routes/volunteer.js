@@ -81,15 +81,17 @@ describe('POST /api/volunteers', function() {
 
   
   it('should delete a volunteer', function( done ) {
-    request(app)
-      .del('/api/volunteers')
-      .set('Accept', 'application/json')
-      .send({'id':searchUserId})
-      .expect(200)
-      .end( function(err, res) {
-        if(err) return done(err);
-        done();
-      });
+    Volunteer.findOne({firstName:'test'}, function(err, vol) {
+      request(app)
+        .del('/api/volunteers/' + vol._id)
+        .set('Accept', 'application/json')
+        .send({'id':searchUserId})
+        .expect(200)
+        .end( function(err, res) {
+          if(err) return done(err);
+          done();
+        });
+    });
   });
 
 
