@@ -17,8 +17,8 @@ exports.create = function(req, res){
  * Get route
  */
 exports.get = function(req, res){
-	var body = req.query;
-	volunteerService.get( body.id, function ( err, result ) {
+	var params = req.params;
+	volunteerService.get( params.id, function ( err, result ) {
 		if ( err ) return res.set( 500 ).send( );
 		res.send( result );
 	});
