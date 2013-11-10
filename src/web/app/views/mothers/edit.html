@@ -93,7 +93,7 @@
         </fieldset>
 
         <!-- Emergency Contact -->
-        <fieldset>
+        <fieldset class='margin-top-50'>
             <legend>Emergency Contact</legend>
             <div class='form-group row' ng-class='{"has-error": isFieldInvalid("erFirstName")}'>
                 <div class='col-md-6'>
@@ -115,6 +115,21 @@
                 <div class='col-md-6'>
                     <label>Phone</label>
                     <input type='text' name='erCellPhone' class='form-control' ng-model='mother.emergencyContact.phone'/>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset class="margin-top-50">
+            <legend>Service Information</legend>
+            <div class='form-group row'>
+                <div class='col-md-6'>
+                    <label>Service Started</label>
+                    <input type='date' name='serviceStarted' class='form-control' ng-model='mother.serviceStartedDate'/>
+                </div>
+
+                <div class='col-md-6'>
+                    <label>Service Ended</label>
+                    <input type='date' name='serviceEnded' class='form-control' ng-model='mother.serviceEndedDate'/>
                 </div>
             </div>
         </fieldset>

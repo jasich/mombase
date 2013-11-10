@@ -15,7 +15,10 @@ angular.module('webApp')
       $scope.volunteer.languages = _.map($scope.selectedLanguages, function(l) { return l.abbr });
       var volunteer = new Volunteer($scope.volunteer);
       volunteer.$save(function() {
+        Alerts.addSuccess("Volunteer was saved successfully");
         $location.path('/volunteers');
+      },function(){
+          Alerts.addError("Unable to save the volunteer information.  Please review the form and try again.");
       });
     }
 

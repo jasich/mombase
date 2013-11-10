@@ -45,7 +45,7 @@
                     </div>
                     <div class='col-md-4'>
                         <label>State</label>
-                        <select ng-model='selectedState' ng-required='true' ng-options='st.name for st in states' class='form-control'>
+                        <select ng-model='volunteer.address.state' ng-required='true' ng-options='st.abbreviation as st.name for st in states' class='form-control'>
                             <option value=''>Select State</option>
                         </select>
                     </div>
@@ -85,7 +85,7 @@
 
                 <div class='form-group'>
                     <label>Languages Spoken</label>
-                    <select ng-model='selectedLanguages' multiple ng-options='lang.name for lang in langCodes' class='form-control'>
+                    <select ng-model='volunteer.languages' multiple ng-options='lang.abbr as lang.name for lang in langCodes' class='form-control'>
 
                     </select>
                 </div>

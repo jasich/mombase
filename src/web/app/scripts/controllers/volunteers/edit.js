@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('webApp')
-    .controller('VolunteersEditCtrl', function ($location, $rootScope, $scope, UsStates, LanguageCodes, Volunteer, $routeParams) {
+    .controller('VolunteersEditCtrl', function ($location, $rootScope, $scope, UsStates, LanguageCodes, Volunteer,Alerts, $routeParams) {
         $scope.states = UsStates;
         $scope.langCodes = LanguageCodes;
 
@@ -17,12 +17,16 @@ angular.module('webApp')
 
         $scope.update = function()
         {
-          $scope.volunteer.address.state = $scope.selectedState.abbreviation;
-          $scope.volunteer.languages = _.map($scope.selectedLanguages, function(l) { return l.abbr });
+          //$scope.volunteer.address.state = $scope.selectedState.abbreviation;
+          //$scope.volunteer.languages = _.map($scope.selectedLanguages, function(l) { return l.abbr });
+
           var volunteer = new Volunteer($scope.volunteer);
           volunteer.$update(function() {
+              Alerts.addSuccess("Volunteer was saved successfully");
             $location.path('/volunteers');
-          });
+          }, function(){
+              Alerts.addError("Unable to save the volunteer information.  Please review the form and try again.");
+            });
         }
 
         $scope.isFormValid = function(){
