@@ -69,7 +69,7 @@
                     </div>
                     <div class='col-md-4'>
                         <label>State</label>
-                        <select ng-model='selectedState' ng-required='true' ng-options='st.name for st in states' class='form-control'>
+                        <select ng-model='mother.address.state' ng-required='true' ng-options='st.abbreviation as st.name for st in states' class='form-control'>
                             <option value=''>Select State</option>
                         </select>
                     </div>
@@ -132,31 +132,31 @@
                 <div class='form-group row'>
                     <div class='col-md-6'>
                         <label>Request for Services Date</label>
-                        <input type='text' name='requestForServices' class='form-control' ng-model='mother.communication.requestForServices.sent'/>
+                        <input type='date' name='requestForServices' class='form-control' ng-model='mother.communication.requestForServices.sent'/>
                     </div>
 
                     <div class='col-md-6'>
                         <label>Response for Services Date</label>
-                        <input type='text' name='responseForServices' class='form-control' ng-model='mother.communication.requestForServices.response'/>
+                        <input type='date' name='responseForServices' class='form-control' ng-model='mother.communication.requestForServices.response'/>
                     </div>
                 </div>
 
                 <div class='form-group row'>
                     <div class='col-md-6'>
                         <label>Waiver Sent</label>
-                        <input type='text' name='waiverSent' class='form-control' ng-model='mother.communication.waiver.sent'/>
+                        <input type='date' name='waiverSent' class='form-control' ng-model='mother.communication.waiver.sent'/>
                     </div>
 
                     <div class='col-md-6'>
                         <label>Waiver Response</label>
-                        <input type='text' name='waiverResponse' class='form-control' ng-model='mother.communication.waiver.response'/>
+                        <input type='date' name='waiverResponse' class='form-control' ng-model='mother.communication.waiver.response'/>
                     </div>
                 </div>
 
                 <div class='form-group row'>
                     <div class='col-md-2'>
                         <label>Availability</label>
-                        <select ng-model='selectedAvailability'  ng-options='av.name for av in availabilityCodes' class='form-control'>
+                        <select ng-model='selectedAvailability'  ng-options='av.value as av.name for av in availabilityCodes' class='form-control'>
                             <option value=''>Select Availability</option>
                         </select>
                     </div>
