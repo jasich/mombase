@@ -2,11 +2,12 @@
 
 <div class='page-header'>
     <h1 class='page-title'>Mothers</h1>
-    <p class='page-description'>
-        This is a list of mom's
-    </p>
 </div>
+
 <div class='page-body'>
+    <div class='clearfix list-actions text-right'>
+        <a href='#/mothers/new' class='btn btn-primary'>New Mother</a>
+    </div>
     <table class='table table-striped'>
         <thead>
         <tr>
@@ -17,21 +18,25 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat='mom in moms'>
+        <tr ng-repeat='mother in mothers' ng-controller="MotherRowCtrl">
             <td>
-                {{mom.firstName}} {{mom.lastName}}
+                {{mother.firstName}} {{mother.lastName}}
             </td>
-            <td>{{mom.age}} years old</td>
+            <td>{{mother.age}} years old</td>
             <td>
-                {{mom.address.line1}}
+                {{address()}}
             </td>
-            <td>
-                <a class='btn'  ng-href="#/mothers/edit/{{mom._id}}">
+            <td class='text-right'>
+                <a class='btn' ng-click="store()"  ng-href="#/mothers/edit/{{mother._id}}">
                     Edit
                 </a>
 
-                <a class='btn' ng-href="#/match/{{mom._id}}">
+                <a class='btn' ng-href="#/match/{{mother._id}}">
                     Match
+                </a>
+
+                <a class='btn text-danger' confirm-click='Are you sure you want to delete this volunteer?' ng-click='delete()'>
+                    Delete
                 </a>
             </td>
         </tr>
