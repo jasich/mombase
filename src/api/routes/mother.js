@@ -72,3 +72,15 @@ exports.update = function(req, res){
     res.send(result);
   });
 };
+
+/**
+ * Assign Volunteer
+ */
+exports.assignVolunteer = function(req, res){
+  var routeParams = req.params;
+  var queryParams = req.query;
+  motherService.assignVolunteer(routeParams.id, queryParams.volunteerEmail, function(err, result) {
+    if ( err ) { return res.send( 500, 'failure'); }
+    res.send(result);
+  });
+}
