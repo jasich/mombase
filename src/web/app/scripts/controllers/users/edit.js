@@ -1,25 +1,21 @@
 'use strict';
 
 angular.module('webApp')
-  .controller('UsersEditCtrl', function ($scope, $q, $timeout, $routeParams) {
-        function $mock(id, username, email, active)
-        {
-            return {
-                id: id,
-                username: username,
-                email: email,
-                active: active
-            }
-        }
-
-        $scope.getUser = function(id)
-        {
-            $scope.user = $mock(1, "administrator", "admin@momsbloom.org", true);
-        }
-
+  .controller('UsersEditCtrl', function ($scope, $q, $timeout, $routeParams, Users, $rootScope, $location) {
+        $scope.user = $rootScope.editingUser || $scope.user || Users.get({id: $routeParams.id});
 
         $scope.isFormValid = function(){
             return $scope.editUser.$valid;
+        }
+
+        $scope.update = function() {
+          $scope.user.id = $scope.user._id;
+          if (! $scope.user.password)
+            delete $scope.user.password;
+          var user = new Users($scope.user);
+          user.$update(function(){
+            $location.path('/users');
+          });
         }
 
         $scope.isFieldInvalid = function(name)
@@ -32,6 +28,4 @@ angular.module('webApp')
             else
                 return true;
         }
-
-        $scope.getUser($routeParams.id);
   });

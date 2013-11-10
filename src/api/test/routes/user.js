@@ -56,3 +56,79 @@ describe('POST /api/users', function() {
   });
 
 });
+
+describe('GET /api/users', function() {
+
+  it('should return a list of current users', function(done) {
+    var user = new User({first:'Testguy', last:'McMan', password:'password', email:'superunique@email.com'});
+    user.save(function(err) {
+      if (err) throw err;
+      request(app)
+        .get('/api/users')
+        .expect(200)
+        .end(function(err, res) {
+          if (err) return done(err);
+          var users = res.res.body;
+          assert.ok(users.length);
+          done();
+        });
+    })
+  });
+
+});
+
+describe('DELETE /api/users', function() {
+
+  it('should delete a user and respond with 204', function(done) {
+    var user = new User({first:'Testguy', last:'McMan', password:'password', email:'superunique@email.com'});
+    user.save(function(err, u) {
+      if (err) throw err;
+      request(app)
+        .del('/api/users/' + u.id)
+        .expect(204, done)
+    })
+  });
+
+});
+
+
+describe('GET /api/users/:id', function() {
+
+  it('should return a single user by id', function(done) {
+    var user = new User({first:'Testguy', last:'McMan', password:'password', email:'superunique@email.com'});
+    user.save(function(err, u) {
+      if (err) throw err;
+      request(app)
+        .get('/api/users/' + u.id)
+        .expect(200)
+        .end(function(err, res) {
+          if (err) return done(err);
+          var user = res.res.body;
+          assert.ok(user._id);
+          done();
+        });
+    })
+  });
+
+});
+
+describe('PUT /api/users/:id', function() {
+
+  it('should update and return a single user by id', function(done) {
+    var user = new User({first:'Testguy', last:'McMan', password:'password', email:'superunique@email.com'});
+    user.save(function(err, u) {
+      if (err) throw err;
+      request(app)
+        .put('/api/users/' + u.id)
+        .send({first:'Testierguy'})
+        .expect(200)
+        .end(function(err, res) {
+          if (err) return done(err);
+          var user = res.res.body;
+          assert.equal('Testierguy', user.first)
+          done();
+        });
+    })
+  });
+
+});

@@ -45,6 +45,42 @@ exports.login = function(req, res, next) {
    })(req, res, next);
 };
 
+exports.list = function(req, res) {
+  User.find(function(err, users) {
+    if (err) return res.send(400, err);
+    res.send(200, users);
+  });
+};
+
+exports.del = function(req, res) {
+  var params = req.params;
+  User.remove({_id:params.id}, function(err) {
+    if (err) return res.send(500);
+    res.send(204);
+  });
+}
+
+exports.get = function(req, res){
+  var params = req.params;
+  User.findById(params.id, function ( err, result ) {
+    if (err) return res.send(500);
+    res.send(result);
+  });
+};
+
+exports.update = function(req, res){
+  var body = req.body
+    , id = req.params.id;
+  delete body.id;
+  delete body._id;
+  delete body.hash;
+  User.update({_id: id}, body, {upsert: true}, function(err, u) {
+    if (err) return res.send(500, err);
+    delete body.password;
+    res.send(body);
+  });
+};
+
 /**
  * Create user
  */
