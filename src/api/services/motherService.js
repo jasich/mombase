@@ -71,7 +71,9 @@ MotherService.prototype = {
         if(mother.primaryVolunteer === volunteerEmail){
           if(mother.volunteers[0]){
             mother.primaryVolunteer = mother.volunteers[0];
-          }          
+          }else{
+            mother.primaryVolunteer = '';
+          }         
         }
 
         mother.save(cb);
