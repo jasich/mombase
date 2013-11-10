@@ -39,6 +39,7 @@ exports.login = function(req, res, next) {
     if (!user) { return res.status(401).send(); }
     req.logIn(user, function(err) {
       if (err) { return next(err); }
+      user.hash = undefined;
       return res.send(user);
     });
    })(req, res, next);

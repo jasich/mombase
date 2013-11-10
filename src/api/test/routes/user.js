@@ -30,6 +30,7 @@ describe('POST /api/users/login', function() {
         if (err) return done(err);
         assert.ok(res.res.body.first);
         assert.ok(res.res.body.last);
+        assert.ok(!res.res.body.hash);
         done();
       });
   });
