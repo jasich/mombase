@@ -8,8 +8,8 @@ angular.module('webApp', [
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+        templateUrl: 'views/mothers.html',
+        controller: 'MothersCtrl'
       })
       .when('/login', {
         templateUrl: 'views/login.html',
@@ -71,13 +71,19 @@ angular.module('webApp', [
         redirectTo: '/'
       });
   })
-    .run(['$rootScope', '$location', '$http', '$cookies', function ($scope, $location, $http, $cookies) {
+    .run(['$rootScope', '$location', '$http', '$cookies', function ($scope, $location, $http,$cookies) {
         var cookie = $cookies["connect.sid"];
+
+
+        console.log($cookies);
 
         $scope.isLoggedIn = !!!!!!cookie;
 
         $scope.Logout = function(){
           $scope.isLoggedIn = false;
+
+          if($cookies)
+            delete $cookies["connect.sid"];
           return $location.path('/login');
         }
 

@@ -34,7 +34,7 @@
 
     <!-- Add your site or application content here -->
     <div class='container'>
-        <div class='page' ng-view="">
+        <div class='page' ng-class='{"page-empty": !isLoggedIn}' ng-view="">
 
         </div>
     </div>
