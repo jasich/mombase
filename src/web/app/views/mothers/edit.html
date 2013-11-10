@@ -2,7 +2,7 @@
     <h1 class='page-title'>Edit Mother</h1>
 </div>
 <div class='page-body'>
-    <form name='editMother' novalidate="" ng-submit='updated()'>
+    <form name='editMother' novalidate="" ng-submit='update()'>
         <div class='form-group' ng-class='{"has-error": isFieldInvalid("firstName")}'>
 
             <!-- Name -->
@@ -26,14 +26,14 @@
 
                 <div class='col-md-6'>
                     <label>Birthdate</label>
-                    <input type='text' name='birthDate' ng-required='true' class='form-control' ng-model='mother.birthdate'/>
+                    <input type='date' name='birthDate' ng-required='true' class='form-control' ng-model='mother.birthdate'/>
                 </div>
             </div>
 
             <div class='form-group row'>
                 <div class='col-md-6'>
                     <label>Email</label>
-                    <input type='email' name='email' ng-required='true' class='form-control' ng-model='mother.email'/>
+                    <input type='email' name='email' class='form-control' ng-model='mother.email'/>
                 </div>
                 <div class='col-md-6'>
                     <label>Phone</label>
@@ -47,18 +47,18 @@
                 <legend>Address</legend>
                 <div class='form-group'>
                     <label>Street</label>
-                    <input type='text' name='address' ng-required='true' class='form-control' ng-model='mother.address.line1'/>
+                    <input type='text' name='line1' ng-required='true' class='form-control' ng-model='mother.address.line1'/>
                 </div>
 
                 <div class='form-group'>
                     <label>Street 2</label>
-                    <input type='text' name='address' ng-required='true' class='form-control' ng-model='mother.address.line2'/>
+                    <input type='text' name='line2' class='form-control' ng-model='mother.address.line2'/>
                 </div>
 
                 <div class='form-group row margin-top-20'>
                     <div class='col-md-6'>
                         <label>County</label>
-                        <input type='text' name='city' ng-required='true' class='form-control' ng-model='mother.address.county'/>
+                        <input type='text' name='city' class='form-control' ng-model='mother.address.county'/>
                     </div>
                 </div>
 
@@ -69,7 +69,7 @@
                     </div>
                     <div class='col-md-4'>
                         <label>State</label>
-                        <select ng-model='selectedState' ng-required='true' ng-options='st.name for st in states' class='form-control'>
+                        <select ng-model='mother.address.state' ng-required='true' ng-options='st.abbreviation as st.name for st in states' class='form-control'>
                             <option value=''>Select State</option>
                         </select>
                     </div>
@@ -86,12 +86,12 @@
                 <div class='form-group row'>
                     <div class='col-md-6'>
                         <label>Started </label>
-                        <input type='text' name='serviceStart' ng-required='true' class='form-control' ng-model='mother.serviceStartedDate'/>
+                        <input type='text' name='serviceStart' class='form-control' ng-model='mother.serviceStartedDate'/>
                     </div>
 
                     <div class='col-md-6'>
                         <label>Ended</label>
-                        <input type='text' name='serviceEnd' ng-required='true' class='form-control' ng-model='mother.serviceEndedDate'/>
+                        <input type='text' name='serviceEnd' class='form-control' ng-model='mother.serviceEndedDate'/>
                     </div>
                 </div>
             </fieldset>
@@ -132,31 +132,31 @@
                 <div class='form-group row'>
                     <div class='col-md-6'>
                         <label>Request for Services Date</label>
-                        <input type='text' name='requestForServices' ng-required='true' class='form-control' ng-model='mother.communication.requestForServices.sent'/>
+                        <input type='date' name='requestForServices' class='form-control' ng-model='mother.communication.requestForServices.sent'/>
                     </div>
 
                     <div class='col-md-6'>
                         <label>Response for Services Date</label>
-                        <input type='text' name='responseForServices' ng-required='true' class='form-control' ng-model='mother.communication.requestForServices.response'/>
+                        <input type='date' name='responseForServices' class='form-control' ng-model='mother.communication.requestForServices.response'/>
                     </div>
                 </div>
 
                 <div class='form-group row'>
                     <div class='col-md-6'>
                         <label>Waiver Sent</label>
-                        <input type='text' name='waiverSent' ng-required='true' class='form-control' ng-model='mother.communication.waiver.sent'/>
+                        <input type='date' name='waiverSent' class='form-control' ng-model='mother.communication.waiver.sent'/>
                     </div>
 
                     <div class='col-md-6'>
                         <label>Waiver Response</label>
-                        <input type='text' name='waiverResponse' ng-required='true' class='form-control' ng-model='mother.communication.waiver.response'/>
+                        <input type='date' name='waiverResponse' class='form-control' ng-model='mother.communication.waiver.response'/>
                     </div>
                 </div>
 
                 <div class='form-group row'>
                     <div class='col-md-2'>
                         <label>Availability</label>
-                        <select ng-model='selectedAvailability' ng-required='true' ng-options='av.name for av in availabilityCodes' class='form-control'>
+                        <select ng-model='selectedAvailability'  ng-options='av.value as av.name for av in availabilityCodes' class='form-control'>
                             <option value=''>Select Availability</option>
                         </select>
                     </div>
@@ -199,12 +199,12 @@
                 <div class='form-group row'>
                     <div class='col-md-6'>
                         <label>Pediatrician</label>
-                        <input type='text' name='pediatrician' ng-required='true' class='form-control' ng-model='mother.pediatrician'/>
+                        <input type='text' name='pediatrician' class='form-control' ng-model='mother.pediatrician'/>
                     </div>
 
                     <div class='col-md-6'>
                         <label>Ethnicity</label>
-                        <input type='text' name='ethnicity' ng-required='true' class='form-control' ng-model='mother.ethnicity'/>
+                        <input type='text' name='ethnicity' class='form-control' ng-model='mother.ethnicity'/>
                     </div>
                 </div>
             </fieldset>
@@ -216,23 +216,23 @@
                 <div class='form-group row'>
                     <div class='col-md-6'>
                         <label>First Name</label>
-                        <input type='text' name='erFirstName' ng-required='true' class='form-control' ng-model='mother.emergencyContact.firstName'/>
+                        <input type='text' name='erFirstName' class='form-control' ng-model='mother.emergencyContact.firstName'/>
                     </div>
 
                     <div class='col-md-6'>
                         <label>Last Name</label>
-                        <input type='text' name='erLastName' ng-required='true' class='form-control' ng-model='mother.emergencyContact.lastName'/>
+                        <input type='text' name='erLastName' class='form-control' ng-model='mother.emergencyContact.lastName'/>
                     </div>
                 </div>
 
                 <div class='form-group row'>
                     <div class='col-md-6'>
                         <label>Email</label>
-                        <input type='email' name='erEmail' ng-required='true' class='form-control' ng-model='mother.emergencyContact.email'/>
+                        <input type='email' name='erEmail' class='form-control' ng-model='mother.emergencyContact.email'/>
                     </div>
                     <div class='col-md-6'>
                         <label>Phone</label>
-                        <input type='text' name='erCellPhone' ng-required='true' class='form-control' ng-model='mother.emergencyContact.phone'/>
+                        <input type='text' name='erCellPhone' class='form-control' ng-model='mother.emergencyContact.phone'/>
                     </div>
                 </div>
             </fieldset>
@@ -243,7 +243,7 @@
                 <div class='form-group row'>
                     <div class='col-md-6'>
                         <label>Primary Volunteer</label>
-                        <input name='primaryVolunteer' ng-required='true' class='form-control' ng-model='mother.primaryVolunteer'/>
+                        <input name='primaryVolunteer' class='form-control' ng-model='mother.primaryVolunteer'/>
                     </div>
                 </div>
             </fieldset>
