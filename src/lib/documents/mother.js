@@ -19,6 +19,7 @@ var motherSchema = mongoose.Schema({
     zip : Number,
     state : String
   },
+  loc: { type : [Number] },
 
   // Important Dates
   createdDate: Date,
