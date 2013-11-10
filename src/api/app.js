@@ -22,11 +22,13 @@ app.get('/api/mothers', mother.get);
 app.post('/api/mothers', mother.create);
 app.del('/api/mothers', mother.del);
 app.post('/api/mothers/search', mother.search);
+app.put('/api/mothers', mother.update);
 
 app.get('/api/volunteers', volunteer.get);
 app.post('/api/volunteers', volunteer.create);
 app.del('/api/volunteers', volunteer.del);
 app.post('/api/volunteers/search', volunteer.search);
+app.put('/api/volunteers', volunteer.update);
 
 module.exports = app;
 
