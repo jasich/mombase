@@ -18,13 +18,11 @@ angular.module('webApp')
       var range = $scope.selectedRange.value;
       var geoStuff = GeoLocation.GetLatLong({address: address($scope.mom.address)})
         .then(function(data){
-          alert(data.lat + ' ' + data.lng);
           Volunteer.within({
             lon: data.lng,
             lat: data.lat,
-            raduis: range
+            radius: range
           }, function(data){
-            debugger;
           });
         }, function(){});
     };
