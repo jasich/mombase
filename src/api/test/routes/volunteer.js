@@ -106,5 +106,29 @@ describe('POST /api/volunteers', function() {
       });
   });
 
+  it('should find a volunteer within', function( done ) {
+    request(app)
+      .get('/api/volunteers/within?lon=-20&lat=5&radius=5')
+      .set('Accept', 'application/json')
+      .expect(200)
+      .end( function(err, res) {
+        if(err) return done(err);
+        assert(res.res.body.length == 1);
+        done();
+      });
+  });
+
+  it('should not find a volunteer outside of it', function( done ) {
+    request(app)
+      .get('/api/volunteers/within?lon=50&lat=50&radius=1')
+      .set('Accept', 'application/json')
+      .expect(200)
+      .end( function(err, res) {
+        if(err) return done(err);
+        assert(res.res.body.length == 0);
+        done();
+      });
+  });
+
 
 });

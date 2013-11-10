@@ -78,9 +78,8 @@ exports.update = function(req, res){
 
 exports.within = function(req, res) {
 	var body = req.query;
-	console.log(body);
 	volunteerService.within(body.lon, body.lat, body.radius, function(err, result) {
-		if ( err ) { console.log(err); return res.send( 500, 'failure'); }
+		if ( err ) { return res.send( 500, 'failure'); }
 		res.send(result);
 	});
 }
