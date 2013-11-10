@@ -55,7 +55,7 @@ angular.module('webApp', [
         templateUrl: 'views/volunteers/edit.html',
         controller: 'VolunteersEditCtrl'
       })
-      .when('/match', {
+      .when('/match/:id', {
         templateUrl: 'views/match.html',
         controller: 'MatchCtrl'
       })
