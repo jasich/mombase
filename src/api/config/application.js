@@ -6,8 +6,14 @@ var mongo = require('./mongo')
 
 module.exports = {
   configure: function(app) {
-    //connect to mongodb
-    mongoose.connect('mongodb://' + mongo.host + ':' + mongo.port + '/' + mongo.db);
+    this.db(app);
+    this.middleware(app);
+  },
+  db: function(app) {
+    if (! /test/.test(app.get('env')))
+      mongoose.connect('mongodb://' + mongo.get('host') + ':' + mongo.get('port') + '/' + mongo.get('db'));
+  },
+  middleware: function(app) {
     //configure application middleware
     app.set('port', process.env.PORT || 3000);
     app.use(express.favicon());
@@ -22,7 +28,7 @@ module.exports = {
     app.use(express.session(session));
 
     //authentication
-    if (app.get('env') != 'development') {
+    if (! /test|development/.test(app.get('env'))) {
       app.use(auth.checkAuth());
     }
     app.use(auth.initialize);
