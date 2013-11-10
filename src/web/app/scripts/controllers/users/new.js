@@ -1,10 +1,19 @@
 'use strict';
 
 angular.module('webApp')
-  .controller('UsersNewCtrl', function ($scope, $location, Alerts) {
+  .controller('UsersNewCtrl', function ($scope, Alerts, Users, $location) {
+
+    $scope.user = {};
 
     $scope.isFormValid = function(){
         return $scope.newUser.$valid;
+    }
+
+    $scope.save = function() {
+      var user = new Users($scope.user);
+      user.$save(function(){
+        $location.path('/users');
+      });
     }
 
     $scope.isFieldInvalid = function(name)
@@ -16,15 +25,5 @@ angular.module('webApp')
         }
         else
             return true;
-    }
-
-    $scope.save = function(){
-        if($scope.isFormValid())
-        {
-            Alerts.addSuccess('User was created successfully');
-            $location.path("/users");
-        }else{
-            Alerts.addWarning('The user you are trying to add is invalid.  Please check the form and try again');
-        }
     }
   });

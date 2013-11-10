@@ -1,11 +1,10 @@
 'use strict';
 
 angular.module('webApp')
-  .service('Users', function Users($resource, apiService) {
-    // AngularJS will instantiate a singleton by calling "new" on this function
-        var resource = $resource("api/users/:id/:action");
-
-        var service = apiService(resource, 'user');
-
-
+  .factory('Users', function Users($resource) {
+    return $resource("api/users/:id/:action",
+      {id: '@id', action: '@action'},
+      {
+        update: {method:'PUT'}
+      });
   });

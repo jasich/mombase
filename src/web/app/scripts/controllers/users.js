@@ -1,23 +1,10 @@
 'use strict';
 
 angular.module('webApp')
-  .controller('UsersCtrl', function ($scope, Alerts) {
-        function $mock(id, username, email, active)
-        {
-            return {
-                id: id,
-                username: username,
-                email: email,
-                active: active
-            }
-        }
+  .controller('UsersCtrl', function ($scope, Alerts, Users) {
+        console.log(Users);
 
-
-        $scope.users = [
-            $mock(1, "administrator", "admin@momsbloom.org", true),
-            $mock(2, "user", "admin@momsbloom.org", true),
-            $mock(3, "baduser", "admin@momsbloom.org", false)
-        ];
+        $scope.users = Users.query();
 
         $scope.deleteUser = function(id)
         {
@@ -25,4 +12,17 @@ angular.module('webApp')
             Alerts.addSuccess('User was deleted successfully');
 
         }
+
+      $scope.$on('user:delete', function(e, id) {
+        _.remove($scope.users, function(v) { return v._id == id });
+      });
+  })
+  .controller('UserRowCtrl', function($scope, $rootScope, Users) {
+    $scope.delete = function() {
+      Users.delete({id:$scope.user._id}, _.partial(_.bind($scope.$emit,$scope), 'user:delete', $scope.user._id));
+    };
+
+    $scope.store = function() {
+      $rootScope.editingUser = $scope.user;
+    };
   });
