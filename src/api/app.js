@@ -9,7 +9,8 @@ var express = require('express')
   , mother = require('./routes/mother')
   , volunteer = require('./routes/volunteer')
   , config = require('./config/application')
-  , app = express();
+  , app = express()
+  , Volunteer = require('../lib/documents/volunteer');
 
 config.configure(app);
 
@@ -35,6 +36,8 @@ app.put('/api/volunteers', volunteer.update);
 
 module.exports = app;
 
+
 http.createServer(app).listen(app.get('port'), function(){
+  Volunteer.setup();
   console.log('Express server listening on port ' + app.get('port'));
 });
