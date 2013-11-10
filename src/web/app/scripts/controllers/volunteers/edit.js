@@ -1,14 +1,14 @@
 'use strict';
 
 angular.module('webApp')
-    .controller('VolunteersEditCtrl', function ($location, $rootScope, $scope, UsStates, LanguageCodes, Volunteer) {
+    .controller('VolunteersEditCtrl', function ($location, $rootScope, $scope, UsStates, LanguageCodes, Volunteer, $routeParams) {
         $scope.states = UsStates;
         $scope.langCodes = LanguageCodes;
 
-        $scope.volunteer = $rootScope.volunteer || $scope.volunteer || {};
+        $scope.volunteer = $rootScope.volunteer || $scope.volunteer || Volunteer.get({id: $routeParams.id});
 
         $scope.selectedState = _.reduce($scope.states, function(res, st){
-          return  (st.abbreviation == $scope.volunteer.address.state) ? st : res;
+          return  $scope.volunteer.state && ((st.abbreviation == $scope.volunteer.address.state) ? st : res);
         });
 
         $scope.selectedLanguages = _.filter($scope.langCodes, function(l) {
