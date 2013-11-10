@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('webApp')
-  .controller('VolunteersNewCtrl', function ($scope, UsStates, LanguageCodes, Volunteer) {
+  .controller('VolunteersNewCtrl', function ($location, $scope, UsStates, LanguageCodes, Volunteer) {
     $scope.states = UsStates;
     $scope.langCodes = LanguageCodes;
 
@@ -11,7 +11,12 @@ angular.module('webApp')
 
     $scope.save = function()
     {
-
+      $scope.volunteer.address.state = $scope.selectedState.abbreviation;
+      $scope.volunteer.languages = _.map($scope.selectedLanguages, function(l) { return l.abbr });
+      var volunteer = new Volunteer($scope.volunteer);
+      volunteer.$save(function() {
+        $location.path('/volunteers');
+      });
     }
 
     $scope.isFormValid = function(){

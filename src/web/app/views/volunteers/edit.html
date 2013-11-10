@@ -2,7 +2,7 @@
     <h1 class='page-title'>Edit Volunteer</h1>
 </div>
 <div class='page-body'>
-    <form name='editVolunteer' novalidate="" ng-submit='save()'>
+    <form name='editVolunteer' novalidate="" ng-submit='update()'>
         <div class='form-group' ng-class='{"has-error": isFieldInvalid("firstName")}'>
 
             <!-- Name -->
@@ -45,7 +45,7 @@
                     </div>
                     <div class='col-md-4'>
                         <label>State</label>
-                        <select ng-model='volunteer.address.state' ng-required='true' ng-options='st.name for st in states' class='form-control'>
+                        <select ng-model='selectedState' ng-required='true' ng-options='st.name for st in states' class='form-control'>
                             <option value=''>Select State</option>
                         </select>
                     </div>
@@ -62,7 +62,7 @@
 
                 <div class='form-group'>
                     <label class='checkbox'>
-                        <input type='checkbox' ng-model='user.isHomeLiason'/>
+                        <input type='checkbox' ng-model='volunteer.homeVisitLiason'/>
                         Is Home Liason
                     </label>
                 </div>
@@ -85,7 +85,7 @@
 
                 <div class='form-group'>
                     <label>Languages Spoken</label>
-                    <select ng-model='volunteer.languages' multiple ng-options='lang.name for lang in langCodes' class='form-control'>
+                    <select ng-model='selectedLanguages' multiple ng-options='lang.name for lang in langCodes' class='form-control'>
 
                     </select>
                 </div>

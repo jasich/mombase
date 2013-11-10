@@ -8,7 +8,7 @@ var Volunteer = require('../../lib/documents/volunteer'),
 exports.create = function(req, res){
 	var body = req.body;
 	volunteerService.save(body, function(err, result) {
-		if ( err ) return res.send( 500, 'failure' );
+		if ( err ) return res.send( 500, err );
 		res.send(result);
 	});
 };
@@ -28,8 +28,8 @@ exports.get = function(req, res){
  * Delete route
  */
 exports.del = function(req, res){
-	var body = req.body;
-	volunteerService.delete(body.id, function(err, result) {
+	var params = req.params;
+	volunteerService.delete(params.id, function(err, result) {
 		if ( err ) return res.set( 500 ).send( );
 		res.send('success');
 	});
