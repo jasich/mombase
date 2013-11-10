@@ -10,9 +10,9 @@
     <form name='momMatch' novalidate="" ng-submit=''>
         <!-- Name -->
         <div class='form-group row'>
-            <div class='col-md-6'>
+            <div class='col-md-4'>
                 <label>Radius</label>
-                <select>
+                <select class="form-control">
                     <option ng-repeat="opt in rangeOptions" value="{{ opt.value }"> {{ opt.label }} </option>
                 </select>
             </div>

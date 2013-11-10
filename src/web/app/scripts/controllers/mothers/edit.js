@@ -1,12 +1,27 @@
 'use strict';
 
 angular.module('webApp')
-  .controller('MothersEditCtrl', function ($rootScope, $scope, $location, $routeParams, UsStates, AvailabilityCodes, LanguageCodes, Mother) {
+  .controller('MothersEditCtrl', function ($rootScope,$filter, $scope, $location, $routeParams, UsStates, AvailabilityCodes, LanguageCodes, Mother, Alerts) {
     $scope.states = UsStates;
     $scope.availabilityCodes = AvailabilityCodes;
     $scope.langCodes = LanguageCodes;
 
-    $scope.mother = $rootScope.mother || $scope.mother || Mother.get({id: $routeParams.id});
+    $scope.formatDate = function(date)
+    {
+      return $filter('date')(date, 'yyyy-MM-dd');
+    }
+
+    $scope.mother = $rootScope.mother || $scope.mother || Mother.get({id: $routeParams.id}, function(mom){
+      $scope.mother.birthdate = $scope.formatDate($scope.mother.birthdate);
+      if($scope.mother.communication){
+        $scope.mother.communication.requestForServices.sent = $scope.formatDate($scope.mother.communication.requestForServices.sent);
+        $scope.mother.communication.requestForServices.response = $scope.formatDate($scope.mother.communication.requestForServices.response);
+        $scope.mother.communication.waiver.sent = $scope.formatDate($scope.mother.waiver.requestForServices.sent);
+        $scope.mother.communication.waiver.response = $scope.formatDate($scope.mother.waiver.requestForServices.response);
+      }
+
+
+    });
 
     $scope.mother.address = $scope.mother.address || {};
 
@@ -25,13 +40,16 @@ angular.module('webApp')
 
 
     $scope.update = function() {
-      $scope.mother.address.state = $scope.selectedState.abbreviation;
+      //$scope.mother.address.state = $scope.selectedState.abbreviation;
       $scope.mother.availability = $scope.selectedAvailability;
       $scope.mother.languages = _.map($scope.selectedLanguages, function(l) { return l.abbr });
 
       var mother = new Mother($scope.mother);
       mother.$update(function(){
+        Alerts.addSuccess("Mother was saved successfully");
         $location.path('/mothers');
+      }, function(){
+        Alerts.addError("Unable to save the mother information.  Please review the form and try again.");
       });
     };
 

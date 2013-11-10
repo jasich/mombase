@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('webApp')
-  .controller('MothersCtrl', function ($scope, Mother) {
+  .controller('MothersCtrl', function ($scope, Mother, Alerts) {
     $scope.mothers = [];
 
     Mother.search(function(data){
@@ -9,7 +9,11 @@ angular.module('webApp')
     });
 
     $scope.$on('mother:delete', function(e, id) {
+      Alerts.addSuccess("Mother was deleted successfully")
       _.remove($scope.mothers, function(v) { return v._id == id });
+    });
+    $scope.$on('mother:delete:error', function(e, id) {
+      Alerts.addError("Unable to delete the mother");
     });
   })
   .controller('MotherRowCtrl', function($rootScope, $scope, Mother) {
@@ -21,7 +25,10 @@ angular.module('webApp')
     };
 
     $scope.delete = function() {
-      Mother.delete({id:$scope.mother._id}, _.partial(_.bind($scope.$emit,$scope), 'mother:delete', $scope.mother._id));
+      Mother.delete({id:$scope.mother._id},
+        _.partial(_.bind($scope.$emit,$scope), 'mother:delete', $scope.mother._id),
+        _.partial(_.bind($scope.$emit, $scope), 'mother:delete:error', $scope.mother)
+      );
     }
 
     $scope.store = function() {

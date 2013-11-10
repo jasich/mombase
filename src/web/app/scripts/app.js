@@ -59,6 +59,14 @@ angular.module('webApp', [
         templateUrl: 'views/match.html',
         controller: 'MatchCtrl'
       })
+      .when('/mothers/edit-children', {
+        templateUrl: 'views/mothers/edit-children.html',
+        controller: 'MothersEditChildrenCtrl'
+      })
+      .when('/mothers/visits', {
+        templateUrl: 'views/mothers/visits.html',
+        controller: 'MothersVisitsCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
