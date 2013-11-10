@@ -24,6 +24,7 @@ app.get('/api/mothers/:id', mother.get);
 app.post('/api/mothers', mother.create);
 app.del('/api/mothers', mother.del);
 app.post('/api/mothers/search', mother.search);
+app.put('/api/mothers', mother.update);
 
 app.get('/api/volunteers', volunteer.get);
 app.post('/api/volunteers', volunteer.create);
