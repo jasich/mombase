@@ -6,7 +6,8 @@ angular.module('webApp')
             {id: '@id', action: '@action'},
             {
                 update: {method:'PUT'},
-                search: {method: 'POST', isArray: true, params: {action: 'search'}}
+                search: {method: 'POST', isArray: true, params: {action: 'search'}},
+                within: {method: 'GET', isArray: true, params: {action: 'within'}}
             });
 
         return resource;
