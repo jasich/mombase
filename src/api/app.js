@@ -22,13 +22,13 @@ app.post('/api/users', user.create);
 app.post('/api/volunteer/create', volunteer.create);
 
 
-app.get('/api/mothers/:id', mother.get);
-app.post('/api/mothers', mother.create);
-app.del('/api/mothers', mother.del);
 app.post('/api/mothers/search', mother.search);
-app.put('/api/mothers', mother.update);
 app.post('/api/mothers/assign/:id', mother.assignVolunteer);
 app.post('/api/mothers/unassign/:id', mother.unassignVolunteer);
+app.post('/api/mothers', mother.create);
+app.del('/api/mothers', mother.del);
+app.put('/api/mothers', mother.update);
+app.get('/api/mothers/:id', mother.get);
 
 app.post('/api/volunteers/search', volunteer.search);
 app.get('/api/volunteers/within', volunteer.within);
