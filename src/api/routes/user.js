@@ -50,7 +50,7 @@ exports.login = function(req, res, next) {
  */
 exports.create = function(req,res) {
   (new User(req.body)).save(function(err, user) {
-    if (err) return res.send(400).send();
+    if (err) return res.send(400)
     user.hash = undefined;
     res.send(200, user);
   });

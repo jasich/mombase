@@ -26,8 +26,8 @@ exports.get = function( req, res ) {
  * Delete route
  */
 exports.del = function(req, res){
-  var body = req.body;
-  motherService.delete(body.id, function(err, result) {
+  var params = req.params;
+  motherService.delete(params.id, function(err, result) {
     if ( err ) return res.set( 500 ).send( );
     res.send('success');
   });
