@@ -6,13 +6,9 @@ var request = require('supertest')
 
 describe('POST /api/volunteers', function() {
 
-  before(function() {
+  before(function(done) {
     Volunteer.collection.drop();
-    // Volunteer.db.db.createCollection('volunteers', function(err, coll) {
-    //   coll.ensureIndex({loc:'2dsphere'}, function(err, res){
-    //     done();
-    //   });
-    // });
+    Volunteer.setup(done);
   });
 
   var createdUser;

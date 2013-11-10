@@ -30,6 +30,7 @@ app.put('/api/mothers', mother.update);
 app.get('/api/volunteers', volunteer.get);
 app.post('/api/volunteers', volunteer.create);
 app.del('/api/volunteers', volunteer.del);
+app.get('/api/volunteers/within', volunteer.within);
 app.post('/api/volunteers/search', volunteer.search);
 app.put('/api/volunteers', volunteer.update);
 
