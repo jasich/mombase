@@ -54,6 +54,31 @@ MotherService.prototype = {
         cb(null, null);
       }
     });
+  },
+  unassignVolunteer: function(id, volunteerEmail, cb){
+    Mother.findOne( { _id: id }, function(err, mother){
+      if(err){
+        throw err;
+      }
+
+      if(mother){
+        var index = mother.volunteers.indexOf(volunteerEmail);
+
+        if(index >= 0){
+          mother.volunteers.shift(index);
+        }
+
+        if(mother.primaryVolunteer === volunteerEmail){
+          if(mother.volunteers[0]){
+            mother.primaryVolunteer = mother.volunteers[0];
+          }          
+        }
+
+        mother.save(cb);
+      }else{
+        cb(null, null);
+      }
+    });
   }
 };
 

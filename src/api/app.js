@@ -28,6 +28,7 @@ app.del('/api/mothers', mother.del);
 app.post('/api/mothers/search', mother.search);
 app.put('/api/mothers', mother.update);
 app.post('/api/mothers/assign/:id', mother.assignVolunteer);
+app.post('/api/mothers/unassign/:id', mother.unassignVolunteer);
 
 app.get('/api/volunteers', volunteer.get);
 app.post('/api/volunteers', volunteer.create);
