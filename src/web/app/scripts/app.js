@@ -64,19 +64,18 @@ angular.module('webApp', [
       });
   })
     .run(['$rootScope', '$location', '$http', '$cookies', function ($scope, $location, $http, $cookies) {   
+        $scope.Logout = function(){
+          $scope.isLoggedIn = false;
+          return $location.path('/login');
+        }
+
         $scope.$on('$routeChangeStart', function (event) {
           if(!($scope.isLoggedIn)){
             return $location.path('/login');
           }
         });
 
-        $scope.Logout = function(){
-          $scope.isLoggedIn = false;
-          return $location.path('/login');
-        }
-
         if(!($scope.isLoggedIn)){
             return $location.path('/login');
         }
-
  }]);
