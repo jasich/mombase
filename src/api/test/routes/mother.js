@@ -97,9 +97,8 @@ describe('POST /api/mothers', function() {
     mother.save(function(err, m) {
       if (err) throw err;
       request(app)
-        .del('/api/mothers')
+        .del('/api/mothers/' + m.id)
         .set('Accept', 'application/json')
-        .send({'id':m.id})
         .expect(200)
         .end( function(err, res) {
           if(err) return done(err);
