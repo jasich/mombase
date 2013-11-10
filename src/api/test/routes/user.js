@@ -30,7 +30,30 @@ describe('POST /api/users/login', function() {
         if (err) return done(err);
         assert.ok(res.res.body.first);
         assert.ok(res.res.body.last);
+        assert.ok(!res.res.body.hash);
         done();
       });
   });
+});
+
+describe('POST /api/users', function() {
+
+  it('should create a user with a 200 ok and returns it', function(done) {
+    request(app)
+      .post('/api/users')
+      .set('Accept', 'application/json')
+      .send({email: 'created@email.com', first: 'brian', last: 'scaturro', password:'password'})
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .end(function(err, res) {
+        if (err) return done(err);
+        var user = res.res.body;
+        assert.ok(user.first);
+        assert.ok(user.last);
+        assert.ok(user._id);
+        assert(!user.hash)
+        done();
+      });
+  });
+
 });

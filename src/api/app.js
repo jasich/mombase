@@ -17,6 +17,7 @@ config.configure(app);
 //application routes
 app.get('/', routes.index);
 app.post('/api/users/login', user.login);
+app.post('/api/users', user.create);
 
 app.post('/api/volunteer/create', volunteer.create);
 
