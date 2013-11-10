@@ -39,6 +39,21 @@ MotherService.prototype = {
   },
   delete: function( id, cb ) {
     Mother.remove( { _id: id }, cb );
+  },
+  assignVolunteer: function(id, volunteerEmail, cb){
+    Mother.findOne( { _id: id }, function(err, mother){
+      if(err){
+        throw err;
+      }
+
+      if(mother){
+        mother.volunteers.push(volunteerEmail);
+        mother.primaryVolunteer = volunteerEmail;
+        mother.save(cb);
+      }else{
+        cb(null, null);
+      }
+    });
   }
 };
 
