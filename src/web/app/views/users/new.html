@@ -6,15 +6,13 @@
 </div>
 <div class='page-body'>
     <form name='newUser' novalidate="" ng-submit='save()'>
-        <div class='form-group'>
-            <label class='checkbox'>
-                <input type='checkbox' ng-model='user.active'/>
-                Is Active
-            </label>
+        <div class='form-group' ng-class='{"has-error": isFieldInvalid("username")}'>
+            <label>First name:</label>
+            <input type='text' name='first' ng-required='true' class='form-control' ng-model='user.first'/>
         </div>
         <div class='form-group' ng-class='{"has-error": isFieldInvalid("username")}'>
-            <label>Username</label>
-            <input type='text' name='username' ng-required='true' class='form-control' ng-model='user.username'/>
+            <label>Last name:</label>
+            <input type='text' name='last' ng-required='true' class='form-control' ng-model='user.last'/>
         </div>
         <div class='form-group' ng-class='{"has-error": isFieldInvalid("email")}'>
             <label>Email</label>

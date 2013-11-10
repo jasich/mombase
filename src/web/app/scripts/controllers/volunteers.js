@@ -27,6 +27,5 @@ angular.module('webApp')
 
     $scope.store = function() {
       $rootScope.volunteer = $scope.volunteer;
-      console.log($rootScope);
     };
   });
