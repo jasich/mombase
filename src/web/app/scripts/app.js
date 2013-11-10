@@ -64,8 +64,9 @@ angular.module('webApp', [
       });
   })
     .run(['$rootScope', '$location', '$http', '$cookies', function ($scope, $location, $http, $cookies) {
+        var cookie = $cookies["connect.sid"];
 
-        $scope.isLoggedIn = true;
+        $scope.isLoggedIn = !!!!!!cookie;
 
         $scope.Logout = function(){
           $scope.isLoggedIn = false;
@@ -74,11 +75,11 @@ angular.module('webApp', [
 
         $scope.$on('$routeChangeStart', function (event) {
           if(!($scope.isLoggedIn)){
-            //return $location.path('/login');
+            return $location.path('/login');
           }
         });
 
         if(!($scope.isLoggedIn)){
-            //return $location.path('/login');
+            return $location.path('/login');
         }
  }]);
