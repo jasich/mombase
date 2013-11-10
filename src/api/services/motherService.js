@@ -31,6 +31,7 @@ MotherService.prototype = {
     delete body._id;
     var self = this;
     Mother.update({_id: id}, body, {upsert: true}, function( err ) {
+      console.log(err);
       self.get(id, cb);
     });
   },
@@ -40,7 +41,8 @@ MotherService.prototype = {
   delete: function( id, cb ) {
     Mother.remove( { _id: id }, cb );
   },
-  assignVolunteer: function(id, volunteerEmail, cb){
+  assignVolunteer: function(id, volunteerEmail, cb) {
+    var self = this;
     Mother.findOne( { _id: id }, function(err, mother){
       if(err){
         throw err;
@@ -49,13 +51,14 @@ MotherService.prototype = {
       if(mother){
         mother.volunteers.push(volunteerEmail);
         mother.primaryVolunteer = volunteerEmail;
-        mother.save(cb);
+        self.update(mother.toObject(), cb);
       }else{
         cb(null, null);
       }
     });
   },
   unassignVolunteer: function(id, volunteerEmail, cb){
+    var self = this;
     Mother.findOne( { _id: id }, function(err, mother){
       if(err){
         throw err;
@@ -76,7 +79,7 @@ MotherService.prototype = {
           }         
         }
 
-        mother.save(cb);
+        self.update(mother.toObject(), cb);
       }else{
         cb(null, null);
       }
