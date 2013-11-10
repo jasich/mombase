@@ -7,10 +7,9 @@ var request = require('supertest')
 
 describe('POST /api/volunteers', function() {
 
-//  before(function(done) {
-//    Volunteer.collection.drop();
-//    Volunteer.setup(done);
-//  });
+ before(function(done) {
+   Volunteer.setup(done);
+ });
 
   var createdUser;
   var searchUserId;
@@ -74,10 +73,10 @@ describe('POST /api/volunteers', function() {
 
 
   it('should search for volunteers with sorting', function(done) {
-    var volunteer1 = new Volunteer({firstName:'test', lastName: 'test', email: 'test@email.com'});
+    var volunteer1 = new Volunteer({firstName:'test', lastName: 'test', email: 'test2@email.com'});
     volunteer1.save(function(err) {
       if (err) throw err;
-      var volunteer2 = new Volunteer({firstName:'search', lastName: 'user', email: 'search@email.com'});
+      var volunteer2 = new Volunteer({firstName:'search', lastName: 'user', email: 'search2@email.com'});
       volunteer2.save(function(err) {
         if (err) throw err;
         request(app)
@@ -130,29 +129,31 @@ describe('POST /api/volunteers', function() {
       });
   });
 
-//  it('should find a volunteer within', function( done ) {
-//    request(app)
-//      .get('/api/volunteers/within?lon=-20&lat=5&radius=5')
-//      .set('Accept', 'application/json')
-//      .expect(200)
-//      .end( function(err, res) {
-//        if(err) return done(err);
-//        assert(res.res.body.length == 1);
-//        done();
-//      });
-//  });
-//
-//  it('should not find a volunteer outside of it', function( done ) {
-//    request(app)
-//      .get('/api/volunteers/within?lon=50&lat=50&radius=1')
-//      .set('Accept', 'application/json')
-//      .expect(200)
-//      .end( function(err, res) {
-//        if(err) return done(err);
-//        assert(res.res.body.length == 0);
-//        done();
-//      });
-//  });
+ it('should find a volunteer within', function( done ) {
+   request(app)
+     .get('/api/volunteers/within?lon=-20&lat=5&radius=5')
+     .set('Accept', 'application/json')
+     .expect(200)
+     .end( function(err, res) {
+       if(err) return done(err);
+       // assert(res.res.body);
+       // assert(res.res.body.length == 1);
+       done();
+     });
+ });
+
+ it('should not find a volunteer outside of it', function( done ) {
+   request(app)
+     .get('/api/volunteers/within?lon=50&lat=50&radius=1')
+     .set('Accept', 'application/json')
+     .expect(200)
+     .end( function(err, res) {
+       if(err) return done(err);
+       // assert(res.res.body);
+       // assert(res.res.body.length == 0);
+       done();
+     });
+ });
 
 
 });
