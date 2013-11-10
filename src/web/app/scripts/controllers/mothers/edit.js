@@ -11,7 +11,19 @@ angular.module('webApp')
       return $filter('date')(date, 'yyyy-MM-dd');
     }
 
-    $scope.mother = $rootScope.mother || $scope.mother || Mother.get({id: $routeParams.id}, function(mom){
+    $scope.getLanguageName = function(code)
+    {
+        var found = _.find($scope.langCodes, function(lang){
+            return code == lang.abbr;
+        });
+
+        if(found)
+            return found.name;
+        else
+            return code;
+    }
+
+    $scope.mother = Mother.get({id: $routeParams.id}, function(mom){
       $scope.mother.birthdate = $scope.formatDate($scope.mother.birthdate);
       if($scope.mother.communication){
         $scope.mother.communication.requestForServices.sent = $scope.formatDate($scope.mother.communication.requestForServices.sent);
@@ -19,8 +31,6 @@ angular.module('webApp')
         $scope.mother.communication.waiver.sent = $scope.formatDate($scope.mother.waiver.requestForServices.sent);
         $scope.mother.communication.waiver.response = $scope.formatDate($scope.mother.waiver.requestForServices.response);
       }
-
-
     });
 
     $scope.mother.address = $scope.mother.address || {};
@@ -42,7 +52,7 @@ angular.module('webApp')
     $scope.update = function() {
       //$scope.mother.address.state = $scope.selectedState.abbreviation;
       $scope.mother.availability = $scope.selectedAvailability;
-      $scope.mother.languages = _.map($scope.selectedLanguages, function(l) { return l.abbr });
+      //$scope.mother.languages = _.map($scope.selectedLanguages, function(l) { return l.abbr });
 
       var mother = new Mother($scope.mother);
       mother.$update(function(){

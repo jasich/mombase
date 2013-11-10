@@ -81,7 +81,7 @@
                 </div>
                 <div class='col-md-4' ng-class='{"has-error": isFieldInvalid("state")}'>
                     <label>State</label>
-                    <select ng-model='selectedState' ng-required='true' ng-options='st.name for st in states' class='form-control'>
+                    <select ng-model='mother.address.state' ng-required='true' ng-options='st.abbreviation as st.name for st in states' class='form-control'>
                         <option value=''>Select State</option>
                     </select>
                 </div>
@@ -160,9 +160,9 @@
         <!-- Additional Information -->
         <fieldset class='margin-top-50'>
             <legend>Additional Information</legend>
-            <h3>Restrictions</h3>
+
             <div class='form-group'>
-                <label>Medications</label>
+                <label>Allergy Medications</label>
                 <textarea rows='5' ng-model='mother.restrictions.medical' class='form-control'>
 
                 </textarea>
@@ -186,9 +186,12 @@
 
             <div class='form-group'>
                 <label>Languages Spoken</label>
-                <select ng-model='selectedLanguages' multiple ng-options='lang.name for lang in langCodes' class='form-control'>
+                <select ng-model='mother.languages' multiple ng-options='lang.abbr as lang.name for lang in langCodes' class='form-control'>
 
                 </select>
+                <div class='vertical-margin-5'>
+                    <span class='label label-default margin-right-5' ng-repeat='lang in mother.languages'>{{getLanguageName(lang)}}&nbsp;</span>
+                </div>
             </div>
 
             <div class='form-group row'>

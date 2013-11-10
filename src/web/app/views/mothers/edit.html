@@ -4,81 +4,207 @@
 <div class='page-body'>
     <form name='editMother' novalidate="" ng-submit='update()'>
         <div class='form-group' ng-class='{"has-error": isFieldInvalid("firstName")}'>
-
-            <!-- Name -->
-            <div class='form-group row'>
-                <div class='col-md-6'>
+        <!-- Name -->
+        <div class='row'>
+            <div class='col-md-6'>
+                <div class="form-group" ng-class='{"has-error": isFieldInvalid("firstName")}'>
                     <label>First Name</label>
                     <input type='text' name='firstName' ng-required='true' class='form-control' ng-model='mother.firstName'/>
                 </div>
 
-                <div class='col-md-6'>
+            </div>
+            <div class='col-md-6'>
+                <div class="form-group" ng-class='{"has-error": isFieldInvalid("lastName")}'>
                     <label>Last Name</label>
                     <input type='text' name='lastName' ng-required='true' class='form-control' ng-model='mother.lastName'/>
                 </div>
             </div>
 
-            <div class='form-group row'>
+        </div>
+        <div class='row form-group'>
+            <div class='col-md-6'>
+                <label>Nick Name</label>
+                <input type='text' name='nickName' class='form-control' ng-model='mother.nickName'/>
+            </div>
+        </div>
+
+
+
+        <div class='form-group row'>
+
+            <div class='col-md-6'>
+                <label>Birthdate</label>
+                <input type='date' name='birthDate' ng-required='true' class='form-control' ng-model='mother.birthdate'/>
+            </div>
+
+            <div class='col-md-6'>
+                <label>Ethnicity</label>
+                <input type='text' name='ethnicity' class='form-control' ng-model='mother.ethnicity'/>
+            </div>
+        </div>
+
+        <div class='form-group row'>
+            <div class='col-md-6' ng-class='{"has-error": isFieldInvalid("email")}'>
+                <label>Email</label>
+                <input type='email' name='email' class='form-control' ng-model='mother.email'/>
+            </div>
+            <div class='col-md-6' ng-class='{"has-error": isFieldInvalid("phone")}'>
+                <label>Phone</label>
+                <input type='text' name='phone' ng-required='true' class='form-control' ng-model='mother.phone'/>
+            </div>
+        </div>
+
+        <!-- Contact (Address) -->
+        <fieldset class='margin-top-50'>
+            <legend>Address</legend>
+            <div class='form-group' ng-class='{"has-error": isFieldInvalid("line1")}'>
+                <label>Street</label>
+                <input type='text' name='line1' ng-required='true' class='form-control' ng-model='mother.address.line1'/>
+            </div>
+
+            <div class='form-group'>
+                <label>Street 2</label>
+                <input type='text' name='line2' class='form-control' ng-model='mother.address.line2'/>
+            </div>
+
+            <div class='form-group row margin-top-20'>
                 <div class='col-md-6'>
-                    <label>Nick Name</label>
-                    <input type='text' name='nickName' class='form-control' ng-model='mother.nickName'/>
+                    <label>County</label>
+                    <input type='text' name='city' class='form-control' ng-model='mother.address.county'/>
+                </div>
+            </div>
+
+            <div class='form-group row margin-top-20'>
+                <div class='col-md-6' ng-class='{"has-error": isFieldInvalid("city")}'>
+                    <label>City</label>
+                    <input type='text' name='city' ng-required='true' class='form-control' ng-model='mother.address.city'/>
+                </div>
+                <div class='col-md-4' ng-class='{"has-error": isFieldInvalid("state")}'>
+                    <label>State</label>
+                    <select name='state' ng-model='mother.address.state' ng-required='true' ng-options='st.abbreviation as st.name for st in states' class='form-control'>
+                        <option value=''>Select State</option>
+                    </select>
+                </div>
+                <div class='col-md-2' ng-class='{"has-error": isFieldInvalid("zip")}'>
+                    <label>Zip</label>
+                    <input type='text' name='zip' ng-required='true' class='form-control' ng-model='mother.address.zip'/>
+                </div>
+            </div>
+        </fieldset>
+
+        <!-- Emergency Contact -->
+        <fieldset>
+            <legend>Emergency Contact</legend>
+            <div class='form-group row' ng-class='{"has-error": isFieldInvalid("erFirstName")}'>
+                <div class='col-md-6'>
+                    <label>First Name</label>
+                    <input type='text' ng-required="true" name='erFirstName' class='form-control' ng-model='mother.emergencyContact.firstName'/>
                 </div>
 
-                <div class='col-md-6'>
-                    <label>Birthdate</label>
-                    <input type='date' name='birthDate' ng-required='true' class='form-control' ng-model='mother.birthdate'/>
+                <div class='col-md-6' ng-class='{"has-error": isFieldInvalid("erLastName")}'>
+                    <label>Last Name</label>
+                    <input type='text' ng-required="true" name='erLastName' class='form-control' ng-model='mother.emergencyContact.lastName'/>
                 </div>
             </div>
 
             <div class='form-group row'>
-                <div class='col-md-6'>
+                <div class='col-md-6' ng-class='{"has-error": isFieldInvalid("erEmail")}'>
                     <label>Email</label>
-                    <input type='email' name='email' class='form-control' ng-model='mother.email'/>
+                    <input type='email' name='erEmail' class='form-control' ng-model='mother.emergencyContact.email'/>
                 </div>
                 <div class='col-md-6'>
                     <label>Phone</label>
-                    <input type='text' name='cellPhone' ng-required='true' class='form-control' ng-model='mother.phone'/>
+                    <input type='text' name='erCellPhone' class='form-control' ng-model='mother.emergencyContact.phone'/>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset class="margin-top-50">
+            <legend>Communication</legend>
+
+            <div class='form-group row'>
+                <div class='col-md-12'>
+                    <label>Availability</label>
+                    <select ng-model='selectedAvailability'  ng-options='av.name for av in availabilityCodes' class='form-control'>
+                        <option value=''>Select Availability</option>
+                    </select>
                 </div>
             </div>
 
-
-            <!-- Contact -->
-            <fieldset class='margin-top-50'>
-                <legend>Address</legend>
-                <div class='form-group'>
-                    <label>Street</label>
-                    <input type='text' name='line1' ng-required='true' class='form-control' ng-model='mother.address.line1'/>
+            <div class='form-group row'>
+                <div class='col-md-6'>
+                    <label>Request for Services Date</label>
+                    <input type='date' name='requestForServices' class='form-control' ng-model='mother.communication.requestForServices.sent'/>
                 </div>
 
-                <div class='form-group'>
-                    <label>Street 2</label>
-                    <input type='text' name='line2' class='form-control' ng-model='mother.address.line2'/>
+                <div class='col-md-6'>
+                    <label>Response for Services Date</label>
+                    <input type='date' name='responseForServices' class='form-control' ng-model='mother.communication.requestForServices.response'/>
+                </div>
+            </div>
+
+            <div class='form-group row'>
+                <div class='col-md-6'>
+                    <label>Waiver Sent</label>
+                    <input type='date' name='waiverSent' class='form-control' ng-model='mother.communication.waiver.sent'/>
                 </div>
 
-                <div class='form-group row margin-top-20'>
-                    <div class='col-md-6'>
-                        <label>County</label>
-                        <input type='text' name='city' class='form-control' ng-model='mother.address.county'/>
-                    </div>
+                <div class='col-md-6'>
+                    <label>Waiver Response</label>
+                    <input type='date' name='waiverResponse' class='form-control' ng-model='mother.communication.waiver.response'/>
+                </div>
+            </div>
+
+        </fieldset>
+
+        <!-- Additional Information -->
+        <fieldset class='margin-top-50'>
+            <legend>Additional Information</legend>
+
+            <div class='form-group'>
+                <label>Allergy Medications</label>
+                <textarea rows='5' ng-model='mother.restrictions.medical' class='form-control'>
+
+                </textarea>
+                <span class='help-block'>A comma separated list of medical restrictions</span>
+            </div>
+            <div class='form-group'>
+                <label>Allergy Restrictions</label>
+                <textarea rows='5' ng-model='mother.restrictions.medical' class='form-control'>
+
+                </textarea>
+                <span class='help-block'>A comma separated list of allergies</span>
+            </div>
+
+            <div class='form-group'>
+                <label>Pet Restrictions</label>
+                <textarea rows='5' ng-model='mother.restrictions.medical' class='form-control'>
+
+                </textarea>
+                <span class='help-block'>A comma separated list of pet allergies</span>
+            </div>
+
+            <div class='form-group'>
+                <label>Languages Spoken</label>
+                <select ng-model='mother.languages' multiple ng-options='lang.abbr as lang.name for lang in langCodes' class='form-control'>
+
+                </select>
+                <div class='vertical-margin-5'>
+                    <span class='label label-default margin-right-5' ng-repeat='lang in mother.languages'>{{getLanguageName(lang)}}&nbsp;</span>
+                </div>
+            </div>
+
+            <div class='form-group row'>
+                <div class='col-md-6'>
+                    <label>Pediatrician</label>
+                    <input type='text' name='pediatrician' class='form-control' ng-model='mother.pediatrician'/>
                 </div>
 
-                <div class='form-group row margin-top-20'>
-                    <div class='col-md-6'>
-                        <label>City</label>
-                        <input type='text' name='city' ng-required='true' class='form-control' ng-model='mother.address.city'/>
-                    </div>
-                    <div class='col-md-4'>
-                        <label>State</label>
-                        <select ng-model='mother.address.state' ng-required='true' ng-options='st.abbreviation as st.name for st in states' class='form-control'>
-                            <option value=''>Select State</option>
-                        </select>
-                    </div>
-                    <div class='col-md-2'>
-                        <label>Zip</label>
-                        <input type='text' name='zip' ng-required='true' class='form-control' ng-model='mother.address.zip'/>
-                    </div>
-                </div>
-            </fieldset>
+            </div>
+        </fieldset>
+
+
+        <!--
 
             <fieldset class='margin-top-50'>
                 <legend>Service Dates</legend>
@@ -96,38 +222,18 @@
                 </div>
             </fieldset>
 
-            <!-- Children -->
-            <fieldset class='margin-top-50'>
-                <legend>Children</legend>
 
-                <div class='form-group'>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Gender</th>
-                                <th>Age</th>
-                                <th>Receiving Services</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="child in mother.children">
-                                <td>{{ child.firstName }} {{ child.lastName }}</td>
-                                <td>{{ child.gender }}</td>
-                                <td>{{ child.age }}</td>
-                                <td>
-                                    <input type="checkbox" ng-model="child.receivingServices" />
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+            <fieldset class="margin-top-50">
+                <legend>Communication</legend>
+
+                <div class='form-group row'>
+                    <div class='col-md-12'>
+                        <label>Availability</label>
+                        <select ng-model='selectedAvailability'  ng-options='av.name for av in availabilityCodes' class='form-control'>
+                            <option value=''>Select Availability</option>
+                        </select>
+                    </div>
                 </div>
-
-            </fieldset>
-
-            <!-- General Info -->
-            <fieldset class='margin-top-50'>
-                <legend>Communications</legend>
 
                 <div class='form-group row'>
                     <div class='col-md-6'>
@@ -152,6 +258,13 @@
                         <input type='date' name='waiverResponse' class='form-control' ng-model='mother.communication.waiver.response'/>
                     </div>
                 </div>
+
+            </fieldset>
+
+
+            <fieldset class='margin-top-50'>
+                <legend>Communications</legend>
+
 
                 <div class='form-group row'>
                     <div class='col-md-2'>
@@ -178,7 +291,7 @@
             </fieldset>
 
 
-            <!-- Additional Information -->
+
             <fieldset class='margin-top-50'>
                 <legend>Additional Information</legend>
                 <div class='form-group'>
@@ -191,9 +304,13 @@
 
                 <div class='form-group'>
                     <label>Languages Spoken</label>
-                    <select ng-model='selectedLanguages' multiple ng-options='lang.name for lang in langCodes' class='form-control'>
+
+                    <select ng-model='mother.languages' multiple ng-options='lang.abbr as lang.name for lang in langCodes' class='form-control'>
 
                     </select>
+                    <div class='vertical-margin-5'>
+                        <span class='label label-default margin-right-5' ng-repeat='lang in mother.languages'>{{getLanguageName(lang)}}&nbsp;</span>
+                    </div>
                 </div>
 
                 <div class='form-group row'>
@@ -208,71 +325,72 @@
                     </div>
                 </div>
             </fieldset>
+        -->
+        <!-- Children -->
+        <!--<fieldset class='margin-top-50'>-->
+            <!--<legend>Children</legend>-->
 
+            <!--<div class='form-group'>-->
+                <!--<table class="table">-->
+                    <!--<thead>-->
+                    <!--<tr>-->
+                        <!--<th>Name</th>-->
+                        <!--<th>Gender</th>-->
+                        <!--<th>Age</th>-->
+                        <!--<th>Receiving Services</th>-->
+                    <!--</tr>-->
+                    <!--</thead>-->
+                    <!--<tbody>-->
+                    <!--<tr ng-repeat="child in mother.children">-->
+                        <!--<td>{{ child.firstName }} {{ child.lastName }}</td>-->
+                        <!--<td>{{ child.gender }}</td>-->
+                        <!--<td>{{ child.age }}</td>-->
+                        <!--<td>-->
+                            <!--<input type="checkbox" ng-model="child.receivingServices" />-->
+                        <!--</td>-->
+                    <!--</tr>-->
+                    <!--</tbody>-->
+                <!--</table>-->
+            <!--</div>-->
 
-            <!-- Emergency Contact -->
-            <fieldset>
-                <legend>Emergency Contact</legend>
-                <div class='form-group row'>
-                    <div class='col-md-6'>
-                        <label>First Name</label>
-                        <input type='text' name='erFirstName' class='form-control' ng-model='mother.emergencyContact.firstName'/>
-                    </div>
+        <!--</fieldset>-->
 
-                    <div class='col-md-6'>
-                        <label>Last Name</label>
-                        <input type='text' name='erLastName' class='form-control' ng-model='mother.emergencyContact.lastName'/>
-                    </div>
-                </div>
+            <!-- Volunteers (Move) -->
 
-                <div class='form-group row'>
-                    <div class='col-md-6'>
-                        <label>Email</label>
-                        <input type='email' name='erEmail' class='form-control' ng-model='mother.emergencyContact.email'/>
-                    </div>
-                    <div class='col-md-6'>
-                        <label>Phone</label>
-                        <input type='text' name='erCellPhone' class='form-control' ng-model='mother.emergencyContact.phone'/>
-                    </div>
-                </div>
-            </fieldset>
+            <!--<fieldset>-->
+                <!--<legend>Volunteers</legend>-->
+                <!--<div class='form-group row'>-->
+                    <!--<div class='col-md-6'>-->
+                        <!--<label>Primary Volunteer</label>-->
+                        <!--<input name='primaryVolunteer' class='form-control' ng-model='mother.primaryVolunteer'/>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</fieldset>-->
 
-            <!-- Volunteers -->
-            <fieldset>
-                <legend>Volunteers</legend>
-                <div class='form-group row'>
-                    <div class='col-md-6'>
-                        <label>Primary Volunteer</label>
-                        <input name='primaryVolunteer' class='form-control' ng-model='mother.primaryVolunteer'/>
-                    </div>
-                </div>
-            </fieldset>
+            <!-- Visits (Move to separate area) -->
+            <!--<fieldset class='margin-top-50'>-->
+                <!--<legend>Visits</legend>-->
 
+                <!--<div class='form-group'>-->
+                    <!--<table class="table">-->
+                        <!--<thead>-->
+                        <!--<tr>-->
+                            <!--<th>Date</th>-->
+                            <!--<th>Primary Volunteer</th>-->
+                            <!--<th>Notes</th>-->
+                        <!--</tr>-->
+                        <!--</thead>-->
+                        <!--<tbody>-->
+                        <!--<tr ng-repeat="visit in mother.visits">-->
+                            <!--<td>{{ visit.startDate }}</td>-->
+                            <!--<td>{{ child.volunteers[0] }}</td>-->
+                            <!--<td>{{  }}</td>-->
+                        <!--</tr>-->
+                        <!--</tbody>-->
+                    <!--</table>-->
+                <!--</div>-->
 
-            <!-- Visits -->
-            <fieldset class='margin-top-50'>
-                <legend>Visits</legend>
-
-                <div class='form-group'>
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Primary Volunteer</th>
-                            <th>Notes</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr ng-repeat="visit in mother.visits">
-                            <td>{{ visit.startDate }}</td>
-                            <td>{{ child.volunteers[0] }}</td>
-                            <td>{{  }}</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-            </fieldset>
+            <!--</fieldset>-->
 
         </div>
 
