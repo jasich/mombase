@@ -14,8 +14,8 @@ VolunteerService.prototype = {
 
 		Volunteer.find( _filter, null, { skip: _offset, limit: _take, sort: _sort }, cb );
 	},
-	within: function( lon, lat, radius, cb ) {
-		Volunteer.find( { loc : { $within: { $center: [ [ lon, lat ], radius ] } } }, cb);
+	within: function( lat, lon, radius, cb ) {
+		Volunteer.find( { loc : { $within: { $center: [ [ lat, lon ], radius ] } } }, cb);
 	},
 	save: function( body, cb ) {
 		var volunteer = new Volunteer(body);

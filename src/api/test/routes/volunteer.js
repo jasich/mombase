@@ -130,16 +130,28 @@ describe('POST /api/volunteers', function() {
   });
 
  it('should find a volunteer within', function( done ) {
-   request(app)
-     .get('/api/volunteers/within?lon=-20&lat=5&radius=5')
-     .set('Accept', 'application/json')
-     .expect(200)
-     .end( function(err, res) {
-       if(err) return done(err);
-       // assert(res.res.body);
-       // assert(res.res.body.length == 1);
-       done();
-     });
+
+    request(app)
+      .post('/api/volunteers')
+      .set('Accept', 'application/json')
+      .send({firstName:'test', lastName: 'test', email: 'radius@email.com', loc: [-20.0, 5.0] })
+      .end( function(err, res) {
+        if(err) return done(err);
+
+       request(app)
+         .get('/api/volunteers/within?lat=-20&lon=5&radius=5')
+         .set('Accept', 'application/json')
+         .expect(200)
+         .end( function(err, res) {
+           if(err) return done(err);
+           assert(res.res.body);
+           assert(res.res.body.length == 1);
+           done();
+         });
+      });
+
+
+
  });
 
  it('should not find a volunteer outside of it', function( done ) {
@@ -149,8 +161,8 @@ describe('POST /api/volunteers', function() {
      .expect(200)
      .end( function(err, res) {
        if(err) return done(err);
-       // assert(res.res.body);
-       // assert(res.res.body.length == 0);
+       assert(res.res.body);
+       assert(res.res.body.length == 0);
        done();
      });
  });
