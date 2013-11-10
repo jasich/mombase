@@ -1,1 +1,190 @@
-<p>This is the mothers/edit view.</p>
+<div class='page-header'>
+    <h1 class='page-title'>Edit Mother</h1>
+</div>
+<div class='page-body'>
+    <form name='editMother' novalidate="" ng-submit='save()'>
+        <div class='form-group' ng-class='{"has-error": isFieldInvalid("firstName")}'>
+
+            <!-- Name -->
+            <div class='form-group row'>
+                <div class='col-md-6'>
+                    <label>First Name</label>
+                    <input type='text' name='firstName' ng-required='true' class='form-control' ng-model='mother.firstName'/>
+                </div>
+
+                <div class='col-md-6'>
+                    <label>Last Name</label>
+                    <input type='text' name='lastName' ng-required='true' class='form-control' ng-model='mother.lastName'/>
+                </div>
+            </div>
+
+            <div class='form-group row'>
+                <div class='col-md-6'>
+                    <label>Nick Name</label>
+                    <input type='text' name='firstName' ng-required='true' class='form-control' ng-model='mother.nickName'/>
+                </div>
+
+                <div class='col-md-6'>
+                    <label>Birthdate</label>
+                    <input type='text' name='lastName' ng-required='true' class='form-control' ng-model='mother.birthdate'/>
+                </div>
+            </div>
+
+            <div class='form-group row'>
+                <div class='col-md-6'>
+                    <label>Email</label>
+                    <input type='email' name='email' ng-required='true' class='form-control' ng-model='mother.email'/>
+                </div>
+                <div class='col-md-6'>
+                    <label>Phone</label>
+                    <input type='text' name='cellPhone' ng-required='true' class='form-control' ng-model='mother.phone'/>
+                </div>
+            </div>
+
+
+            <!-- Contact -->
+            <fieldset class='margin-top-50'>
+                <legend>Address</legend>
+                <div class='form-group'>
+                    <label>Street</label>
+                    <input type='text' name='address' ng-required='true' class='form-control' ng-model='mother.address.line1'/>
+                </div>
+
+                <div class='form-group'>
+                    <label>Street 2</label>
+                    <input type='text' name='address' ng-required='true' class='form-control' ng-model='mother.address.line2'/>
+                </div>
+
+                <div class='form-group row margin-top-20'>
+                    <div class='col-md-6'>
+                        <label>County</label>
+                        <input type='text' name='city' ng-required='true' class='form-control' ng-model='mother.address.county'/>
+                    </div>
+                </div>
+
+                <div class='form-group row margin-top-20'>
+                    <div class='col-md-6'>
+                        <label>City</label>
+                        <input type='text' name='city' ng-required='true' class='form-control' ng-model='mother.address.city'/>
+                    </div>
+                    <div class='col-md-4'>
+                        <label>State</label>
+                        <select ng-model='mother.address.state' ng-required='true' ng-options='st.name for st in states' class='form-control'>
+                            <option value=''>Select State</option>
+                        </select>
+                    </div>
+                    <div class='col-md-2'>
+                        <label>Zip</label>
+                        <input type='text' name='zip' ng-required='true' class='form-control' ng-model='mother.address.zip'/>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class='margin-top-50'>
+                <legend>Service Dates</legend>
+
+                <div class='form-group row'>
+                    <div class='col-md-6'>
+                        <label>Started </label>
+                        <input type='text' name='firstName' ng-required='true' class='form-control' ng-model='mother.serviceStartedDate'/>
+                    </div>
+
+                    <div class='col-md-6'>
+                        <label>Ended</label>
+                        <input type='text' name='lastName' ng-required='true' class='form-control' ng-model='mother.serviceEndedDate'/>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Children -->
+            <fieldset class='margin-top-50'>
+                <legend>Children</legend>
+
+                <div class='form-group'>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Gender</th>
+                                <th>Age</th>
+                                <th>Receiving Services</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="child in mother.children">
+                                <td>{{ child.firstName }} {{ child.lastName }}</td>
+                                <td>{{ child.gender }}</td>
+                                <td>{{ child.age }}</td>
+                                <td>
+                                    <input type="checkbox" ng-model="child.receivingServices" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </fieldset>
+
+            <!-- General Info -->
+            <fieldset class='margin-top-50'>
+                <legend>Communications</legend>
+
+                <div class='form-group row'>
+                    <div class='col-md-6'>
+                        <label>Request for Services</label>
+                        <input type='text' name='firstName' ng-required='true' class='form-control' ng-model='mother.communication.requestForServices.sent'/>
+                    </div>
+
+                    <div class='col-md-6'>
+                        <label>Response for Services</label>
+                        <input type='text' name='lastName' ng-required='true' class='form-control' ng-model='mother.communication.requestForServices.response'/>
+                    </div>
+                </div>
+
+                <div class='form-group row'>
+                    <div class='col-md-6'>
+                        <label>Waiver Sent</label>
+                        <input type='text' name='firstName' ng-required='true' class='form-control' ng-model='mother.communication.waiver.sent'/>
+                    </div>
+
+                    <div class='col-md-6'>
+                        <label>Waiver Response</label>
+                        <input type='text' name='lastName' ng-required='true' class='form-control' ng-model='mother.communication.waiver.response'/>
+                    </div>
+                </div>
+
+                <div class='form-group row'>
+                    <div class=''>
+                        <label>Availability</label>
+                        <input type='text' name='availability' ng-required='true' class='form-control' ng-model='mother.availability'/>
+                    </div>
+                </div>
+
+                <div class='form-group row'>
+                    <div class=''>
+                        <label>How did you find us?</label>
+                        <input type='text' name='availability' ng-required='true' class='form-control' ng-model='mother.howDidYouFind'/>
+                    </div>
+                </div>
+
+                <div class='form-group row'>
+                    <div class=''>
+                        <label>Referral Details</label>
+                        <input type='text' name='availability' ng-required='true' class='form-control' ng-model='mother.referralDetails'/>
+                    </div>
+                </div>
+            </fieldset>
+
+
+
+        </div>
+
+
+
+
+        <div class='form-actions'>
+            <button class='btn btn-primary' ng-disabled='!isFormValid()'>Save Mother</button>
+            <a class='btn btn-link margin-left-5' href="#/mothers">Cancel</a>
+        </div>
+    </form>
+</div>

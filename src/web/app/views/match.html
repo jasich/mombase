@@ -2,16 +2,36 @@
 <div class='page-header'>
     <h1 class='page-title'>Match</h1>
     <p class='page-description'>
-        This where you match a mom with a volunteer
+        This where you match a volunteer to: <strong>{{ mom.firstName }} {{ mom.lastName }}</strong>
     </p>
 </div>
 
 <div class='page-body'>
     <form name='momMatch' novalidate="" ng-submit=''>
-        <div class='form-group' ng-class='{"has-error": isFieldInvalid("firstName")}'>
+        <!-- Name -->
+        <div class='form-group row'>
+            <div class='col-md-6'>
+                <label>Radius</label>
+                <select>
+                    <option ng-repeat="opt in rangeOptions" value="{{ opt.value }"> {{ opt.label }} </option>
+                </select>
+            </div>
 
-            <label>{{ mom.firstName }} {{ mom.lasttName }} adflj</label>
-
+            <div class='col-md-6'>
+                <label></label>
+            </div>
         </div>
     </form>
+
+    <div class="list-group">
+        <a ng-repeat='volunteer in volunteers'
+           class="list-group-item" ng-class="{active: mom.primaryVolunteer == volunteer.email }">
+
+            <button ng-hide="mom.primaryVolunteer == volunteer.email" ng-click="assignVolunteer(volunteer.email)" class="btn btn-small pull-right">Assign</button>
+            <button ng-hide="mom.primaryVolunteer != volunteer.email" ng-click="unassignVolunteer(volunteer.email)" class="btn btn-small pull-right">Remove</button>
+            <h4 class="list-group-item-heading">{{ volunteer.firstName}} {{ volunteer.lastName }}</h4>
+            <p class="list-group-item-text">{{ volunteer.email }}</p>
+
+        </a>
+    </div>
 </div>
