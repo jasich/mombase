@@ -33,7 +33,7 @@ beforeEach(function (done) {
         clearDB();
         break;
       default:
-        process.nextTick(checkState);
+        setImmediate(checkState);
     }
   }
 
