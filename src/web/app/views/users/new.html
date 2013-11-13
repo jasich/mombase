@@ -6,11 +6,11 @@
 </div>
 <div class='page-body'>
     <form name='newUser' novalidate="" ng-submit='save()'>
-        <div class='form-group' ng-class='{"has-error": isFieldInvalid("username")}'>
+        <div class='form-group' ng-class='{"has-error": isFieldInvalid("first")}'>
             <label>First name:</label>
             <input type='text' name='first' ng-required='true' class='form-control' ng-model='user.first'/>
         </div>
-        <div class='form-group' ng-class='{"has-error": isFieldInvalid("username")}'>
+        <div class='form-group' ng-class='{"has-error": isFieldInvalid("last")}'>
             <label>Last name:</label>
             <input type='text' name='last' ng-required='true' class='form-control' ng-model='user.last'/>
         </div>

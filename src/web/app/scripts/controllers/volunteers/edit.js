@@ -15,6 +15,18 @@ angular.module('webApp')
           return _.contains($scope.volunteer.languages, l.abbr);
         });
 
+        $scope.getLanguageName = function(code)
+        {
+            var found = _.find($scope.langCodes, function(lang){
+                return code == lang.abbr;
+            });
+
+            if(found)
+                return found.name;
+            else
+                return code;
+        }
+
         $scope.update = function()
         {
           //$scope.volunteer.address.state = $scope.selectedState.abbreviation;

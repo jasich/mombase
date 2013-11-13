@@ -33,6 +33,5 @@ angular.module('webApp')
 
     $scope.store = function() {
       $rootScope.mother = $scope.mother;
-      console.log($rootScope);
     };
   });

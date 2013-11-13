@@ -2,7 +2,6 @@
 
 angular.module('webApp')
   .controller('UsersCtrl', function ($scope, Alerts, Users) {
-        console.log(Users);
 
         $scope.users = Users.query();
 

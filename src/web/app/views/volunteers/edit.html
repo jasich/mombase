@@ -88,6 +88,9 @@
                     <select ng-model='volunteer.languages' multiple ng-options='lang.abbr as lang.name for lang in langCodes' class='form-control'>
 
                     </select>
+                    <div class='vertical-margin-5'>
+                        <span class='label label-default margin-right-5' ng-repeat='lang in volunteer.languages'>{{getLanguageName(lang)}}&nbsp;</span>
+                    </div>
                 </div>
 
             </fieldset>

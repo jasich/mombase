@@ -26,6 +26,6 @@ angular.module('webApp')
                 return field.$dirty && field.$invalid;
             }
             else
-                return true;
+                return false;
         }
   });

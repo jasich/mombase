@@ -75,8 +75,6 @@ angular.module('webApp', [
         var cookie = $cookies["connect.sid"];
 
 
-        console.log($cookies);
-
         $scope.isLoggedIn = !!!!!!cookie;
 
         $scope.Logout = function(){
