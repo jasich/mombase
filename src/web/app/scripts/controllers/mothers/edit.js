@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('webApp')
-  .controller('MothersEditCtrl', function ($rootScope,$filter, $scope, $location, $routeParams, UsStates, AvailabilityCodes, LanguageCodes, Mother, Alerts) {
+  .controller('MothersEditCtrl', function ($rootScope,$filter, $scope, $location, $routeParams, UsStates, AvailabilityCodes, LanguageCodes, Mother, Alerts, GeoLocation) {
     $scope.states = UsStates;
     $scope.availabilityCodes = AvailabilityCodes;
     $scope.langCodes = LanguageCodes;
@@ -28,8 +28,11 @@ angular.module('webApp')
       if($scope.mother.communication){
         $scope.mother.communication.requestForServices.sent = $scope.formatDate($scope.mother.communication.requestForServices.sent);
         $scope.mother.communication.requestForServices.response = $scope.formatDate($scope.mother.communication.requestForServices.response);
-        $scope.mother.communication.waiver.sent = $scope.formatDate($scope.mother.waiver.requestForServices.sent);
-        $scope.mother.communication.waiver.response = $scope.formatDate($scope.mother.waiver.requestForServices.response);
+
+        if ($scope.mother.communication.waiver) {
+          $scope.mother.communication.waiver.sent = $scope.formatDate($scope.mother.waiver.requestForServices.sent);
+          $scope.mother.communication.waiver.response = $scope.formatDate($scope.mother.waiver.requestForServices.response);
+        }
       }
     });
 
@@ -54,13 +57,39 @@ angular.module('webApp')
       $scope.mother.availability = $scope.selectedAvailability;
       //$scope.mother.languages = _.map($scope.selectedLanguages, function(l) { return l.abbr });
 
-      var mother = new Mother($scope.mother);
-      mother.$update(function(){
-        Alerts.addSuccess("Mother was saved successfully");
-        $location.path('/mothers');
-      }, function(){
-        Alerts.addError("Unable to save the mother information.  Please review the form and try again.");
-      });
+      var motherUpdate = function () {
+        var mother = new Mother($scope.mother);
+        mother.$update(function(){
+          Alerts.addSuccess("Mother was saved successfully");
+          $location.path('/mothers');
+        }, function(){
+          Alerts.addError("Unable to save the mother information.  Please review the form and try again.");
+        });
+      };
+
+      var geoPromise = GeoLocation.GetLatLong({address: address($scope.mother.address)})
+        .then(function(data){
+          if (data && data.lat) {
+            console.log('setting mother coordinates to: ' + data.lat + ", " + data.lng);
+            $scope.mother.loc = [data.lat, data.lng];
+
+            // Angular 1.0.8 does not have a finally method on promises, so we call it on both...
+            motherUpdate();
+          }
+        }, function(){
+          console.log('Could not locate mothers address...');
+
+          // Angular 1.0.8 does not have a finally method on promises, so we call it on both...
+          motherUpdate();
+        });
+
+
+    };
+
+    var address = function(address) {
+      var keys = Object.keys(address)
+        , values = keys.map(function(k) { return address[k] });
+      return values.join(', ');
     };
 
     $scope.isFormValid = function(){

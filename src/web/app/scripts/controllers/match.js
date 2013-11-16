@@ -6,25 +6,21 @@ angular.module('webApp')
     $scope.selectedRange = _.find($scope.rangeOptions, function(x) { return x.selected === true;});
 
     Mother.get({id: $routeParams.id}, function(data) {
-      console.dir(data);
       $scope.mom = data;
-    });
-
-    Volunteer.search(function(data){
-      $scope.volunteers = data;
+      $scope.FindWithin();
     });
 
     $scope.FindWithin= function() {
       var range = $scope.selectedRange.value;
-      var geoStuff = GeoLocation.GetLatLong({address: address($scope.mom.address)})
-        .then(function(data){
-          Volunteer.within({
-            lon: data.lng,
-            lat: data.lat,
-            radius: range
-          }, function(data){
-          });
-        }, function(){});
+      $scope.mom.loc = $scope.mom.loc || [0,0];
+
+      Volunteer.within({
+        lon: $scope.mom.loc[1],
+        lat: $scope.mom.loc[0],
+        radius: range
+      }, function(data){
+        $scope.volunteers = data;
+      });
     };
 
     var address = function(address) {
