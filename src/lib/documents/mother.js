@@ -46,7 +46,7 @@ var motherSchema = mongoose.Schema({
         recorded: Date,
         weight: Number
       },
-      bottleFeeding: Boolean, // Bottle Feeding: True - Breast Feeding: False
+      bottleFeeding: Boolean // Bottle Feeding: True - Breast Feeding: False
     },
 
     commentsConcerns: String

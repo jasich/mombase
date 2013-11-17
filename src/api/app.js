@@ -33,6 +33,7 @@ app.post('/api/mothers', mother.create);
 app.del('/api/mothers/:id', mother.del);
 app.put('/api/mothers', mother.update);
 app.get('/api/mothers/:id', mother.get);
+app.post('/api/mothers/:id/children', mother.addChild);
 
 app.post('/api/volunteers/search', volunteer.search);
 app.get('/api/volunteers/within', volunteer.within);

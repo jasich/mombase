@@ -3,7 +3,9 @@ var request = require('supertest')
   , mongoose = require('mongoose')
   , Mother = require('../../../lib/documents/mother')
   , assert = require('assert')
-  , bootstrap = require('./bootstrap');
+  , bootstrap = require('./bootstrap')
+  , fixture = {firstName:'test', lastName: 'test', email: 'testing@email.com', emergencyContact: { firstName: 'bill', lastName: 'clinton'}}
+  , childNoBaby = {firstName: "Jimbo", nickName: "Neckbone", lastName: "Jones", gender: true, birthDate: new Date("June 20, 1995"), receivingServices: true, specialNeeds: "Jimbo is hyper aggressive", commentsConcerns: "Jimbo calms down when given tea"}
 
 describe('POST /api/mothers', function() {
 
@@ -108,7 +110,7 @@ describe('POST /api/mothers', function() {
   });
 
   it('should update a mother', function( done ) {
-    var mother = new Mother({firstName:'test', lastName: 'test', email: 'test@email.com', emergencyContact: { firstName: 'bill', lastName: 'clinton'}});
+    var mother = new Mother(fixture);
     mother.save(function(err, m) {
       if (err) throw err;
       m.firstName = 'somethingtotallynew';
@@ -123,4 +125,25 @@ describe('POST /api/mothers', function() {
         });
     })
   });
+});
+
+describe("POST /api/mothers/:id/children", function(){
+
+  it("should add a child to a mother document", function(done) {
+    var mother = new Mother(fixture);
+    mother.save(function(err, m) {
+      if (err) throw err;
+      request(app)
+        .post('/api/mothers/' + m.id + '/children')
+        .set('Accept', 'application/json')
+        .send(childNoBaby)
+        .expect(200)
+        .end(function(err, res) {
+          if (err) return done(err);
+          assert(res.body.children.length > 0);
+          done();
+        });
+    });
+  });
+
 });

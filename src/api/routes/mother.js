@@ -1,4 +1,5 @@
-var motherService = require('../services/motherService');
+var motherService = require('../services/motherService')
+  , Mother = require('../../lib/documents/mother');
 
 
 /**
@@ -86,7 +87,7 @@ exports.assignVolunteer = function(req, res){
 };
 
 /**
- * Assign Volunteer
+ * Unassign Volunteer
  */
 exports.unassignVolunteer = function(req, res){
   var routeParams = req.params;
@@ -94,5 +95,23 @@ exports.unassignVolunteer = function(req, res){
   motherService.unassignVolunteer(routeParams.id, queryParams.volunteerEmail, function(err, result) {
     if ( err ) { return res.send( 500, 'failure'); }
     res.send(result);
+  });
+}
+
+/**
+ * Add a child to a mother
+ * @param req
+ * @param res
+ */
+exports.addChild = function(req, res) {
+  var params = req.params
+    , body = req.body;
+  motherService.get(params.id, function(err, match) {
+    if (err) return res.send(500, err);
+    match.children.push(body);
+    match.save(function(err, result) {
+      if (err) return res.send(500, err);
+      res.send(result);
+    });
   });
 }
