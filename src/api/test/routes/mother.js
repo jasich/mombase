@@ -166,4 +166,12 @@ describe("POST /api/mothers/:id/children", function(){
     });
   });
 
+  it ("should return a 404 if the mother is not found", function(done) {
+    request(app)
+      .post('/api/mothers/' + mongoose.Types.ObjectId() + '/children')
+      .set('Accept', 'application/json')
+      .send(childNoBaby)
+      .expect(404, done);
+  });
+
 });

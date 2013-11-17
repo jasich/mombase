@@ -112,6 +112,7 @@ exports.addChild = function(req, res) {
     , body = req.body;
   motherService.get(params.id, function(err, match) {
     if (err) return res.send(500, err);
+    if (! match) return res.send(404, {message: 'Mother not found'});
     match.children.push(body);
     match.save(function(err, result) {
       if (err) return res.send(500, err);
