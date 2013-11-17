@@ -1,6 +1,6 @@
 var motherService = require('../services/motherService')
-  , Mother = require('../../lib/documents/mother');
-
+  , Mother = require('../../lib/documents/mother')
+  , _ = require('lodash');
 
 /**
  * Create route
@@ -98,6 +98,19 @@ exports.unassignVolunteer = function(req, res){
   });
 }
 
+
+/**
+ * Wraps common save logic
+ * @param res
+ * @param err
+ * @param result
+ * @returns {*|send|Request|ServerResponse|send}
+ */
+function onSave(res, err, result) {
+  if (err) return res.send(500, err);
+  res.send(result);
+}
+
 /**
  * Add a child to a mother
  *
@@ -114,9 +127,29 @@ exports.addChild = function(req, res) {
     if (err) return res.send(500, err);
     if (! match) return res.send(404, {message: 'Mother not found'});
     match.children.push(body);
-    match.save(function(err, result) {
-      if (err) return res.send(500, err);
-      res.send(result);
-    });
+    match.save(onSave.bind(null, res));
+  });
+}
+
+/**
+ * Update a child document that belongs to a mother
+ *
+ * @param req
+ * @param res
+ */
+exports.updateChild = function(req, res) {
+  var params = req.params
+    , body = req.body;
+  motherService.get(params.id, function(err, match) {
+    if (err) return res.send(500, err);
+    if (! match) return res.send(404, {message: 'Mother not found'});
+
+    var child = match.children.id(params.cid);
+    if (! child) return res.send(404, {message: 'Child not found'});
+
+    for (var k in body)
+      child.set(k, body[k]);
+
+    match.save(onSave.bind(null, res));
   });
 }

@@ -175,3 +175,45 @@ describe("POST /api/mothers/:id/children", function(){
   });
 
 });
+
+describe("PUT /api/mothers/:id/children/:cid", function() {
+  it("should update the child and return the mother", function(done) {
+    var mother = new Mother(fixture);
+    mother.children.push(childNoBaby);
+    mother.save(function(err, m) {
+      if (err) throw err;
+      var child = m.children[0];
+      request(app)
+        .put('/api/mothers/' + m.id + '/children/' + child.id)
+        .set('Accept', 'application/json')
+        .send({firstName:'Jumbo'})
+        .expect(200)
+        .end(function(err, res) {
+          if (err) return done(err);
+          var child = res.body.children[0];
+          assert.equal('Jumbo', child.firstName);
+          done();
+        });
+    });
+  });
+
+  it ("should return a 404 if the mother is not found", function(done) {
+    request(app)
+      .put('/api/mothers/' + mongoose.Types.ObjectId() + '/children/' + mongoose.Types.ObjectId())
+      .set('Accept', 'application/json')
+      .send(childNoBaby)
+      .expect(404, done);
+  });
+
+  it("should return a 404 if the child is not found", function(done) {
+    var mother = new Mother(fixture);
+    mother.save(function(err, m) {
+      if (err) throw err;
+      request(app)
+        .put('/api/mothers/' + m.id + '/children/' + mongoose.Types.ObjectId())
+        .set('Accept', 'application/json')
+        .send({firstName:'Jumbo'})
+        .expect(404, done);
+    });
+  });
+});
