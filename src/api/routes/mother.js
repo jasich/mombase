@@ -100,6 +100,10 @@ exports.unassignVolunteer = function(req, res){
 
 /**
  * Add a child to a mother
+ *
+ * Returns the mother in the response with an updated
+ * children collection
+ *
  * @param req
  * @param res
  */
