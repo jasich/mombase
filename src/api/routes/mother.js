@@ -111,6 +111,11 @@ function onSave(res, err, result) {
   res.send(result);
 }
 
+/****************************************************************
+ * Embedded Child Resource
+ * @todo repetition of "Not Found" checks should be encapsulated
+ ****************************************************************/
+
 /**
  * Add a child to a mother
  *
@@ -154,6 +159,12 @@ exports.updateChild = function(req, res) {
   });
 };
 
+
+/**
+ * Delete a child
+ * @param req
+ * @param res
+ */
 exports.deleteChild = function(req, res) {
   var params = req.params;
   motherService.get(params.id, function(err, match) {
@@ -169,5 +180,24 @@ exports.deleteChild = function(req, res) {
       if (err) return res.send(500, err);
       return res.send(204);
     })
+  });
+};
+
+/**
+ * Get a single child by id
+ * 
+ * @param req
+ * @param res
+ */
+exports.getChild = function(req, res) {
+  var params = req.params;
+  motherService.get(params.id, function(err, match) {
+    if (err) return res.send(500, err);
+    if (! match) return res.send(404, {message: 'Mother not found'});
+
+    var child = match.children.id(params.cid);
+    if (! child) return res.send(404, {message: 'Child not found'});
+
+    return res.send(child);
   });
 };

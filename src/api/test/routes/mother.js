@@ -247,3 +247,39 @@ describe("DELETE /api/mothers/:id/children/:cid", function() {
     });
   });
 });
+
+describe("GET /api/mothers/:id/children/:cid", function() {
+  it("should return a child by id", function(done) {
+    var mother = new Mother(fixture);
+    mother.children.push(childNoBaby);
+    mother.save(function(err, m) {
+      if (err) throw err;
+      var child = m.children[0];
+      request(app)
+        .get('/api/mothers/' + m.id + '/children/' + child.id)
+        .expect(200)
+        .end(function(err, res) {
+          if (err) return done(err);
+          var child = res.body;
+          assert.equal('Jimbo', child.firstName);
+          done();
+        });
+    });
+  });
+
+  it ("should return a 404 if the mother is not found", function(done) {
+    request(app)
+      .get('/api/mothers/' + mongoose.Types.ObjectId() + '/children/' + mongoose.Types.ObjectId())
+      .expect(404, done);
+  });
+
+  it("should return a 404 if the child is not found", function(done) {
+    var mother = new Mother(fixture);
+    mother.save(function(err, m) {
+      if (err) throw err;
+      request(app)
+        .get('/api/mothers/' + m.id + '/children/' + mongoose.Types.ObjectId())
+        .expect(404, done);
+    });
+  });
+});
