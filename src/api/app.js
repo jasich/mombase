@@ -25,7 +25,6 @@ app.put('/api/users/:id', user.update);
 
 app.post('/api/volunteer/create', volunteer.create);
 
-
 app.post('/api/mothers/search', mother.search);
 app.post('/api/mothers/assign/:id', mother.assignVolunteer);
 app.post('/api/mothers/unassign/:id', mother.unassignVolunteer);
@@ -38,6 +37,11 @@ app.post('/api/mothers/:id/children', mother.addChild);
 app.put('/api/mothers/:id/children/:cid', mother.updateChild);
 app.del('/api/mothers/:id/children/:cid', mother.deleteChild);
 app.get('/api/mothers/:id/children/:cid', mother.getChild);
+
+app.post('/api/mothers/:id/visits', mother.addVisit);
+app.put('/api/mothers/:id/visits/:vid', mother.updateVisit);
+app.del('/api/mothers/:id/visits/:vid', mother.deleteVisit);
+app.get('/api/mothers/:id/visits/:vid', mother.getVisit);
 
 app.post('/api/volunteers/search', volunteer.search);
 app.get('/api/volunteers/within', volunteer.within);

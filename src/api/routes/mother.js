@@ -201,3 +201,95 @@ exports.getChild = function(req, res) {
     return res.send(child);
   });
 };
+
+/****************************************************************
+ * Embedded Visit Resource
+ * @todo repetition of "Not Found" checks should be encapsulated
+ * @todo Embedded resource collections have very similar logic, maybe abstract this out as well
+ ****************************************************************/
+
+/**
+ * Add a visit to a mother
+ *
+ * Returns the mother in the response with an updated
+ * visits collection
+ *
+ * @param req
+ * @param res
+ */
+exports.addVisit = function(req, res) {
+  var params = req.params
+    , body = req.body;
+  motherService.get(params.id, function(err, match) {
+    if (err) return res.send(500, err);
+    if (! match) return res.send(404, {message: 'Mother not found'});
+    match.visits.push(body);
+    match.save(onSave.bind(null, res));
+  });
+};
+
+/**
+ * Update a visit document that belongs to a mother
+ *
+ * @param req
+ * @param res
+ */
+exports.updateVisit = function(req, res) {
+  var params = req.params
+    , body = req.body;
+  motherService.get(params.id, function(err, match) {
+    if (err) return res.send(500, err);
+    if (! match) return res.send(404, {message: 'Mother not found'});
+
+    var visit = match.visits.id(params.vid);
+    if (! visit) return res.send(404, {message: 'Visit not found'});
+
+    for (var k in body)
+      visit.set(k, body[k]);
+
+    match.save(onSave.bind(null, res));
+  });
+};
+
+
+/**
+ * Delete a visit
+ * @param req
+ * @param res
+ */
+exports.deleteVisit = function(req, res) {
+  var params = req.params;
+  motherService.get(params.id, function(err, match) {
+    if (err) return res.send(500, err);
+    if (! match) return res.send(404, {message: 'Mother not found'});
+
+    var visit = match.visits.id(params.vid);
+    if (! visit) return res.send(404, {message: 'Visit not found'});
+
+    visit.remove();
+
+    match.save(function(err, result) {
+      if (err) return res.send(500, err);
+      return res.send(204);
+    })
+  });
+};
+
+/**
+ * Get a single visit by id
+ *
+ * @param req
+ * @param res
+ */
+exports.getVisit = function(req, res) {
+  var params = req.params;
+  motherService.get(params.id, function(err, match) {
+    if (err) return res.send(500, err);
+    if (! match) return res.send(404, {message: 'Mother not found'});
+
+    var visit = match.visits.id(params.vid);
+    if (! visit) return res.send(404, {message: 'Visit not found'});
+
+    return res.send(visit);
+  });
+};
