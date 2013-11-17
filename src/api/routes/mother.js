@@ -185,7 +185,7 @@ exports.deleteChild = function(req, res) {
 
 /**
  * Get a single child by id
- * 
+ *
  * @param req
  * @param res
  */
