@@ -129,7 +129,7 @@ exports.addChild = function(req, res) {
     match.children.push(body);
     match.save(onSave.bind(null, res));
   });
-}
+};
 
 /**
  * Update a child document that belongs to a mother
@@ -152,4 +152,22 @@ exports.updateChild = function(req, res) {
 
     match.save(onSave.bind(null, res));
   });
-}
+};
+
+exports.deleteChild = function(req, res) {
+  var params = req.params;
+  motherService.get(params.id, function(err, match) {
+    if (err) return res.send(500, err);
+    if (! match) return res.send(404, {message: 'Mother not found'});
+
+    var child = match.children.id(params.cid);
+    if (! child) return res.send(404, {message: 'Child not found'});
+
+    child.remove();
+
+    match.save(function(err, result) {
+      if (err) return res.send(500, err);
+      return res.send(204);
+    })
+  });
+};

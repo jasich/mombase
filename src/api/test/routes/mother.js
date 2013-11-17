@@ -217,3 +217,33 @@ describe("PUT /api/mothers/:id/children/:cid", function() {
     });
   });
 });
+
+describe("DELETE /api/mothers/:id/children/:cid", function() {
+  it("should delete the child and return the mother", function(done) {
+    var mother = new Mother(fixture);
+    mother.children.push(childNoBaby);
+    mother.save(function(err, m) {
+      if (err) throw err;
+      var child = m.children[0];
+      request(app)
+        .del('/api/mothers/' + m.id + '/children/' + child.id)
+        .expect(204, done);
+    });
+  });
+
+  it ("should return a 404 if the mother is not found", function(done) {
+    request(app)
+      .del('/api/mothers/' + mongoose.Types.ObjectId() + '/children/' + mongoose.Types.ObjectId())
+      .expect(404, done);
+  });
+
+  it("should return a 404 if the child is not found", function(done) {
+    var mother = new Mother(fixture);
+    mother.save(function(err, m) {
+      if (err) throw err;
+      request(app)
+        .del('/api/mothers/' + m.id + '/children/' + mongoose.Types.ObjectId())
+        .expect(404, done);
+    });
+  });
+});
