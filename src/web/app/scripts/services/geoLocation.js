@@ -43,7 +43,7 @@ angular.module('webApp')
 				var json = data, coord;
 				if(json){
           var jsonObj = json;
-          if (typeof jsonObj === 'String') {
+          if (typeof jsonObj === 'string') {
 					  var jsonObj = JSON.parse(json);
           }
 
