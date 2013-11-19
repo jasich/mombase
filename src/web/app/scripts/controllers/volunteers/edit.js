@@ -45,8 +45,8 @@ angular.module('webApp')
           var geoPromise = GeoLocation.GetLatLong({address: address($scope.volunteer.address)})
             .then(function(data){
               if (data && data.lat) {
-                console.log('setting volunteer coordinates to: ' + data.lat + ", " + data.lng);
-                $scope.volunteer.loc = [data.lat, data.lng];
+                console.log('setting volunteer coordinates to: ' +  data.lng + ", "  + data.lat);
+                $scope.volunteer.loc = [data.lng, data.lat];
 
                 // Angular 1.0.8 does not have a finally method on promises, so we call it on both...
                 updateVolunteer();
