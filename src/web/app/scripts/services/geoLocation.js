@@ -42,7 +42,11 @@ angular.module('webApp')
 			success: function(data, status){
 				var json = data, coord;
 				if(json){
-					var jsonObj = JSON.parse(json);
+          var jsonObj = json;
+          if (typeof jsonObj === 'string') {
+					  var jsonObj = JSON.parse(json);
+          }
+
 					var res = jsonObj.results;
 
 					// check the status, be sure we have results

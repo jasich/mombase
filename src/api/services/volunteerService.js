@@ -16,7 +16,7 @@ VolunteerService.prototype = {
 	},
 	within: function( lat, lon, radius, cb ) {
 		console.log(lat,lon,radius);
-		Volunteer.find( { loc : { $within: { $centerSphere: [ [ lat, lon ], radius ] } } }, cb);
+		Volunteer.find( { loc : { $geoWithin: { $centerSphere: [ [ lon, lat ], radius ] } } }, cb);
 	},
 	save: function( body, cb ) {
 		var volunteer = new Volunteer(body);

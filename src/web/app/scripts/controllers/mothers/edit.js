@@ -70,8 +70,8 @@ angular.module('webApp')
       var geoPromise = GeoLocation.GetLatLong({address: address($scope.mother.address)})
         .then(function(data){
           if (data && data.lat) {
-            console.log('setting mother coordinates to: ' + data.lat + ", " + data.lng);
-            $scope.mother.loc = [data.lat, data.lng];
+            console.log('setting mother coordinates to: ' + data.lng + ", "+ data.lat );
+            $scope.mother.loc = [data.lng, data.lat];
 
             // Angular 1.0.8 does not have a finally method on promises, so we call it on both...
             motherUpdate();
