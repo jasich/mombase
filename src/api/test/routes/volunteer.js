@@ -134,12 +134,12 @@ describe('POST /api/volunteers', function() {
     request(app)
       .post('/api/volunteers')
       .set('Accept', 'application/json')
-      .send({firstName:'test', lastName: 'test', email: 'radius@email.com', loc: [-20.0, 5.0] })
+      .send({firstName:'test', lastName: 'test', email: 'radius@email.com', loc: [5.0, -20.0] })
       .end( function(err, res) {
         if(err) return done(err);
 
        request(app)
-         .get('/api/volunteers/within?lat=-20&lon=5&radius=' + ( 1.0 / 3959.0))
+         .get('/api/volunteers/within?lon=5&lat=-20&radius=' + ( 1.0 / 3959.0))
          .set('Accept', 'application/json')
          .expect(200)
          .end( function(err, res) {
