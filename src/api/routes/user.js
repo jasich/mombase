@@ -86,7 +86,7 @@ exports.update = function(req, res){
  */
 exports.create = function(req,res) {
   (new User(req.body)).save(function(err, user) {
-    if (err) return res.send(400)
+    if (err) return res.send(400, {message:err.message});
     user.hash = undefined;
     res.send(200, user);
   });
