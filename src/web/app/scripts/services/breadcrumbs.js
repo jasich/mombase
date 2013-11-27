@@ -18,7 +18,7 @@ angular.module('webApp')
         var generateBreadcrumbs = function() {
             breadcrumbs = [];
             currentScope = $route.current.scope;
-            
+
             var pathElements = $location.path().split('/'),
                 path = '';
 
@@ -56,7 +56,14 @@ angular.module('webApp')
                 var route = getRoute(path);
 
                 if (routes[route] && routes[route].label) {
-                    breadcrumbs.push({ label: getLabel(routes[route]), path: path });
+                    breadcrumbs.push({
+                        route: routes[route],
+                        getLabel: function(){
+                            return getLabel(this.route || routes[route]);
+                        },
+                        label: getLabel(routes[route]),
+                        path: path
+                    });
                 }
             });
         };

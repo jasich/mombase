@@ -3,6 +3,15 @@
     <p class='page-description'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam consequat semper purus vitae facilisis. Sed faucibus lectus id dui vehicula, id condimentum ipsum aliquam.</p>
 </div>
 <div class='page-body'>
+    <div class='row margin-bottom-50'>
+        <div class='col-md-4 col-md-offset-8 col-sm-offset-6 col-sm-6'>
+            <div class='btn-group btn-group-justified'>
+                <a class='btn btn-primary' href='/#/mothers/{{mother._id}}/children'>Children</a>
+                <a class='btn btn-primary' href='/#/mothers/{{mother._id}}/visits'>Visits</a>
+                <a class='btn btn-primary' href='/#/match/{{mother._id}}'>Find Match</a>
+            </div>
+        </div>
+    </div>
     <form name='editMother' novalidate="" ng-submit='update()'>
         <div class='form-group' ng-class='{"has-error": isFieldInvalid("firstName")}'>
         <!-- Name -->

@@ -86,7 +86,8 @@ angular.module('webApp', [
         })
       .when('/match/:id', {
         templateUrl: 'views/match.html',
-        controller: 'MatchCtrl'
+        controller: 'MatchCtrl',
+        label: 'Find Match'
       })
       .when('/mothers/visits', {
         templateUrl: 'views/mothers/visits.html',
@@ -122,15 +123,15 @@ angular.module('webApp', [
   })
     .run(['$rootScope', '$location', '$http', '$cookies', 'Authentication', function ($scope, $location, $http,$cookies, Authentication) {
         var cookie = $cookies["connect.sid"];
+        var user = Authentication.getCurrentUser();
 
-
-        $scope.isLoggedIn = !!!!!!cookie;
+        $scope.isLoggedIn = !!!!!!cookie && user;
         if($scope.isLoggedIn)
-            $scope.user = Authentication.getCurrentUser();
+            $scope.user = user;
 
         $scope.Logout = function(){
           $scope.isLoggedIn = false;
-
+          Authentication.setCurrentUser(false);
           if($cookies)
             delete $cookies["connect.sid"];
           return $location.path('/login');

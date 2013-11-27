@@ -4,7 +4,11 @@
         <div class='col-md-4 col-md-offset-4'>
 
             <div class='login'>
-
+                <div ng-show='errorMessage.length'>
+                    <div class='alert alert-danger'>
+                        {{errorMessage}}
+                    </div>
+                </div>
                 <div class='form-group'>
                     <label class='control-label'>
                         Email
