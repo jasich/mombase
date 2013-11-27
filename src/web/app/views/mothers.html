@@ -8,41 +8,57 @@
     <div class='clearfix list-actions text-right'>
         <a href='#/mothers/new' class='btn btn-primary'>New Mother</a>
     </div>
-    <table class='table table-striped'>
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Address</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat='mother in mothers' ng-controller="MotherRowCtrl">
-            <td>
+    <table ng-table="tableParams" class="table table-striped">
+        <tr ng-repeat="mother in $data" ng-controller="MotherRowCtrl">
+            <td data-title="'Name'" sortable="'firstName'">
                 {{mother.firstName}} {{mother.lastName}}
                 <span class="text-muted" ng-show="mother.nickName">({{mother.nickName}})</span>
             </td>
-            <td>{{mother.email}}</td>
-            <td>{{mother.phone}}</td>
-            <td>
-                {{address()}}
+            <td data-title="'Email'" sortable="'email'">
+                {{mother.email}}
+            </td>
+            <td data-title="'Phone'" sortable="'phone'">{{mother.phone | phone}}</td>
+            <td data-title="'Address'">
+                {{mother.address | address}}
             </td>
             <td class='text-right'>
-                <a class='btn' ng-click="store()"  ng-href="#/mothers/edit/{{mother._id}}">
+                <a class='btn' ng-click="store()" ng-href="#/mothers/edit/{{mother._id}}">
                     Edit
                 </a>
-
-                <a class='btn' ng-href="#/match/{{mother._id}}">
-                    Match
-                </a>
-
                 <a class='btn text-danger' confirm-click='Are you sure you want to delete this mother?' ng-click='delete()'>
                     Delete
                 </a>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        View <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a ng-href="#/mothers/{{mother._id}}/children">
+                                Children
+                            </a>
+                        </li>
+                        <li>
+                            <a ng-href="#/mothers/{{mother._id}}/visits">
+                                Visits
+                            </a>
+                        </li>
+                        <li>
+                            <a ng-href="#/match/{{mother._id}}">
+                                Match
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+
+
+
+
+
             </td>
         </tr>
-        </tbody>
+
     </table>
+
 </div>

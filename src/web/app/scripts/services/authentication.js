@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('webApp')
-  .service('Authentication', function Authentication( $rootScope, $location, loginService ) {
+  .service('Authentication', function Authentication( $rootScope, $location, $cookieStore, loginService ) {
     // AngularJS will instantiate a singleton by calling "new" on this function
 
     	function Login(username, password){
@@ -9,7 +9,7 @@ angular.module('webApp')
     		login.$save(function(u){
     			if(u){
     				$rootScope.isLoggedIn = true;
-    				$rootScope.username = u.username;
+    				setCurrentUser(u);
     				return $location.path('/');
     			}
     		});
@@ -17,7 +17,7 @@ angular.module('webApp')
 
     	function Logout(){
     		$rootScope.isLoggedIn = false;
-    		$rootScope.username = null;
+            setCurrentUser(null);
     		return $rootScope.isLoggedIn
     	}
 
@@ -25,9 +25,25 @@ angular.module('webApp')
     		return $rootScope.isLoggedIn;
     	}
 
+        function getCurrentUser(){
+            return $rootScope.user || $cookieStore.get('currentUser');
+        }
+
+        function setCurrentUser(user)
+        {
+            $rootScope.user = user;
+            if(user)
+                $cookieStore.put('currentUser', user);
+            else
+                $cookieStore.remove('currentUser');
+
+        }
+
     	return{
     		Login: Login,
     		Logout: Logout,
-    		IsLoggedIn: IsLoggedIn
+    		IsLoggedIn: IsLoggedIn,
+            getCurrentUser: getCurrentUser,
+            setCurrentUser: setCurrentUser
     	}
   });

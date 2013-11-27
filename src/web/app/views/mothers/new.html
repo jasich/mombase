@@ -9,14 +9,14 @@
             <div class='col-md-6'>
                 <div class="form-group" ng-class='{"has-error": isFieldInvalid("firstName")}'>
                     <label>First Name</label>
-                    <input type='text' name='firstName' ng-required='true' class='form-control' ng-model='mother.firstName'/>
+                    <input type='text' ng-required='true' name='firstName' class='form-control' ng-model='mother.firstName'/>
                 </div>
 
             </div>
             <div class='col-md-6'>
                 <div class="form-group" ng-class='{"has-error": isFieldInvalid("lastName")}'>
                     <label>Last Name</label>
-                    <input type='text' name='lastName' ng-required='true' class='form-control' ng-model='mother.lastName'/>
+                    <input type='text' ng-required='true' name='lastName' class='form-control' ng-model='mother.lastName'/>
                 </div>
             </div>
 
@@ -32,9 +32,9 @@
 
         <div class='form-group row'>
 
-            <div class='col-md-6'>
-                <label>Birthdate</label>
-                <input type='date' name='birthDate' ng-required='true' class='form-control' ng-model='mother.birthdate'/>
+            <div class='col-md-6' ng-class='{"has-error": form.isFieldInvalid("birthDate")}'>
+                <label>Birth Date</label>
+                <input type='date' name='birthDate' class='form-control' ng-model='mother.birthdate'/>
             </div>
 
             <div class='col-md-6'>
@@ -50,7 +50,7 @@
             </div>
             <div class='col-md-6' ng-class='{"has-error": isFieldInvalid("phone")}'>
                 <label>Phone</label>
-                <input type='text' name='phone' ng-required='true' class='form-control' ng-model='mother.phone'/>
+                <input type='text' ui-mask='(999)999-9999' ng-minlength="10" name='phone' class='form-control' ng-model='mother.phone'/>
             </div>
         </div>
 
@@ -59,7 +59,7 @@
             <legend>Address</legend>
             <div class='form-group' ng-class='{"has-error": isFieldInvalid("line1")}'>
                 <label>Street</label>
-                <input type='text' name='line1' ng-required='true' class='form-control' ng-model='mother.address.line1'/>
+                <input type='text' name='line1' class='form-control' ng-model='mother.address.line1'/>
             </div>
 
             <div class='form-group'>
@@ -77,17 +77,33 @@
             <div class='form-group row margin-top-20'>
                 <div class='col-md-6' ng-class='{"has-error": isFieldInvalid("city")}'>
                     <label>City</label>
-                    <input type='text' name='city' ng-required='true' class='form-control' ng-model='mother.address.city'/>
+                    <input type='text' name='city' class='form-control' ng-model='mother.address.city'/>
                 </div>
                 <div class='col-md-4' ng-class='{"has-error": isFieldInvalid("state")}'>
                     <label>State</label>
-                    <select ng-model='mother.address.state' ng-required='true' ng-options='st.abbreviation as st.name for st in states' class='form-control'>
+                    <select ng-model='mother.address.state' ng-options='st.abbreviation as st.name for st in states' class='form-control'>
                         <option value=''>Select State</option>
                     </select>
                 </div>
                 <div class='col-md-2' ng-class='{"has-error": isFieldInvalid("zip")}'>
                     <label>Zip</label>
-                    <input type='text' name='zip' ng-required='true' class='form-control' ng-model='mother.address.zip'/>
+                    <input type='text' name='zip' class='form-control' ng-model='mother.address.zip'/>
+                </div>
+            </div>
+
+            <div class='form-group row margin-top-20'>
+                <div class='col-md-4' ng-class='{"has-error": isFieldInvalid("city")}'>
+                    <label>Latitude</label>
+                    <input type='text' name='latitude' class='form-control' ng-model='mother.loc[0]'/>
+                </div>
+                <div class='col-md-4' ng-class='{"has-error": isFieldInvalid("state")}'>
+                    <label>Longitude</label>
+                    <input type='text' name='longitude' class='form-control' ng-model='mother.loc[1]'/>
+                </div>
+                <div class='col-md-4' ng-class='{"has-error": isFieldInvalid("zip")}'>
+                    <label>&nbsp;</label><br/>
+                    <a ng-disabled='!isValidAddress()' ng-click='findLatLng()' class='btn btn-info'>Find Latitude & Longitude</a>
+                    <a href="http://www.latlong.net/" class='margin-left-10 btn btn-link' target="_blank">or use online tool</a>
                 </div>
             </div>
         </fieldset>
@@ -98,12 +114,12 @@
             <div class='form-group row' ng-class='{"has-error": isFieldInvalid("erFirstName")}'>
                 <div class='col-md-6'>
                     <label>First Name</label>
-                    <input type='text' ng-required="true" name='erFirstName' class='form-control' ng-model='mother.emergencyContact.firstName'/>
+                    <input type='text' name='erFirstName' class='form-control' ng-model='mother.emergencyContact.firstName'/>
                 </div>
 
                 <div class='col-md-6' ng-class='{"has-error": isFieldInvalid("erLastName")}'>
                     <label>Last Name</label>
-                    <input type='text' ng-required="true" name='erLastName' class='form-control' ng-model='mother.emergencyContact.lastName'/>
+                    <input type='text' name='erLastName' class='form-control' ng-model='mother.emergencyContact.lastName'/>
                 </div>
             </div>
 
@@ -143,7 +159,7 @@
             <div class='form-group row'>
                 <div class='col-md-12'>
                     <label>Availability</label>
-                    <select ng-model='selectedAvailability'  ng-options='av.name for av in availabilityCodes' class='form-control'>
+                    <select ng-model='selectedAvailability' ng-required='true' ng-options='av.name for av in availabilityCodes' class='form-control'>
                         <option value=''>Select Availability</option>
                     </select>
                 </div>
@@ -204,6 +220,7 @@
 
             <div class='form-group'>
                 <label>Languages Spoken</label>
+                
                 <select ng-model='mother.languages' multiple ng-options='lang.abbr as lang.name for lang in langCodes' class='form-control'>
 
                 </select>

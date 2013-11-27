@@ -19,8 +19,8 @@
             </div>
             <div class="">
                 <ul class="nav navbar-nav navbar-right">
-                    <li ng-show='username'>
-                        <p class='navbar-text'>Welcome, {{username}}</p>
+                    <li ng-show='user'>
+                        <span class='navbar-text'>Welcome, {{user.first}}</span>
                     </li>
                     <li>
                         <a ng-click="Logout()" confirm-click="Are you sure you want to log out?" class="pull-right clickable">Log Out</a>

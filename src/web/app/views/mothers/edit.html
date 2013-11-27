@@ -1,5 +1,6 @@
 <div class='page-header'>
     <h1 class='page-title'>Edit Mother</h1>
+    <p class='page-description'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam consequat semper purus vitae facilisis. Sed faucibus lectus id dui vehicula, id condimentum ipsum aliquam.</p>
 </div>
 <div class='page-body'>
     <form name='editMother' novalidate="" ng-submit='update()'>
@@ -88,6 +89,21 @@
                 <div class='col-md-2' ng-class='{"has-error": isFieldInvalid("zip")}'>
                     <label>Zip</label>
                     <input type='text' name='zip' ng-required='true' class='form-control' ng-model='mother.address.zip'/>
+                </div>
+            </div>
+            <div class='form-group row margin-top-20'>
+                <div class='col-md-4' ng-class='{"has-error": isFieldInvalid("city")}'>
+                    <label>Latitude</label>
+                    <input type='text' name='latitude' class='form-control' ng-model='mother.loc[0]'/>
+                </div>
+                <div class='col-md-4' ng-class='{"has-error": isFieldInvalid("state")}'>
+                    <label>Longitude</label>
+                    <input type='text' name='longitude' class='form-control' ng-model='mother.loc[1]'/>
+                </div>
+                <div class='col-md-4' ng-class='{"has-error": isFieldInvalid("zip")}'>
+                    <label>&nbsp;</label><br/>
+                    <a ng-disabled='!isValidAddress()' ng-click='findLatLng()' class='btn btn-info'>Find Latitude & Longitude</a>
+                    <a href="http://www.latlong.net/" class='margin-left-10 btn btn-link' target="_blank">or use online tool</a>
                 </div>
             </div>
         </fieldset>

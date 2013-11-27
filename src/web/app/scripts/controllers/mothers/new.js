@@ -1,10 +1,16 @@
 'use strict';
 
 angular.module('webApp')
-  .controller('MothersNewCtrl', function ($rootScope, $scope, $location, $routeParams, UsStates, AvailabilityCodes, LanguageCodes, Mother, Alerts) {
-    $scope.states = UsStates;
-    $scope.availabilityCodes = AvailabilityCodes;
-    $scope.langCodes = LanguageCodes;
+  .controller('MothersNewCtrl', function ($rootScope, $scope, $injector, $location, $routeParams) {
+    var addressHelper = $injector.get("AddressHelper"),
+        GeoLocation = $injector.get("GeoLocation"),
+        Mother = $injector.get("Mother"),
+        Alerts = $injector.get("Alerts");
+
+    $scope.states = $injector.get("UsStates");
+    $scope.availabilityCodes = $injector.get("AvailabilityCodes");
+    $scope.langCodes = $injector.get("LanguageCodes");
+
     $scope.mother = {};
 
     $scope.isFormValid = function(){
@@ -34,6 +40,7 @@ angular.module('webApp')
             return code;
     }
 
+
     $scope.save = function() {
       $scope.mother.availability = $scope.selectedAvailability;
       //$scope.mother.languages = _.map($scope.selectedLanguages, function(l) { return l.abbr });
@@ -45,5 +52,24 @@ angular.module('webApp')
       }, function(){
         Alerts.addError("Unable to save the mother information.  Please review the form and try again.");
       });
+    };
+
+    $scope.isValidAddress = function()
+    {
+        return addressHelper.isLocatableAddress($scope.mother.address);
+    }
+
+    $scope.findLatLng = function()
+    {
+        GeoLocation.GetLatLong({address: $scope.address()})
+            .then(function(data){
+                if(data && data.lat){
+                    $scope.mother.loc = [data.lng, data.lat];
+                }
+            })
+    }
+
+    $scope.address = function() {
+        return addressHelper.formatAddress($scope.mother.address)
     };
   });

@@ -3,10 +3,12 @@
 //include twitter bootstrap
 @import "bootstrap-sass/lib/bootstrap";
 //include local files
+@import "mixins";
 @import "layout";
 @import "table";
 @import "form";
 @import "utils";
+@import "theme";
 
 /* Put your CSS here */
 .clickable{

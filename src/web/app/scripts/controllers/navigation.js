@@ -1,6 +1,6 @@
 
 angular.module('webApp')
-  .controller('NavigationCtrl', function ($scope, $location) {
+  .controller('NavigationCtrl', function ($scope, $rootScope, $location) {
         $scope.menu = [
             {
                 text: 'Mothers',

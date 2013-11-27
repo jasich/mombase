@@ -1,10 +1,15 @@
 'use strict';
 
 angular.module('webApp')
-  .controller('MothersEditCtrl', function ($rootScope,$filter, $scope, $location, $routeParams, UsStates, AvailabilityCodes, LanguageCodes, Mother, Alerts, GeoLocation) {
-    $scope.states = UsStates;
-    $scope.availabilityCodes = AvailabilityCodes;
-    $scope.langCodes = LanguageCodes;
+  .controller('MothersEditCtrl', function ($rootScope,$filter, $injector, $scope, $location, $routeParams) {
+    $scope.states = $injector.get("UsStates");
+    $scope.availabilityCodes = $injector.get("AvailabilityCodes");
+    $scope.langCodes = $injector.get("LanguageCodes");
+
+    var addressHelper = $injector.get("AddressHelper"),
+        GeoLocation = $injector.get("GeoLocation"),
+        Mother = $injector.get("Mother"),
+        Alerts = $injector.get("Alerts");
 
     $scope.formatDate = function(date)
     {
@@ -70,7 +75,6 @@ angular.module('webApp')
       var geoPromise = GeoLocation.GetLatLong({address: address($scope.mother.address)})
         .then(function(data){
           if (data && data.lat) {
-            console.log('setting mother coordinates to: ' + data.lng + ", "+ data.lat );
             $scope.mother.loc = [data.lng, data.lat];
 
             // Angular 1.0.8 does not have a finally method on promises, so we call it on both...
@@ -106,4 +110,26 @@ angular.module('webApp')
       else
         return true;
     }
+
+    /*
+     Address Helpers
+     */
+    $scope.isValidAddress = function()
+    {
+        return addressHelper.isLocatableAddress($scope.mother.address);
+    }
+
+    $scope.findLatLng = function()
+    {
+        GeoLocation.GetLatLong({address: $scope.address()})
+            .then(function(data){
+                if(data && data.lat){
+                    $scope.mother.loc = [data.lng, data.lat];
+                }
+            })
+    }
+
+    $scope.address = function() {
+        return addressHelper.formatAddress($scope.mother.address)
+    };
   });

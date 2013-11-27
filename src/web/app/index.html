@@ -10,48 +10,56 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-
+        <!-- Google Fonts -->
+        <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600" rel="stylesheet" type="text/css">
         <!-- build:css(.tmp) styles/main.css -->
         <link rel="stylesheet" href="styles/main.css">
         <!-- endbuild -->
 </head>
   <body ng-app="webApp">
-    <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
+    <div class='application' ng-controller='AppCtrl'>
+        <!-- Activity Indicator -->
+        <div activity-indicator="activity" ></div>
 
-    <!--[if lt IE 9]>
-      <script src="bower_components/es5-shim/es5-shim.js"></script>
-      <script src="bower_components/json3/lib/json3.min.js"></script>
-    <![endif]-->
+        <!--[if lt IE 7]>
+          <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
 
-    <div ng-controller="NavigationCtrl">
-        <div ng-include="'views/shared/navigation.html'"></div>
-    </div>
+        <!--[if lt IE 9]>
+          <script src="bower_components/es5-shim/es5-shim.js"></script>
+          <script src="bower_components/json3/lib/json3.min.js"></script>
+        <![endif]-->
 
-    <div ng-include="'views/shared/alerts.html'"></div>
-
-
-    <!-- Add your site or application content here -->
-    <div class='container'>
-        <div class='page' ng-class='{"page-empty": !isLoggedIn}' ng-view="">
-
+        <div ng-controller="NavigationCtrl">
+            <div ng-include="'views/shared/navigation.html'"></div>
         </div>
-    </div>
 
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
-     <script>
-       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        <div ng-include="'views/shared/alerts.html'"></div>
 
-       ga('create', 'UA-XXXXX-X');
-       ga('send', 'pageview');
-    </script>
 
-    <script src="bower_components/jquery/jquery.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
+        <!-- Add your site or application content here -->
+        <div class='container'>
+            <ol class="breadcrumb">
+                <li ng-repeat="breadcrumb in breadcrumbs.getAll()"><a href="#{{breadcrumb.path}}" ng-hide="$last">{{breadcrumb.label}}</a><span ng-show="$last">{{breadcrumb.label}}</span></li>
+            </ol>
+            <div class='page' ng-class='{"page-empty": !isLoggedIn}' ng-view="">
+
+            </div>
+        </div>
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+         <script>
+           (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+           (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+           m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+           })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+           ga('create', 'UA-XXXXX-X');
+           ga('send', 'pageview');
+        </script>
+
+        <script src="bower_components/jquery/jquery.js"></script>
+        <script src="bower_components/angular/angular.js"></script>
 
         <!-- build:js scripts/plugins.js -->
         <script src="bower_components/bootstrap-sass/js/affix.js"></script>
@@ -77,7 +85,10 @@
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
+
+        <!-- Controllers -->
         <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/application.js"></script>
         <script src="scripts/controllers/login.js"></script>
         <script src="scripts/controllers/register.js"></script>
         <script src="scripts/controllers/mothers.js"></script>
@@ -91,6 +102,15 @@
         <script src="scripts/controllers/volunteers/edit.js"></script>
         <script src="scripts/controllers/navigation.js"></script>
         <script src="scripts/controllers/match.js"></script>
+        <script src="scripts/controllers/mothers/edit-children.js"></script>
+        <script src="scripts/controllers/mothers/visits.js"></script>
+
+        <!-- Services -->
+        <script src="scripts/services/us-states.js"></script>
+        <script src="scripts/services/loginService.js"></script>
+        <script src="scripts/services/language-codes.js"></script>
+        <script src="scripts/services/availability-codes.js"></script>
+        <script src="scripts/services/range-options.js"></script>
         <script src="scripts/services/geoLocation.js"></script>
         <script src="scripts/services/error-handler.js"></script>
         <script src="scripts/services/mothers.js"></script>
@@ -100,16 +120,30 @@
         <script src="scripts/services/messenger.js"></script>
         <script src="scripts/services/api-service.js"></script>
         <script src="scripts/services/alerts.js"></script>
+        <script src="scripts/services/helpers.js"></script>
+        <script src="scripts/services/pagination.js"></script>
+
+        <!-- Directives -->
         <script src="scripts/directives/confirm-click.js"></script>
         <script src="scripts/directives/same-as.js"></script>
-        <script src="scripts/services/us-states.js"></script>
-        <script src="scripts/services/loginService.js"></script>
-        <script src="scripts/services/language-codes.js"></script>
-        <script src="scripts/services/availability-codes.js"></script>
-        <script src="scripts/services/range-options.js"></script>
-        <script src="scripts/controllers/mothers/edit-children.js"></script>
-        <script src="scripts/controllers/mothers/visits.js"></script>
-        <!-- endbuild -->
+        <script src="scripts/directives/table.js"></script>
 
+        <!-- Filters -->
+        <script src="scripts/filters/address.js"></script>
+
+        <!-- Misc -->
+
+        <script src="scripts/filters/phone.js"></script>
+        <script src="scripts/directives/mask.js"></script>
+        <script src="scripts/services/activity.js"></script>
+        <script src="scripts/controllers/mothers/children.js"></script>
+        <script src="scripts/controllers/mothers/new-child.js"></script>
+        <script src="scripts/controllers/mothers/edit-child.js"></script>
+        <script src="scripts/services/child.js"></script>
+        <script src="scripts/filters/gender.js"></script>
+        <script src="scripts/filters/age.js"></script>
+        <script src="scripts/services/breadcrumbs.js"></script>
+        <!-- endbuild -->
+    </div>
 </body>
 </html>

@@ -3,13 +3,15 @@
 angular.module('webApp', [
   'ngCookies',
   'ngResource',
-  'ngSanitize'
+  'ngSanitize',
+  'ngTable'
 ])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/mothers.html',
-        controller: 'MothersCtrl'
+        controller: 'MothersCtrl',
+        label: 'Home'
       })
       .when('/login', {
         templateUrl: 'views/login.html',
@@ -21,49 +23,96 @@ angular.module('webApp', [
       })
       .when('/mothers', {
         templateUrl: 'views/mothers.html',
-        controller: 'MothersCtrl'
+        controller: 'MothersCtrl',
+        label: 'Mothers'
       })
       .when('/mothers/new', {
         templateUrl: 'views/mothers/new.html',
-        controller: 'MothersNewCtrl'
+        controller: 'MothersNewCtrl',
+        label: 'New Mother'
       })
       .when('/mothers/edit/:id', {
         templateUrl: 'views/mothers/edit.html',
-        controller: 'MothersEditCtrl'
+        controller: 'MothersEditCtrl',
+        label: function(scope)
+        {
+            if(scope) return [scope.mother.firstName, scope.mother.lastName].join(' ');
+            else return 'Edit Mother';
+        }
       })
+        .when('/mothers/:id', {
+            templateUrl: 'views/mothers/edit.html',
+            controller: 'MothersEditCtrl',
+            label: function(scope)
+            {
+                if(scope && scope.mother) return [scope.mother.firstName, scope.mother.lastName].join(' ');
+                else return 'Edit Mother';
+            }
+        })
       .when('/users', {
         templateUrl: 'views/users.html',
-        controller: 'UsersCtrl'
+        controller: 'UsersCtrl',
+        label: 'Users'
       })
       .when('/users/new', {
         templateUrl: 'views/users/new.html',
-        controller: 'UsersNewCtrl'
+        controller: 'UsersNewCtrl',
+        label: 'New User'
       })
       .when('/users/edit/:id', {
         templateUrl: 'views/users/edit.html',
-        controller: 'UsersEditCtrl'
+        controller: 'UsersEditCtrl',
+        label: 'Edit User'
       })
       .when('/volunteers', {
         templateUrl: 'views/volunteers.html',
-        controller: 'VolunteersCtrl'
+        controller: 'VolunteersCtrl',
+        label: 'Volunteers'
       })
       .when('/volunteers/new', {
         templateUrl: 'views/volunteers/new.html',
-        controller: 'VolunteersNewCtrl'
+        controller: 'VolunteersNewCtrl',
+        label: 'New Volunteer'
       })
       .when('/volunteers/edit/:id', {
         templateUrl: 'views/volunteers/edit.html',
-        controller: 'VolunteersEditCtrl'
+        controller: 'VolunteersEditCtrl',
+        label: 'Edit Volunteer'
       })
+        .when('/volunteers/:id', {
+            templateUrl: 'views/volunteers/edit.html',
+            controller: 'VolunteersEditCtrl',
+            label: 'Edit Volunteer'
+        })
       .when('/match/:id', {
         templateUrl: 'views/match.html',
         controller: 'MatchCtrl'
       })
-      .when('/mothers/edit-children', {
-        templateUrl: 'views/mothers/edit-children.html',
-        controller: 'MothersEditChildrenCtrl'
-      })
       .when('/mothers/visits', {
+        templateUrl: 'views/mothers/visits.html',
+        controller: 'MothersVisitsCtrl'
+      })
+      .when('/mothers/:id/children', {
+        templateUrl: 'views/mothers/children.html',
+        controller: 'MothersChildrenCtrl',
+        label: 'Children'
+      })
+
+      .when('/mothers/:id/children/new', {
+        templateUrl: 'views/mothers/new-child.html',
+        controller: 'MothersNewChildCtrl',
+        label: 'New Child'
+      })
+      .when('/mothers/:id/children/edit/:cid', {
+        templateUrl: 'views/mothers/edit-child.html',
+        controller: 'MothersEditChildCtrl',
+            label: function(scope)
+            {
+                if(scope && scope.currentChild) return [scope.currentChild.firstName, scope.currentChild.lastName].join(' ');
+                else return 'Edit Child';
+            }
+      })
+      .when('/mothers/:id/visits', {
         templateUrl: 'views/mothers/visits.html',
         controller: 'MothersVisitsCtrl'
       })
@@ -71,11 +120,13 @@ angular.module('webApp', [
         redirectTo: '/'
       });
   })
-    .run(['$rootScope', '$location', '$http', '$cookies', function ($scope, $location, $http,$cookies) {
+    .run(['$rootScope', '$location', '$http', '$cookies', 'Authentication', function ($scope, $location, $http,$cookies, Authentication) {
         var cookie = $cookies["connect.sid"];
 
 
         $scope.isLoggedIn = !!!!!!cookie;
+        if($scope.isLoggedIn)
+            $scope.user = Authentication.getCurrentUser();
 
         $scope.Logout = function(){
           $scope.isLoggedIn = false;

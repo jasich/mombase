@@ -1,0 +1,98 @@
+<div class='page-header'>
+    <h1 class='page-title'>Edit Child Information</h1>
+</div>
+<div class='page-body'>
+    <form name='childForm' novalidate="" ng-submit='save()'>
+        <!-- Name -->
+        <div class='row'>
+            <div class='col-md-6'>
+                <div class="form-group" ng-class='{"has-error": form.isFieldInvalid("firstName")}'>
+                    <label>First Name</label>
+                    <input type='text' ng-required='true' name='firstName' class='form-control' ng-model='currentChild.firstName'/>
+                </div>
+
+            </div>
+            <div class='col-md-6'>
+                <div class="form-group" ng-class='{"has-error": form.isFieldInvalid("lastName")}'>
+                    <label>Last Name</label>
+                    <input type='text' ng-required='true' name='lastName' class='form-control' ng-model='currentChild.lastName'/>
+                </div>
+            </div>
+
+        </div>
+        <div class='row form-group'>
+            <div class='col-md-6'>
+                <label>Nick Name</label>
+                <input type='text' name='nickName' class='form-control' ng-model='currentChild.nickName'/>
+            </div>
+
+        </div>
+        <div class='form-group row'>
+
+            <div class='col-md-6' ng-class='{"has-error": form.isFieldInvalid("birthDate")}'>
+                <label>Birth Date</label>
+                <input type='date' name='birthDate' class='form-control' ng-model='currentChild.birthDate'/>
+            </div>
+
+            <div class='col-md-6'>
+                <label>Gender</label>
+                <select class='form-control' ng-model='currentChild.gender' ng-options='g.value as g.name for g in formData.genders'>
+                    <option value=''>Select Gender</option>
+                </select>
+            </div>
+        </div>
+        <div class='form-group'>
+            <label class='checkbox'>
+                <input type='checkbox' ng-model='currentChild.receivingServices'/>
+                Is the child receiving services
+            </label>
+            <label class='checkbox'>
+                <input type='checkbox' ng-model='currentChild.specialNeeds'/>
+                Is the child special needs
+            </label>
+        </div>
+
+        <div class='well margin-top-50'>
+            <fieldset>
+                <legend>Baby</legend>
+                <div class='form-group row'>
+
+                    <div class='col-md-6' ng-class='{"has-error": form.isFieldInvalid("dueDate")}'>
+                        <label>Due Date</label>
+                        <input type='date' name='dueDate' class='form-control' ng-model='currentChild.baby.dueDate'/>
+                    </div>
+
+                    <div class='col-md-6'>
+                        <label>Delivery Type</label>
+                        <input type='text' class='form-control' ng-model='currentChild.baby.deliveryType'/>
+                    </div>
+                </div>
+                <div class='form-group row'>
+                    <div class='col-md-6'>
+                        <label>Birth Complications</label>
+                        <input type='text' name='birthComplications' class='form-control' ng-model='currentChild.baby.birthComplications'/>
+                    </div>
+                </div>
+                <div class='form-group'>
+                    <label class='checkbox'>
+                        <input type='checkbox' ng-model='currentChild.baby.bottleFeeding'/>
+                        Is the baby being bottle fed
+                    </label>
+                </div>
+            </fieldset>
+        </div>
+
+        <div class='form-group margin-top-50'>
+            <label>Comments / Concerns</label>
+            <textarea class='form-control' rows='5' ng-model='currentChild.baby.commentsConcerns'></textarea>
+        </div>
+
+        <div class='form-actions'>
+            <div class='form-actions'>
+                <button class='btn btn-primary' ng-disabled='!form.isFormValid()'>Save Child</button>
+                <a class='btn btn-link margin-left-5' onclick='window.history.back()'>Cancel</a>
+            </div>
+        </div>
+    </form>
+
+</div>

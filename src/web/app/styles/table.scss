@@ -1,11 +1,17 @@
 
+$table-cell-padding: 12px;
 
+// Overrides
+//----------------------------
 .table{
-
   > thead{
     tr > td,
     tr > th{
+      color: $table-head-color;
       vertical-align: middle;
+      padding: $table-cell-padding $table-cell-padding + 4;
+      background: $table-head-bg;
+      border-bottom-width: 0;
     }
   }
 
@@ -13,6 +19,51 @@
     tr > td,
     tr > th{
       vertical-align: middle;
+      padding: $table-cell-padding $table-cell-padding + 4;
+    }
+  }
+}
+
+// Actions
+//----------------------------
+.table-actions,.list-actions{
+  margin: 10px 0;
+}
+
+// Sorting
+//----------------------------
+.table thead td,
+.table th{
+  &.sortable{
+    cursor: pointer;
+
+    &:hover{
+      background: darken($table-head-bg, 4%);
+    }
+
+    &:before{
+      @include glyphicon;
+      font-size: 11px;
+      //line-height: 16px;
+      color: #666;
+      float:right;
+      margin: 5px 0 0;
+
+    }
+  }
+
+  &, &:hover{
+    &.sort-desc{
+      background: $table-head-sort-bg;
+      &:before{
+        content: "\e114"; //chevron down
+      }
+    }
+    &.sort-asc{
+      background: $table-head-sort-bg;
+      &:before{
+        content: "\e113"; //chevron up
+      }
     }
   }
 
