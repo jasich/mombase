@@ -14,9 +14,11 @@ VolunteerService.prototype = {
 
 		Volunteer.find( _filter, null, { skip: _offset, limit: _take, sort: _sort }, cb );
 	},
-	within: function( lat, lon, radius, cb ) {
-		console.log(lat,lon,radius);
-		Volunteer.find( { loc : { $geoWithin: { $centerSphere: [ [ lon, lat ], radius ] } } }, cb);
+	within: function( lat, lon, radius, offset, take, cb ) {
+		var _offset = 0; if ( offset ) _offset = offset;
+		var _take = 10; if ( take ) _take = take;
+		var _filter = { loc : { $within: { $centerSphere: [ [ lon, lat ], radius ] } } };
+		Volunteer.find( _filter, null, { skip: _offset, limit: _take } , cb);
 	},
 	save: function( body, cb ) {
 		var volunteer = new Volunteer(body);
