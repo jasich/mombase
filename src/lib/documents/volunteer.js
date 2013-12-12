@@ -4,7 +4,7 @@ var volunteerSchema = mongoose.Schema({
   // Contact Information
   firstName: {type: String, required: true},
   lastName: {type: String, required: true},
-  email: {type: String, required: true, unique: true},
+  email: {type: String, unique: true},
   phone: String,
   // Address Information
   address: {
@@ -22,9 +22,9 @@ var volunteerSchema = mongoose.Schema({
   // Based on ISO-639-2  ( http://www.loc.gov/standards/iso639-2/php/code_list.php )
   languages: [String],
   availability: [{
-    day: { type: Number, required: true},
+    day: { type: Number },
     // Time in seconds into the day (from midnight)
-    start: { type: Number, required: true},
+    start: { type: Number },
     end: Number
   }],
 
