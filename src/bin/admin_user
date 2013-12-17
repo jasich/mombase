@@ -11,8 +11,20 @@ var config = require('../api/config/application')
 config.db(app);
 
 //admin user
-var admin = new User({first:'Admin', last:'User', email:'admin@momsbloom.com', password:'momsbloom2013'});
-admin.save(function(err, u) {
+var email = 'admin@momsbloom.com'
+  , password = 'replaceme'
+  , admin = new User({first:'Admin', last:'User', email:, password:'momsbloom2013'});
+
+//create user if the admin user doesn't exist already
+User.findOne({email:email}, function(err, u) {
     if (err) throw err;
-    console.log("Admin user created\n");
+    if (u) {
+        process.exit(0);
+    } else {
+        admin.save(function(err, u) {
+            if (err) throw err;
+            console.log("Admin user created\n");
+            process.exit(0);
+        });
+    }
 });
