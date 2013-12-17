@@ -13,7 +13,7 @@ config.db(app);
 //admin user
 var email = 'admin@momsbloom.com'
   , password = 'replaceme'
-  , admin = new User({first:'Admin', last:'User', email:, password:'momsbloom2013'});
+  , admin = new User({first:'Admin', last:'User', email:, password:password});
 
 //create user if the admin user doesn't exist already
 User.findOne({email:email}, function(err, u) {
