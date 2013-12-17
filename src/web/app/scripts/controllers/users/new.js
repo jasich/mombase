@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('webApp')
-  .controller('UsersNewCtrl', function ($scope, Alerts, Users, $location) {
+  .controller('UsersNewCtrl', ["$scope", "Alerts", "Users", "$location", function ($scope, Alerts, Users, $location) {
 
     $scope.user = {};
 
@@ -26,4 +26,4 @@ angular.module('webApp')
         else
             return false;
     }
-  });
+  }]);

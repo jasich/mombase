@@ -2,7 +2,7 @@
 
 angular.module('webApp')
 
-  .controller('MothersCtrl', function ($scope, $injector, Mother, Alerts, ngTableParams, $filter, $activity) {
+  .controller('MothersCtrl', ["$scope", "$injector", "Mother", "Alerts", "ngTableParams", "$filter", "$activity", function ($scope, $injector, Mother, Alerts, ngTableParams, $filter, $activity) {
 
     var TableHelper = $injector.get("TableHelper");
 
@@ -56,8 +56,8 @@ angular.module('webApp')
     $scope.$on('mother:delete:error', function(e, id) {
       Alerts.addError("Unable to delete the mother");
     });
-  })
-  .controller('MotherRowCtrl', function($rootScope, $scope, Mother, AddressHelper) {
+  }])
+  .controller('MotherRowCtrl', ["$rootScope", "$scope", "Mother", "AddressHelper", function($rootScope, $scope, Mother, AddressHelper) {
     $scope.address = function() {
       $scope.mother.address || ($scope.mother.address = {});
 
@@ -74,4 +74,4 @@ angular.module('webApp')
     $scope.store = function() {
       $rootScope.mother = $scope.mother;
     };
-  });
+  }]);

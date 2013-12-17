@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('webApp')
-  .service('Authentication', function Authentication( $rootScope, $location,$q, $cookieStore, $cookies, loginService ) {
+  .service('Authentication', ["$rootScope", "$location","$q", "$cookieStore", "$cookies", "loginService", function Authentication( $rootScope, $location,$q, $cookieStore, $cookies, loginService ) {
     // AngularJS will instantiate a singleton by calling "new" on this function
 
     	function Login(username, password){
@@ -57,4 +57,4 @@ angular.module('webApp')
             getCurrentUser: getCurrentUser,
             setCurrentUser: setCurrentUser
     	}
-  });
+  }]);

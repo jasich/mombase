@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('webApp')
-    .controller('VolunteersEditCtrl', function ($location, $rootScope, $scope, UsStates, LanguageCodes, Volunteer,Alerts, $routeParams, GeoLocation) {
+    .controller('VolunteersEditCtrl', ["$location", "$rootScope", "$scope", "UsStates", "LanguageCodes", "Volunteer","Alerts", "$routeParams", "GeoLocation", function ($location, $rootScope, $scope, UsStates, LanguageCodes, Volunteer,Alerts, $routeParams, GeoLocation) {
         $scope.states = UsStates;
         $scope.langCodes = LanguageCodes;
 
@@ -79,4 +79,4 @@ angular.module('webApp')
             else
                 return true;
         }
-    });
+    }]);

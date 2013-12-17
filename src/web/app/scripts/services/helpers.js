@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('webApp')
-    .service('DateHelper', function($filter){
+    .service('DateHelper', ["$filter", function($filter){
         return {
             format: function(dateStr, format)
             {
@@ -13,9 +13,9 @@ angular.module('webApp')
                 return ~~((Date.now() - birthday) / (31557600000));
             }
         }
-    })
+    }])
     //Helper methods used to help work with ngTable
-    .service('TableHelper', function($filter){
+    .service('TableHelper', ["$filter", function($filter){
         return {
             getPage: function(data, params)
             {
@@ -55,9 +55,9 @@ angular.module('webApp')
                 return params;
             }
         }
-    })
+    }])
     //Helper used to work with address objects
-    .service('AddressHelper', function Helper($rootScope) {
+    .service('AddressHelper', ["$rootScope", function Helper($rootScope) {
 
         return {
             isLocatableAddress: function(address)
@@ -78,9 +78,9 @@ angular.module('webApp')
                 return values.join(', ');
             }
         }
-    })
+    }])
     //Helper used to help validate a form
-    .factory("FormValidationHelper", function Helper(){
+    .factory("FormValidationHelper", function(){
         function FormValidationHelper(scope, formName)
         {
 

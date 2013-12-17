@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('webApp')
-  .filter('age', function (DateHelper) {
+  .filter('age', ["DateHelper", function (DateHelper) {
     return function (dateStr) {
       if(!dateStr)
         return ""
@@ -10,4 +10,4 @@ angular.module('webApp')
       var yText = age == 1 ? "year" : "years";
       return [age, yText, "old"].join(" ");
     };
-  });
+  }]);

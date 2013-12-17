@@ -6,7 +6,7 @@ angular.module('webApp', [
   'ngSanitize',
   'ngTable'
 ])
-  .config(function ($routeProvider) {
+  .config(["$routeProvider", function ($routeProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/mothers.html',

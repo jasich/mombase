@@ -2,7 +2,7 @@
 
 angular.module('webApp')
 
-  .factory('breadcrumbs', function ($rootScope, $location, $route, $timeout) {
+  .factory('breadcrumbs', ["$rootScope", "$location", "$route", "$timeout", function ($rootScope, $location, $route, $timeout) {
         var breadcrumbs = [],
             breadcrumbsService = {},
             routes = $route.routes,
@@ -99,4 +99,4 @@ angular.module('webApp')
         };
 
         return breadcrumbsService;
-  });
+  }]);

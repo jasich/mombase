@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('webApp')
-  .controller('LoginCtrl', function ($scope, Alerts, Authentication) {
+  .controller('LoginCtrl', ["$scope", "Alerts", "Authentication", function ($scope, Alerts, Authentication) {
   		$scope.user = {};
         $scope.errorMessage = '';
 
@@ -11,4 +11,4 @@ angular.module('webApp')
                     $scope.errorMessage = "Invalid email or password";
                 });
    		}
-  });
+  }]);

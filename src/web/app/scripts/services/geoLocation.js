@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('webApp')
-	.service('GeoLocation', function GeoLocation($rootScope, $http, $q, ErrorHandler) {
+	.service('GeoLocation', ["$rootScope", "$http", "$q", "ErrorHandler", function GeoLocation($rootScope, $http, $q, ErrorHandler) {
 	// AngularJS will instantiate a singleton by calling "new" on this function
 
 	this.GetLatLong = function(query){
@@ -82,4 +82,4 @@ angular.module('webApp')
 
 		return defer.promise;
 	};
-});
+}]);

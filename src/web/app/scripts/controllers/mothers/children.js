@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('webApp')
-  .controller('MothersChildrenCtrl', function ($scope, $injector, $routeParams) {
+  .controller('MothersChildrenCtrl',["$scope", "$injector", "$routeParams", function ($scope, $injector, $routeParams) {
         var Mother = $injector.get("Mother"),
             Alerts = $injector.get("Alerts"),
             ngTableParams = $injector.get("ngTableParams"),
@@ -44,8 +44,8 @@ angular.module('webApp')
             function(){
                 $scope.mother = {}
             });
-  })
-    .controller('ChildRowCtrl', function($rootScope, $scope, Child) {
+  }])
+    .controller('ChildRowCtrl', ["$rootScope", "$scope", "Child", function($rootScope, $scope, Child) {
 
         $scope.delete = function() {
             var params = {id: $scope.kid._id, mid: $scope.mother._id};
@@ -56,4 +56,4 @@ angular.module('webApp')
             );
         }
 
-    });
+    }]);

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('webApp')
-  .factory('Volunteer', function Volunteers($resource) {
+  .factory('Volunteer', ["$resource", function Volunteers($resource) {
         var resource = $resource("api/volunteers/:id/:action",
             {id: '@id', action: '@action'},
             {
@@ -11,4 +11,4 @@ angular.module('webApp')
             });
 
         return resource;
-  });
+  }]);

@@ -1,6 +1,6 @@
 
 angular.module('webApp')
-  .controller('NavigationCtrl', function ($scope, $rootScope, $location) {
+  .controller('NavigationCtrl', ["$scope", "$rootScope", "$location", function ($scope, $rootScope, $location) {
         $scope.menu = [
             {
                 text: 'Mothers',
@@ -22,4 +22,4 @@ angular.module('webApp')
             return url == currentUrl;
         }
 
-  });
+  }]);

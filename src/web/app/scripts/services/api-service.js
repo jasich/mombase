@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('webApp')
-  .factory('apiService', function ($rootScope,$injector, $q, Messenger) {
+  .factory('apiService', ["$rootScope","$injector", "$q", "Messenger", function ($rootScope,$injector, $q, Messenger) {
         function ApiService(resource, evName)
         {
             this.resource = resource;
@@ -51,4 +51,4 @@ angular.module('webApp')
         }
 
 
-  });
+  }]);

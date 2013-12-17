@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('webApp')
-  .controller('RegisterCtrl', function ($scope) {
+  .controller('RegisterCtrl', ["$scope", function ($scope) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
-  });
+  }]);

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('webApp')
-  .controller('VolunteersNewCtrl', function ($location, $scope, UsStates, LanguageCodes, Volunteer) {
+  .controller('VolunteersNewCtrl', ["$location", "$scope", "UsStates", "LanguageCodes", "Volunteer", function ($location, $scope, UsStates, LanguageCodes, Volunteer) {
     $scope.states = UsStates;
     $scope.langCodes = LanguageCodes;
 
@@ -37,4 +37,4 @@ angular.module('webApp')
             return true;
     }
 
-  });
+  }]);

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('webApp')
-  .controller('UsersEditCtrl', function ($scope, $q, $timeout, $routeParams, Users, $rootScope, $location) {
+  .controller('UsersEditCtrl', ["$scope", "$q", "$timeout", "$routeParams", "Users", "$rootScope", "$location", function ($scope, $q, $timeout, $routeParams, Users, $rootScope, $location) {
         $scope.user = $rootScope.editingUser || $scope.user || Users.get({id: $routeParams.id});
 
         $scope.isFormValid = function(){
@@ -28,4 +28,4 @@ angular.module('webApp')
             else
                 return false;
         }
-  });
+  }]);

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('webApp')
-  .controller('MothersEditChildCtrl', function ($scope, $injector, $routeParams, $location, breadcrumbs) {
+  .controller('MothersEditChildCtrl', ["$scope", "$injector", "$routeParams", "$location", "breadcrumbs", function ($scope, $injector, $routeParams, $location, breadcrumbs) {
         var FormValidation = $injector.get("FormValidationHelper"),
             Mother  =    $injector.get("Mother"),
             Child   =    $injector.get("Child"),
@@ -43,4 +43,4 @@ angular.module('webApp')
                     Alerts.addError('Unable to update child.  Please review the form and try again.');
                 });
         }
-  });
+  }]);

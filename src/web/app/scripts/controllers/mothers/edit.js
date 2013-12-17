@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('webApp')
-  .controller('MothersEditCtrl', function ($rootScope,$filter, $injector, $scope, $location, $routeParams) {
+  .controller('MothersEditCtrl', ["$rootScope","$filter", "$injector", "$scope", "$location", "$routeParams", function ($rootScope,$filter, $injector, $scope, $location, $routeParams) {
     $scope.states = $injector.get("UsStates");
     $scope.availabilityCodes = $injector.get("AvailabilityCodes");
     $scope.langCodes = $injector.get("LanguageCodes");
@@ -132,4 +132,4 @@ angular.module('webApp')
     $scope.address = function() {
         return addressHelper.formatAddress($scope.mother.address)
     };
-  });
+  }]);

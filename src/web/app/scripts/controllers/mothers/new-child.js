@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('webApp')
-  .controller('MothersNewChildCtrl', function ($scope, $injector, $routeParams, $location) {
+  .controller('MothersNewChildCtrl', ["$scope", "$injector", "$routeParams", "$location", function ($scope, $injector, $routeParams, $location) {
         var FormValidation = $injector.get("FormValidationHelper"),
             Mother  =    $injector.get("Mother"),
             Child   =    $injector.get("Child"),
@@ -37,4 +37,4 @@ angular.module('webApp')
                     Alerts.addError('Unable to save child.  Please review the form and try again.');
                 });
         }
-  });
+  }]);

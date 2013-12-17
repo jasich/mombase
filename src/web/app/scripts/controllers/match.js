@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('webApp')
-  .controller('MatchCtrl', function ($scope, $routeParams, GeoLocation, RangeOptions, Mother, Volunteer) {
+  .controller('MatchCtrl', ["$scope", "$routeParams", "GeoLocation", "RangeOptions", "Mother", "Volunteer", function ($scope, $routeParams, GeoLocation, RangeOptions, Mother, Volunteer) {
     $scope.rangeOptions = RangeOptions;
     $scope.selectedRange = _.find($scope.rangeOptions, function(x) { return x.selected === true;});
 
@@ -28,8 +28,8 @@ angular.module('webApp')
         , values = keys.map(function(k) { return address[k] });
       return values.join(', ');
     };
-})
-.controller('MatchRowCtrl', function($rootScope, $scope, Mother) {
+}])
+.controller('MatchRowCtrl', ["$rootScope", "$scope", "Mother", function($rootScope, $scope, Mother) {
     $scope.address = function() {
       $scope.volunteer.address || ($scope.volunteer.address = {});
       var keys = Object.keys($scope.volunteer.address)
@@ -48,4 +48,4 @@ angular.module('webApp')
         $scope.mom = data;
       });
     };
-});
+}]);

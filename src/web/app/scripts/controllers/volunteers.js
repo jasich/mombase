@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('webApp')
-  .controller('VolunteersCtrl', function ($scope, Volunteer) {
+  .controller('VolunteersCtrl', ["$scope", "Volunteer", function ($scope, Volunteer) {
       $scope.volunteers = [];
 
       Volunteer.search(function(data){
@@ -11,8 +11,8 @@ angular.module('webApp')
       $scope.$on('volunteer:delete', function(e, id) {
         _.remove($scope.volunteers, function(v) { return v._id == id });
       });
-  })
-  .controller('VolunteerRowCtrl', function($rootScope, $scope, Volunteer) {
+  }])
+  .controller('VolunteerRowCtrl', ["$rootScope", "$scope", "Volunteer", function($rootScope, $scope, Volunteer) {
 
     $scope.address = function() {
       $scope.volunteer.address || ($scope.volunteer.address = {});
@@ -28,4 +28,4 @@ angular.module('webApp')
     $scope.store = function() {
       $rootScope.volunteer = $scope.volunteer;
     };
-  });
+  }]);

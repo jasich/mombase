@@ -8,7 +8,7 @@ angular.module('webApp')
             return input.slice(startAt, take);
         }
     })
-    .factory('Pagination', function ($rootScope) {
+    .factory('Pagination', ["$rootScope", function ($rootScope) {
 
         function Pagination(items, perPage)
         {
@@ -75,4 +75,4 @@ angular.module('webApp')
         };
 
         return Pagination;
-    });
+    }]);

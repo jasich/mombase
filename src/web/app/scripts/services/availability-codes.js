@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('webApp')
-  .service('AvailabilityCodes', function AvailabilityCodes() {
+  .service('AvailabilityCodes', function() {
     var codes = [
       {
         name: 'Any',

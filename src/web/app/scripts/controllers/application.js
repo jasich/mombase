@@ -2,7 +2,7 @@
 
 
 angular.module('webApp')
-    .controller('AppCtrl', function ($scope, $rootScope, $injector, breadcrumbs) {
+    .controller('AppCtrl', ["$scope", "$rootScope", "$injector", "breadcrumbs", function ($scope, $rootScope, $injector, breadcrumbs) {
         /**
          *  Reusable form data that can be used from any form within the
          *  application.  Mostly used for select dropdowns and other form items.
@@ -36,4 +36,4 @@ angular.module('webApp')
             date: $injector.get("DateHelper")
         }
 
-    });
+    }]);

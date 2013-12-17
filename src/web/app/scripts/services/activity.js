@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('webApp')
-    .service("$activity", function($rootScope){
+    .service("$activity", ["$rootScope", function($rootScope){
 
         function Activity()
         {
@@ -34,7 +34,7 @@ angular.module('webApp')
             $rootScope.activity = new Activity();
 
         return $rootScope.activity;
-    })
+    }])
     .directive('activityIndicator', function(){
 
 

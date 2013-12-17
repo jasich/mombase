@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('webApp')
-  .service('LanguageCodes', function LanguageCodes() {
+  .service('LanguageCodes', function() {
         /**
          * @author Phil Teare
          * using wikipedia data

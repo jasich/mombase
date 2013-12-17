@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('webApp')
-  .service('Messenger', function Messenger($rootScope, $log) {
+  .service('Messenger', ["$rootScope", "$log", function Messenger($rootScope, $log) {
         function Messenger(scope){
             this.root = scope || $rootScope;
             this.debug = false;
@@ -101,4 +101,4 @@ angular.module('webApp')
         }
 
         return new Messenger($rootScope);
-  });
+  }]);

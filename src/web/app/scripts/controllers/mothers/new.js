@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('webApp')
-  .controller('MothersNewCtrl', function ($rootScope, $scope, $injector, $location, $routeParams) {
+  .controller('MothersNewCtrl', ["$rootScope", "$scope", "$injector", "$location", "$routeParams", function ($rootScope, $scope, $injector, $location, $routeParams) {
     var addressHelper = $injector.get("AddressHelper"),
         GeoLocation = $injector.get("GeoLocation"),
         Mother = $injector.get("Mother"),
@@ -72,4 +72,4 @@ angular.module('webApp')
     $scope.address = function() {
         return addressHelper.formatAddress($scope.mother.address)
     };
-  });
+  }]);

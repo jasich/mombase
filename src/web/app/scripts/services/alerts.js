@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('webApp')
-  .service('Alerts', function Alerts($rootScope) {
+  .service('Alerts', ["$rootScope", function Alerts($rootScope) {
         if(!$rootScope.alerts) $rootScope.alerts = [];
 
         return {
@@ -41,4 +41,4 @@ angular.module('webApp')
                 }
             }
         }
-  });
+  }]);
