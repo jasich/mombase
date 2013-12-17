@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('webApp')
-  .controller('VolunteersNewCtrl', ["$location", "$scope", "UsStates", "LanguageCodes", "Volunteer", function ($location, $scope, UsStates, LanguageCodes, Volunteer) {
+  .controller('VolunteersNewCtrl', ["$location", "$scope", "UsStates", "LanguageCodes", "Volunteer", "Alerts", function ($location, $scope, UsStates, LanguageCodes, Volunteer, Alerts) {
     $scope.states = UsStates;
     $scope.langCodes = LanguageCodes;
 
