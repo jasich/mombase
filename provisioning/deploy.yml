@@ -1,0 +1,8 @@
+---
+- hosts: servers
+  gather_facts: false
+  user: root
+
+  tasks:
+  - name: Pull source from github
+    git: repo=${repo} dest=${src_root}

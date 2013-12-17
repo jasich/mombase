@@ -15,5 +15,6 @@
   tags: mongodb
 
 - name: MongoDB | Run mongo daemon
+  sudo: yes
   service: name=mongodb state=started
   tags: mongodb

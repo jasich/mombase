@@ -1,9 +1,11 @@
 ---
-- hosts: all
-  user: vagrant
+- hosts: servers
+  gather_facts: false
+  user: root
 
   roles:
     - common
+    - ruby
     - nodejs
     - mongodb
     - yo

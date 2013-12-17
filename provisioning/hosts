@@ -1,2 +1,8 @@
+[servers:children]
+production
+
 [vagrant]
 192.168.111.222
+
+[production]
+162.243.224.218

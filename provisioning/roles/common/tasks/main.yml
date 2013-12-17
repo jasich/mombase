@@ -4,17 +4,16 @@
   apt: update-cache=yes
   tags: common
 
-- name: Common | Install git
-  apt: pkg=git state=present
+- name: Common | Update language
   sudo: yes
+  apt: pkg=language-pack-en
   tags: common
 
-- name: Common | Install ruby
-  apt: pkg=ruby
+- name: Common | Install Git
   sudo: yes
+  apt: pkg=git
   tags: common
 
-- name: Common | Install compass
-  sudo: yes
-  gem: name=compass
+- name: Common | Create application dir
+  file: state=directory path=${src_root}
   tags: common

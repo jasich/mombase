@@ -8,12 +8,12 @@ server {
     #server_name app.net www.app.net app;
     #access_log /var/log/nginx/app.log;
     #error_log /var/log/nginx/app.error.log debug;
-    root {{src_root}}/{{web_project_name}};
+    root {{src_root}}/{{web_project_name}}/dist;
 
-    location / {
-      index	index.html;
-      try_files $uri $uri/ /index.html;
-    }
+    #location / {
+    #  index	index.html;
+    #  try_files $uri $uri/ /index.html;
+    #}
 
     # pass the request to the node.js server with the correct headers and much more can be added, see nginx config options
     location /{{express_base_route}} {
