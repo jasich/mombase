@@ -12,7 +12,7 @@
             </div>
             <div class="">
                 <ul class="nav navbar-nav navbar-left">
-                    <li ng-repeat='item in menu' ng-class='{"active": isActive(item.url)}'>
+                    <li ng-repeat='item in menu' ng-class="{active: isActive(item.url)}">
                         <a ng-href="#{{item.url}}">{{item.text}}</a>
                     </li>
                 </ul>
