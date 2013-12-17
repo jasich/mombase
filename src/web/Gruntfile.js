@@ -296,9 +296,9 @@ module.exports = function (grunt) {
       },
       fonts: {
         expand: true,
-        cwd: '<%= yeoman.app %>/bower_components/bootstrap-sass',
-        src: 'fonts',
-        dest: '<%= yeoman.dist %>/fonts'
+        cwd: '<%= yeoman.app %>/bower_components/bootstrap-sass/fonts',
+        src: ['*.eot', '*.svg', '*.ttf', '*.woff'],
+        dest: '<%= yeoman.dist %>/fonts/'
       }
     },
     concurrent: {
