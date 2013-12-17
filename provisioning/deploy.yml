@@ -12,3 +12,6 @@
 
   - name: Start node application
     raw: pm2 start ${src_root}/src/api/app.js -i max
+
+  - name: Ensure admin user present
+    raw: ${src_root}/src/bin/admin_user
