@@ -120,7 +120,7 @@ angular.module('webApp', [
       .otherwise({
         redirectTo: '/'
       });
-  })
+  }])
     .run(['$rootScope', '$location', '$http', '$cookies', 'Authentication', function ($scope, $location, $http,$cookies, Authentication) {
         var cookie = $cookies["connect.sid"];
         var user = Authentication.getCurrentUser();
