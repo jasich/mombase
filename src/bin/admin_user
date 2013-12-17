@@ -1,0 +1,18 @@
+#!/usr/bin/env node
+var config = require('../api/config/application')
+  , User = require('../lib/documents/user')
+  , app = {
+    get: function(env) {
+        return 'production'
+    }
+  };
+
+//connect to the db
+config.db(app);
+
+//admin user
+var admin = new User({first:'Admin', last:'User', email:'admin@momsbloom.com', password:'momsbloom2013'});
+admin.save(function(err, u) {
+    if (err) throw err;
+    console.log("Admin user created\n");
+});
