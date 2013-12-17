@@ -10,3 +10,4 @@ build:
 	cd ./src && npm i
 	cd ./src/web && bower --allow-root i
 	cd ./src/web && npm i
+	cd ./src/web && grunt build

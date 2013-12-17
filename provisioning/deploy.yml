@@ -8,4 +8,7 @@
     git: repo=${repo} dest=${src_root}
 
   - name: Build application
-    command: cd ${src_root} && make build
+    shell: cd ${src_root} && make build
+
+  - name: Start node application
+    shell: pm2 start ${src_root}/src/api/app.js -i max
