@@ -293,6 +293,12 @@ module.exports = function (grunt) {
         cwd: '<%= yeoman.app %>/styles',
         dest: '.tmp/styles/',
         src: '{,*/}*.css'
+      },
+      fonts: {
+        expand: true,
+        cwd: '<%= yeoman.app %>/bower_components/bootstrap-sass',
+        src: 'fonts',
+        dest: '<%= yeoman.dist %>/fonts'
       }
     },
     concurrent: {
@@ -375,6 +381,7 @@ module.exports = function (grunt) {
     'useminPrepare',
     'compass:dist',
     'copy:styles',
+    'copy:fonts',
     'imagemin',
     'svgmin',
     'htmlmin',
