@@ -8,5 +8,5 @@ test-routes:
 
 build:
 	cd ./src && npm i
-	cd ./src/web && bower i
+	cd ./src/web && bower --allow-root i
 	cd ./src/web && npm i
