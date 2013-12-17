@@ -42,7 +42,7 @@
             <ol ng-show="isLoggedIn" ng-cloak class="breadcrumb">
                 <li ng-repeat="breadcrumb in breadcrumbs.getAll()"><a href="#{{breadcrumb.path}}" ng-hide="$last" ng-bind='breadcrumb.getLabel()'></a><span ng-show="$last" ng-bind='breadcrumb.getLabel()'>{{breadcrumb.label}}</span></li>
             </ol>
-            <div class='page' ng-class='{"page-empty": !isLoggedIn}' ng-view>
+            <div class='page' ng-class="{page-empty: !isLoggedIn}" ng-view>
 
             </div>
         </div>
