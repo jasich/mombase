@@ -11,4 +11,4 @@
     shell: cd ${src_root} && make build
 
   - name: Start node application
-    shell: pm2 start ${src_root}/src/api/app.js -i max
+    raw: pm2 start ${src_root}/src/api/app.js -i max
