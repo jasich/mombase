@@ -19,6 +19,7 @@ var email = 'admin@momsbloom.com'
 User.findOne({email:email}, function(err, u) {
     if (err) throw err;
     if (u) {
+        console.log("User already exists.");
         process.exit(0);
     } else {
         admin.save(function(err, u) {
