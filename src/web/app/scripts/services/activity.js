@@ -49,7 +49,7 @@ angular.module('webApp')
 
                 scope.show = function(txt)
                 {
-                    scope.text = txt || 'loading';
+                    scope.characters = (txt || 'loading').split("");
 
                     element.removeClass('off').addClass('on');
                 }
