@@ -132,3 +132,24 @@ describe('PUT /api/users/:id', function() {
   });
 
 });
+
+
+describe('PUT /api/users/:id/password', function() {
+
+  it('should change password for user', function(done) {
+    var user = new User({first:'Testguy', last:'McMan', password:'password', email:'superunique@email.com'});
+    user.save(function(err, u) {
+      if (err) throw err;
+      request(app)
+        .put('/api/users/' + u.id + '/password')
+        .send({currentPassword: 'password', password: 'strongerPassword', confirmPassword: 'strongerPassword'})
+        .expect(200)
+        .end(function(err, res) {
+          if (err) return done(err);
+          assert.ok(res.res.body.success);
+          done();
+        });
+    })
+  });
+
+});
