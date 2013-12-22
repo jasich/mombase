@@ -47,6 +47,7 @@ body {
 //----------------------------
 .login{
   margin-top: 30%;
+  margin-bottom: 30%;
   padding: $padding-content-vertical $padding-content-horizontal;
   background: $login-bg;
 }
@@ -56,4 +57,10 @@ body {
 .navbar-text
 {
   line-height: $line-height-computed;
+}
+
+// Navigation Action
+// ---------------------------
+.inline-action {
+  font-size: 90%;
 }

@@ -94,3 +94,31 @@ exports.create = function(req,res) {
     res.send(200, user);
   });
 };
+
+exports.changePassword = function(req, res) {
+  var params = req.params;
+  var currentPassword = req.body.currentPassword;
+  var password = req.body.password;
+  var confirmPassword = req.body.confirmPassword;
+
+  User.findById(params.id, function ( err, user ) {
+    if (err) return res.send(500);
+
+    if (user) {
+      if (!user.comparePassword(currentPassword)) {
+        return res.send(200, { success: false, errorMessage: "Invalid password" });
+      }
+
+      if (password !== confirmPassword) {
+        return res.send(200, { success: false, errorMessage: "Passwords do not match" });
+      }
+
+      user.password = password;
+      user.save(function() {
+        return res.send(200, { success: true });
+      });
+    } else {
+      return res.send(400);
+    }
+  });
+};

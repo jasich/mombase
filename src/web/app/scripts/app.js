@@ -40,15 +40,15 @@ angular.module('webApp', [
             else return 'Edit Mother';
         }
       })
-        .when('/mothers/:id', {
-            templateUrl: 'views/mothers/edit.html',
-            controller: 'MothersEditCtrl',
-            label: function(scope)
-            {
-                if(scope && scope.mother) return [scope.mother.firstName, scope.mother.lastName].join(' ');
-                else return 'Edit Mother';
-            }
-        })
+      .when('/mothers/:id', {
+          templateUrl: 'views/mothers/edit.html',
+          controller: 'MothersEditCtrl',
+          label: function(scope)
+          {
+              if(scope && scope.mother) return [scope.mother.firstName, scope.mother.lastName].join(' ');
+              else return 'Edit Mother';
+          }
+      })
       .when('/users', {
         templateUrl: 'views/users.html',
         controller: 'UsersCtrl',
@@ -58,6 +58,11 @@ angular.module('webApp', [
         templateUrl: 'views/users/new.html',
         controller: 'UsersNewCtrl',
         label: 'New User'
+      })
+      .when('/users/password', {
+        templateUrl: 'views/users/password.html',
+        controller: "ChangePasswordCtrl",
+        label: "Change Password"
       })
       .when('/users/edit/:id', {
         templateUrl: 'views/users/edit.html',

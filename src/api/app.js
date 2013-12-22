@@ -22,6 +22,7 @@ app.get('/api/users', user.list);
 app.get('/api/users/:id', user.get);
 app.del('/api/users/:id', user.del);
 app.put('/api/users/:id', user.update);
+app.put('/api/users/:id/password', user.changePassword);
 
 app.post('/api/volunteer/create', volunteer.create);
 
