@@ -136,6 +136,7 @@ angular.module('webApp', [
     $provide.factory('AuthHttpInterceptor', ['$q', '$location', function($q, $location) {
       return {
         'responseError': function(rejection) {
+          if (/login/.test($location.path())) return $q.reject(rejection);
           if (rejection.status && rejection.status == 401) {
             var deferred = $q.defer();
             $location.path('/login');
