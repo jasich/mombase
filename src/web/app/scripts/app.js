@@ -4,7 +4,8 @@ angular.module('webApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
-  'ngTable'
+  'ngTable',
+  'ngRoute'
 ])
   .config(["$routeProvider", function ($routeProvider) {
     $routeProvider
@@ -126,7 +127,27 @@ angular.module('webApp', [
         redirectTo: '/'
       });
   }])
-    .run(['$rootScope', '$location', '$http', '$cookies', 'Authentication', function ($scope, $location, $http,$cookies, Authentication) {
+  .config(['$provide', '$httpProvider', function($provide, $httpProvider) {
+    /**
+     * Define an interceptor to look at all response errors for a 401 -
+     * if found, the location is sent to the login route and any user information
+     * on rootScope and cookieStore will be removed
+     */
+    $provide.factory('AuthHttpInterceptor', ['$q', '$location', function($q, $location) {
+      return {
+        'responseError': function(rejection) {
+          if (rejection.status && rejection.status == 401) {
+            var deferred = $q.defer();
+            $location.path('/login');
+            return deferred.promise;
+          }
+          return $q.reject(rejection);
+        }
+      };
+    }]);
+    $httpProvider.interceptors.push('AuthHttpInterceptor');
+  }])
+  .run(['$rootScope', '$location', '$cookies', 'Authentication', function ($scope, $location,$cookies, Authentication) {
         var cookie = $cookies["connect.sid"];
         var user = Authentication.getCurrentUser();
 
