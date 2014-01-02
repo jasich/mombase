@@ -10,6 +10,12 @@
   - name: Build application
     shell: cd ${src_root} && make build
 
+  - name: Dump pm2
+    raw: pm2 dump
+
+  - name: Kill pm2
+    raw: pm2 kill
+
   - name: Start node application
     raw: pm2 start ${src_root}/src/api/app.js -i max
 
