@@ -1,19 +1,51 @@
 'use strict';
 
 angular.module('webApp')
-    .controller('VolunteersEditCtrl', ["$location", "$rootScope", "$scope", "UsStates", "LanguageCodes", "Volunteer","Alerts", "$routeParams", "GeoLocation", function ($location, $rootScope, $scope, UsStates, LanguageCodes, Volunteer,Alerts, $routeParams, GeoLocation) {
+    .controller('VolunteersEditCtrl', ["$location", "$rootScope", "$scope", "$q", "UsStates", "LanguageCodes", "Volunteer","Alerts", "$routeParams", "GeoLocation", function ($location, $rootScope, $scope, $q, UsStates, LanguageCodes, Volunteer,Alerts, $routeParams, GeoLocation) {
         $scope.states = UsStates;
         $scope.langCodes = LanguageCodes;
 
-        $scope.volunteer = $rootScope.volunteer || $scope.volunteer || Volunteer.get({id: $routeParams.id});
+        var assignRestrictions = function(volunteer) {
+          if (volunteer.restrictions) {
+            $scope.restrictionList = volunteer.restrictions.join(', ');
+          }
 
-        $scope.selectedState = _.reduce($scope.states, function(res, st){
-          return  $scope.volunteer.state && ((st.abbreviation == $scope.volunteer.address.state) ? st : res);
-        });
+          if (volunteer.skills) {
+            $scope.skillList = volunteer.skills.join(', ');
+          }
 
-        $scope.selectedLanguages = _.filter($scope.langCodes, function(l) {
-          return _.contains($scope.volunteer.languages, l.abbr);
-        });
+          $scope.selectedState = _.reduce($scope.states, function(res, st){
+            return  $scope.volunteer.state && ((st.abbreviation == $scope.volunteer.address.state) ? st : res);
+          });
+
+          $scope.selectedLanguages = _.filter($scope.langCodes, function(l) {
+            return _.contains($scope.volunteer.languages, l.abbr);
+          });
+        };
+
+        $scope.resolveVolunteer = function () {
+          var deferred = $q.defer();
+
+          if ($rootScope.volunteer) {
+            $scope.volunteer = $rootScope.volunteer;
+            deferred.resolve($rootScope.volunteer);
+          }
+          else if ($scope.volunteer) {
+            deferred.resolve($scope.volunteer);
+          } else {
+            Volunteer.get(
+              { id: $routeParams.id },
+              function(value) { $scope.volunteer = value; deferred.resolve(value); },
+              function(value) { deferred.reject(value); }
+            );
+          }
+
+          return deferred.promise;
+        };
+
+        $scope.resolveVolunteer().then(assignRestrictions);
+
+
 
         $scope.getLanguageName = function(code)
         {
