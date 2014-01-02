@@ -382,7 +382,7 @@ module.exports = function (grunt) {
     'compass:dist',
     'copy:styles',
     'copy:fonts',
-    'imagemin',
+    //'imagemin',
     'svgmin',
     'htmlmin',
     'autoprefixer',
