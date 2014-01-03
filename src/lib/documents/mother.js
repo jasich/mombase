@@ -65,12 +65,7 @@ var motherSchema = mongoose.Schema({
   },
 
   // Communications
-  availability: [{
-    day: { type: Number },
-    // Time in seconds into the day (from midnight)
-    start: { type: Number },
-    end: Number
-  }],
+  availability:  Number,  // 0 = Any, 1 = AM, 2 = PM
   howDidYouFind: String,
   referralDetails: String,
 
