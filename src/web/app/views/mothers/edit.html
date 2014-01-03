@@ -202,26 +202,11 @@
             <legend>Additional Information</legend>
 
             <div class='form-group'>
-                <label>Allergy Medications</label>
-                <textarea rows='5' ng-model='mother.restrictions.medical' class='form-control'>
+                <label>Restrictions</label>
+                <textarea rows='5' ng-model='restrictionList' comma-separated='mother.restrictions' class='form-control'>
 
                 </textarea>
-                <span class='help-block'>A comma separated list of medical restrictions</span>
-            </div>
-            <div class='form-group'>
-                <label>Allergy Restrictions</label>
-                <textarea rows='5' ng-model='mother.restrictions.medical' class='form-control'>
-
-                </textarea>
-                <span class='help-block'>A comma separated list of allergies</span>
-            </div>
-
-            <div class='form-group'>
-                <label>Pet Restrictions</label>
-                <textarea rows='5' ng-model='mother.restrictions.medical' class='form-control'>
-
-                </textarea>
-                <span class='help-block'>A comma separated list of pet allergies</span>
+                <span class='help-block'>A comma separated list of restrictions</span>
             </div>
 
             <div class='form-group'>
@@ -336,7 +321,7 @@
                 <legend>Additional Information</legend>
                 <div class='form-group'>
                     <label>Restrictions</label>
-                    <textarea rows='5' ng-model='mother.restrictions' class='form-control'>
+                    <textarea rows='5' comma-seperated='mother.restrictions' ng-model='restrictionList' class='form-control'>
 
                     </textarea>
                     <span class='help-block'>A comma separated list of restrictions ex: Allergies, Locations, etc...</span>
