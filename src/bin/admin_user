@@ -11,7 +11,7 @@ var config = require('../api/config/application')
 config.db(app);
 
 //admin user
-var email = 'admin@momsbloom.com'
+var email = 'admin@momsbloom.org'
   , password = 'replaceme'
   , admin = new User({first:'Admin', last:'User', email:email, password:password});
 
