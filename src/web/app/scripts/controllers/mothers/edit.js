@@ -39,6 +39,10 @@ angular.module('webApp')
           $scope.mother.communication.waiver.response = $scope.formatDate($scope.mother.waiver.requestForServices.response);
         }
       }
+
+      if ($scope.mother.restrictions) {
+        $scope.restrictionList = $scope.mother.restrictions.join(', ');
+      }
     });
 
     $scope.mother.address = $scope.mother.address || {};

@@ -14,7 +14,7 @@ angular.module('webApp')
           var results = [];
           var pieces = value.split(',');
           for (var i = 0; i < pieces.length; i++) {
-            results.push(pieces[i].trim().replace(/ /g, '-')); // Trim then replace spaces with hyphens
+            results.push(pieces[i].trim()); // Trim
           }
 
           var model = $parse(attrs.commaSeparated);
