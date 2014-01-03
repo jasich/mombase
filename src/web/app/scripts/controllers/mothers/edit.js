@@ -43,27 +43,27 @@ angular.module('webApp')
       if ($scope.mother.restrictions) {
         $scope.restrictionList = $scope.mother.restrictions.join(', ');
       }
-    });
 
-    $scope.mother.address = $scope.mother.address || {};
+      $scope.mother.address = $scope.mother.address || {};
 
+      if (typeof $scope.mother.availability !== 'undefined') {
+        $scope.selectedAvailability = _.find($scope.availabilityCodes,
+          function(x) { return x.value === $scope.mother.availability; });
+      }
 
-    $scope.selectedAvailability = _.reduce($scope.availabilityCodes, function(res, av){
-      return  $scope.mother.availability && ((av.value == $scope.mother.availability) ? av.value : res.value);
-    });
+      $scope.selectedState = _.reduce($scope.states, function(res, st){
+        return $scope.mother.address.state && ((st.abbreviation == $scope.mother.address.state) ? st : res);
+      });
 
-    $scope.selectedState = _.reduce($scope.states, function(res, st){
-      return  $scope.mother.address.state && ((st.abbreviation == $scope.mother.address.state) ? st : res);
-    });
-
-    $scope.selectedLanguages = _.filter($scope.langCodes, function(l) {
-      return _.contains($scope.mother.languages, l.abbr);
+      $scope.selectedLanguages = _.filter($scope.langCodes, function(l) {
+        return _.contains($scope.mother.languages, l.abbr);
+      });
     });
 
 
     $scope.update = function() {
       //$scope.mother.address.state = $scope.selectedState.abbreviation;
-      $scope.mother.availability = $scope.selectedAvailability;
+      $scope.mother.availability = $scope.selectedAvailability.value;
       //$scope.mother.languages = _.map($scope.selectedLanguages, function(l) { return l.abbr });
 
       var motherUpdate = function () {

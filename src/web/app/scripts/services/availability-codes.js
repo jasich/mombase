@@ -5,15 +5,15 @@ angular.module('webApp')
     var codes = [
       {
         name: 'Any',
-        value: 'Any'
+        value: 0
       },
       {
         name: 'AM',
-        value: 'AM'
+        value: 1
       },
       {
         name: 'PM',
-        value: 'PM'
+        value: 2
       }];
 
     return codes;
