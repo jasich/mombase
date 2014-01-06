@@ -6,14 +6,7 @@ angular.module('webApp')
         var breadcrumbs = [],
             breadcrumbsService = {},
             routes = $route.routes,
-            values = {},
-            currentScope = $rootScope,
-            config = {
-                'EditMother': function(crumbs)
-                {
-
-                }
-            };
+            currentScope = $rootScope;
 
         var generateBreadcrumbs = function() {
             breadcrumbs = [];
@@ -77,18 +70,9 @@ angular.module('webApp')
 
         });
 
-        breadcrumbsService.values = function(key, value)
-        {
-            switch(arguments.length){
-                case 0 : return values;
-                case 1 : return values[key];
-                default:
-                    if(value === undefined || value === false)
-                        delete values[key];
-                    else
-                        values[key] = value;
-            }
-        }
+        breadcrumbsService.count = function() {
+            return breadcrumbs.length;
+        };
 
         breadcrumbsService.getAll = function() {
             return breadcrumbs;

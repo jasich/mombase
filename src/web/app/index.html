@@ -39,12 +39,14 @@
 
         <!-- Add your site or application content here -->
         <div class='container'>
-            <ol ng-show="isLoggedIn" ng-cloak class="breadcrumb">
-                <li ng-repeat="breadcrumb in breadcrumbs.getAll()"><a href="#{{breadcrumb.path}}" ng-hide="$last" ng-bind='breadcrumb.getLabel()'></a><span ng-show="$last" ng-bind='breadcrumb.getLabel()'>{{breadcrumb.label}}</span></li>
-            </ol>
-            <div class='page' ng-class="{'page-empty': !isLoggedIn}" ng-view>
 
-            </div>
+            <ul ng-show="isLoggedIn && breadcrumbs.count() > 1" ng-cloak class="nav nav-breadcrumb">
+                <li ng-repeat="breadcrumb in breadcrumbs.getAll()">
+                    <a href="#{{breadcrumb.path}}" ng-hide="$last" ng-bind='breadcrumb.getLabel()'></a>
+                    <span ng-show="$last" ng-bind='breadcrumb.getLabel()'>{{breadcrumb.label}}</span>
+                </li>
+            </ul>
+            <div class='page' ng-class="{'page-empty': !isLoggedIn}" ng-view>
         </div>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -104,7 +106,6 @@
         <script src="scripts/controllers/volunteers/edit.js"></script>
         <script src="scripts/controllers/navigation.js"></script>
         <script src="scripts/controllers/match.js"></script>
-        <script src="scripts/controllers/mothers/edit-children.js"></script>
         <script src="scripts/controllers/mothers/visits.js"></script>
 
         <!-- Services -->
@@ -143,10 +144,14 @@
         <script src="scripts/controllers/mothers/children.js"></script>
         <script src="scripts/controllers/mothers/new-child.js"></script>
         <script src="scripts/controllers/mothers/edit-child.js"></script>
+        <script src="scripts/controllers/mothers/visits.js"></script>
+        <script src="scripts/controllers/mothers/new-visit.js"></script>
+        <script src="scripts/controllers/mothers/edit-visit.js"></script>
         <script src="scripts/services/child.js"></script>
         <script src="scripts/filters/gender.js"></script>
         <script src="scripts/filters/age.js"></script>
         <script src="scripts/services/breadcrumbs.js"></script>
+        <script src="scripts/services/visit.js"></script>
         <!-- endbuild -->
     </div>
 </body>

@@ -1,0 +1,34 @@
+<div class='page-header'>
+    <h1 class='page-title'>Add New Visit</h1>
+</div>
+<div class='page-body'>
+    <form name='visitForm' novalidate="" ng-submit='save()'>
+
+        <div class='form-group row'>
+
+            <div class='col-md-6' ng-class='{"has-error": form.isFieldInvalid("birthDate")}'>
+                <label>Started At</label>
+                <input type='time' name='startDate' class='form-control' ng-model='visit.startDate'/>
+            </div>
+
+            <div class='col-md-6'>
+                <label>Ended At</label>
+                <input type='text' ui-mask='99/99/9999 99:99' name='endDate' class='form-control' ng-model='visit.endDate'/>
+            </div>
+        </div>
+        <div class='form-group'>
+            <label>Challenges</label>
+            <textarea type='text' placeholder="Enter challenges that occurred during visit..." name='challenges' rows='3' class='form-control' ng-model='visit.challenges'>
+
+            </textarea>
+        </div>
+
+        <div class='form-actions'>
+            <div class='form-actions'>
+                <button class='btn btn-primary' ng-disabled='!form.isFormValid()'>Save Child</button>
+                <a class='btn btn-link margin-left-5' onclick='window.history.back()'>Cancel</a>
+            </div>
+        </div>
+    </form>
+
+</div>

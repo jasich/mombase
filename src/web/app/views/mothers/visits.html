@@ -1,1 +1,33 @@
-<p>This is the mothers/visits view.</p>
+
+
+<div class='page-header'>
+    <h1 class='page-title'>
+        Visits for <a href='/#/mothers/{{mother._id}}'>{{mother.firstName}} {{mother.lastName}}</a>
+    </h1>
+
+</div>
+
+<div class='page-body'>
+    <div class='clearfix list-actions text-right'>
+        <a href='#/mothers/{{mother._id}}/visits/new' class='btn btn-primary'>New Visit</a>
+    </div>
+    <div ng-show='mother.visits.length'>
+        <table ng-table="tableParams" class="table table-striped">
+            <tr ng-repeat="visit in $data" ng-controller="VisitRowCtrl">
+
+                <td class='text-right'>
+                    <a class='btn' ng-click="store()" ng-href="#/mothers/{{mother._id}}/visits/edit/{{visit._id}}">
+                        Edit
+                    </a>
+                    <a class='btn text-danger' confirm-click='Are you sure you want to delete this visit?' ng-click='delete(visit._id)'>
+                        Delete
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class='well empty-message text-center' ng-hide='mother.visits.length'>
+        <p>No visits have been added yet.</p>
+    </div>
+
+</div>

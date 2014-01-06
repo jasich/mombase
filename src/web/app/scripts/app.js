@@ -95,10 +95,6 @@ angular.module('webApp', [
         controller: 'MatchCtrl',
         label: 'Find Match'
       })
-      .when('/mothers/visits', {
-        templateUrl: 'views/mothers/visits.html',
-        controller: 'MothersVisitsCtrl'
-      })
       .when('/mothers/:id/children', {
         templateUrl: 'views/mothers/children.html',
         controller: 'MothersChildrenCtrl',
@@ -113,15 +109,21 @@ angular.module('webApp', [
       .when('/mothers/:id/children/edit/:cid', {
         templateUrl: 'views/mothers/edit-child.html',
         controller: 'MothersEditChildCtrl',
-            label: function(scope)
-            {
-                if(scope && scope.currentChild) return [scope.currentChild.firstName, scope.currentChild.lastName].join(' ');
-                else return 'Edit Child';
-            }
+        label: function(scope)
+        {
+            if(scope && scope.currentChild) return [scope.currentChild.firstName, scope.currentChild.lastName].join(' ');
+            else return 'Edit Child';
+        }
       })
+        .when('/mothers/:id/visits/new', {
+            templateUrl: 'views/mothers/new-visit.html',
+            controller: 'MothersNewVisitCtrl',
+            label: 'New Visit'
+        })
       .when('/mothers/:id/visits', {
         templateUrl: 'views/mothers/visits.html',
-        controller: 'MothersVisitsCtrl'
+        controller: 'MothersVisitsCtrl',
+        label: 'Visits'
       })
       .otherwise({
         redirectTo: '/'

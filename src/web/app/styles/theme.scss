@@ -125,3 +125,137 @@ $loading-width: 100px;
 .activity-indicator-content span:nth-child(10n + 9){
   @include animation-delay(.9s);
 }
+
+//
+// Breadcrumbs
+// --------------------------------
+$breadcrumb-bg: #e4e1db;
+$breadcrumb-height: 40px;
+$breadcrumb-text-size: 20px;
+$breadcrumb-arrow-width: 20px;
+$breadcrumb-border-size: $breadcrumb-height / 2;
+
+$breadcrumb-bg: #e4e1db;
+$breadcrumb-color: #94928e;
+$breadcrumb-hover-bg: $brand-primary;
+$breadcrumb-hover-color: #fff;
+
+ul.nav-breadcrumb{
+  list-style:none;
+  display: inline-block;
+  margin: 10px 0;
+
+  .icon{
+    font-size: 14px;
+  }
+
+  li{
+    float:left;
+    a, span{
+
+      display:block;
+
+      text-decoration: none;
+      position:relative;
+      height: $breadcrumb-height;
+      line-height:  $breadcrumb-height;
+      padding: 0 20px 0 15px;
+      text-align: center;
+      margin-right: 23px;
+    }
+    a{
+      color: $breadcrumb-color;
+      background: $breadcrumb-bg;
+    }
+    span{
+      color: $breadcrumb-hover-bg;
+      font-size: 1.3em;
+      font-weight: 200;
+      padding-left: 5px;
+      letter-spacing: .5px;
+    }
+
+    &:first-child{
+      a{
+        padding-left:15px;
+
+        &:before{
+          @include glyphicon;
+          content: "\e021";
+          line-height: $breadcrumb-height;
+          position: relative;
+          margin: 0 -10px 0 15px;
+          font-size: 16px;
+          vertical-align: bottom;
+
+          border:none;
+        }
+      }
+    }
+    &:last-child{
+      a{
+        padding-right:15px;
+
+        &:after{
+          border:none;
+        }
+      }
+    }
+
+
+
+    a{
+      &:before,
+      &:after{
+        content: "";
+        position:absolute;
+        top: 0;
+        border:0 solid $breadcrumb-bg;
+        border-width:$breadcrumb-border-size 10px;
+        width: 0;
+        height: 0;
+      }
+      &:before{
+        left:-$breadcrumb-border-size;
+        border-left-color:transparent;
+      }
+      &:after{
+        left:100%;
+        border-color:transparent;
+        border-left-color:$breadcrumb-bg;
+      }
+      &:hover{
+        background-color: $breadcrumb-hover-bg;
+        color: $breadcrumb-hover-color;
+        &:before{
+          border-color:$breadcrumb-hover-bg;
+          border-left-color:transparent;
+        }
+        &:after{
+          border-left-color:$breadcrumb-hover-bg;
+        }
+      }
+      //&:active{
+      //  background-color: $breadcrumb-hover-bg-darken;
+      //
+      //  &:before{
+      //    border-color:$breadcrumb-hover-bg-darken;
+      //    border-left-color:transparent;
+      //  }
+      //  &:after{
+      //    border-left-color:$breadcrumb-hover-bg-darken;
+      //  }
+      //}
+    }
+  }
+}
+
+//// Justified Steps
+////-------------------------
+//ul.nav-steps.nav-justified{
+//  width: 100%;
+//  li{
+//    display: table-cell;
+//    > a{display:block;}
+//  }
+//}
