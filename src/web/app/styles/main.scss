@@ -1,8 +1,11 @@
 //variables must be included before bootstrap to override
-@import "variables";
+@import "variable-overrides";
+
 //include twitter bootstrap
-@import "bootstrap-sass/lib/bootstrap";
+@import "../bower_components/bootstrap-sass/lib/bootstrap";
+
 //include local files
+@import "variables";
 @import "mixins";
 @import "layout";
 @import "table";
@@ -10,8 +13,10 @@
 @import "utils";
 @import "theme";
 
-/* Put your CSS here */
-.clickable{
-	cursor: pointer;
-}
+//include vender styles
+@import "../vendor/chosen/chosen-bootstrap";
+
+
+
+
 

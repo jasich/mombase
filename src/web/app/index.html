@@ -15,7 +15,7 @@
         <!-- build:css(.tmp) styles/main.css -->
         <link rel="stylesheet" href="styles/main.css">
         <!-- endbuild -->
-</head>
+  </head>
   <body ng-app="webApp">
     <div class='application' ng-controller='AppCtrl'>
         <!-- Activity Indicator -->
@@ -77,6 +77,8 @@
         <script src="bower_components/bootstrap-sass/js/collapse.js"></script>
         <script src="bower_components/bootstrap-sass/js/tab.js"></script>
         <script src="bower_components/lodash/dist/lodash.js"></script>
+        <script src="vendor/chosen/chosen.jquery.js"></script>
+        <script src="vendor/chosen/chosen.js"></script>
         <!-- endbuild -->
 
         <!-- build:js scripts/modules.js -->
@@ -88,6 +90,8 @@
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
+
+
 
         <!-- Controllers -->
         <script src="scripts/controllers/main.js"></script>
@@ -107,7 +111,12 @@
         <script src="scripts/controllers/navigation.js"></script>
         <script src="scripts/controllers/match.js"></script>
         <script src="scripts/controllers/mothers/visits.js"></script>
-
+        <script src="scripts/controllers/mothers/children.js"></script>
+        <script src="scripts/controllers/mothers/new-child.js"></script>
+        <script src="scripts/controllers/mothers/edit-child.js"></script>
+        <script src="scripts/controllers/mothers/visits.js"></script>
+        <script src="scripts/controllers/mothers/new-visit.js"></script>
+        <script src="scripts/controllers/mothers/edit-visit.js"></script>
         <!-- Services -->
         <script src="scripts/services/us-states.js"></script>
         <script src="scripts/services/loginService.js"></script>
@@ -126,32 +135,26 @@
         <script src="scripts/services/helpers.js"></script>
         <script src="scripts/services/pagination.js"></script>
         <script src="scripts/services/password.js"></script>
+        <script src="scripts/services/activity.js"></script>
+        <script src="scripts/services/child.js"></script>
+        <script src="scripts/services/breadcrumbs.js"></script>
+        <script src="scripts/services/visit.js"></script>
 
         <!-- Directives -->
         <script src="scripts/directives/confirm-click.js"></script>
         <script src="scripts/directives/same-as.js"></script>
         <script src="scripts/directives/table.js"></script>
         <script src="scripts/directives/comma-seperated.js"></script>
+        <script src="scripts/directives/mask.js"></script>
 
         <!-- Filters -->
         <script src="scripts/filters/address.js"></script>
-
-        <!-- Misc -->
-
         <script src="scripts/filters/phone.js"></script>
-        <script src="scripts/directives/mask.js"></script>
-        <script src="scripts/services/activity.js"></script>
-        <script src="scripts/controllers/mothers/children.js"></script>
-        <script src="scripts/controllers/mothers/new-child.js"></script>
-        <script src="scripts/controllers/mothers/edit-child.js"></script>
-        <script src="scripts/controllers/mothers/visits.js"></script>
-        <script src="scripts/controllers/mothers/new-visit.js"></script>
-        <script src="scripts/controllers/mothers/edit-visit.js"></script>
-        <script src="scripts/services/child.js"></script>
         <script src="scripts/filters/gender.js"></script>
         <script src="scripts/filters/age.js"></script>
-        <script src="scripts/services/breadcrumbs.js"></script>
-        <script src="scripts/services/visit.js"></script>
+        <script src="scripts/filters/name.js"></script>
+        <!-- Misc -->
+
         <!-- endbuild -->
     </div>
 </body>

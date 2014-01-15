@@ -26,7 +26,7 @@ angular.module('webApp')
         });
 
         $scope.$on('visit:delete', function(e, id) {
-            Alerts.addSuccess("Child was deleted successfully")
+            Alerts.addSuccess("Visit was deleted successfully")
             _.remove($scope.mother.visits, function(v) { return v._id == id });
             $scope.tableParams.reload();
 
@@ -51,8 +51,8 @@ angular.module('webApp')
             var params = {id: $scope.visit._id, mid: $scope.mother._id};
 
             Visit.delete(params,
-                _.partial(_.bind($scope.$emit,$scope), 'child:delete', params.id),
-                _.partial(_.bind($scope.$emit, $scope), 'child:delete:error', $scope.kid)
+                _.partial(_.bind($scope.$emit,$scope), 'visit:delete', params.id),
+                _.partial(_.bind($scope.$emit, $scope), 'visit:delete:error', $scope.visit)
             );
         }
 

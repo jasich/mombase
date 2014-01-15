@@ -12,6 +12,17 @@
   }
 }
 
+.input-group-btn .btn{
+  line-height: 20px;
+}
+
+//
+// Alerts
+// --------------------------------
+.alerts .alert{
+  margin: 10px 0 0;
+}
+
 //
 // Activity Indicators
 // --------------------------------
@@ -129,16 +140,7 @@ $loading-width: 100px;
 //
 // Breadcrumbs
 // --------------------------------
-$breadcrumb-bg: #e4e1db;
-$breadcrumb-height: 40px;
-$breadcrumb-text-size: 20px;
-$breadcrumb-arrow-width: 20px;
-$breadcrumb-border-size: $breadcrumb-height / 2;
 
-$breadcrumb-bg: #e4e1db;
-$breadcrumb-color: #94928e;
-$breadcrumb-hover-bg: $brand-primary;
-$breadcrumb-hover-color: #fff;
 
 ul.nav-breadcrumb{
   list-style:none;
@@ -235,17 +237,6 @@ ul.nav-breadcrumb{
           border-left-color:$breadcrumb-hover-bg;
         }
       }
-      //&:active{
-      //  background-color: $breadcrumb-hover-bg-darken;
-      //
-      //  &:before{
-      //    border-color:$breadcrumb-hover-bg-darken;
-      //    border-left-color:transparent;
-      //  }
-      //  &:after{
-      //    border-left-color:$breadcrumb-hover-bg-darken;
-      //  }
-      //}
     }
   }
 }

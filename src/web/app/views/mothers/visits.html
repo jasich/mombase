@@ -14,9 +14,14 @@
     <div ng-show='mother.visits.length'>
         <table ng-table="tableParams" class="table table-striped">
             <tr ng-repeat="visit in $data" ng-controller="VisitRowCtrl">
-
+                <td data-title="'Date'" sortable="'startDate'">
+                    {{(visit.startDate | date) || 'No Date Specified'}}
+                </td>
+                <td data-title="'Volunteers'">
+                    {{visit.volunteers.length}} Volunteer(s)
+                </td>
                 <td class='text-right'>
-                    <a class='btn' ng-click="store()" ng-href="#/mothers/{{mother._id}}/visits/edit/{{visit._id}}">
+                    <a class='btn' ng-href="#/mothers/{{mother._id}}/visits/edit/{{visit._id}}">
                         Edit
                     </a>
                     <a class='btn text-danger' confirm-click='Are you sure you want to delete this visit?' ng-click='delete(visit._id)'>

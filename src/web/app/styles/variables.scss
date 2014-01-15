@@ -1,3 +1,5 @@
+
+
 // Bootstrap Overrides
 //----------------------------
 $padding-base-vertical: 10px;
@@ -9,6 +11,11 @@ $headings-font-family: 'Source Sans Pro','Segoe UI','Droid Sans',Tahoma,Arial,sa
 //colors
 $text-color: #555;
 $headings-color: #444;
+
+//buttons
+$btn-default-color: $text-color;
+$btn-default-bg: #efefef;
+
 
 //$brand-primary: #f89e00;
 //$text-color: #37281e;
@@ -39,3 +46,17 @@ $padding-content-vertical:    20px;
 $table-head-bg: #e6e6e6;
 $table-head-sort-bg: #d2d2d2;
 $table-head-color: #555;
+
+//
+// Breadcrumbs
+// --------------------------------
+$breadcrumb-bg: #e4e1db;
+$breadcrumb-height: 40px;
+$breadcrumb-text-size: 20px;
+$breadcrumb-arrow-width: 20px;
+$breadcrumb-border-size: $breadcrumb-height / 2;
+
+$breadcrumb-bg: #e4e1db;
+$breadcrumb-color: #94928e;
+$breadcrumb-hover-bg: $brand-primary;
+$breadcrumb-hover-color: #fff;

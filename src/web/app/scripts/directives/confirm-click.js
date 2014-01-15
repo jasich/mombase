@@ -3,7 +3,7 @@
 angular.module('webApp')
   .directive('confirmClick', function () {
     return {
-        priority: 100,
+        priority: -100,
         restrict: 'A',
         link: function postLink(scope, element, attrs) {
             element.bind('click', function(e){

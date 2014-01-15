@@ -1,25 +1,30 @@
 'use strict';
 
 angular.module('webApp')
-  .controller('MothersEditChildCtrl', function ($scope, $injector, $routeParams, $location, breadcrumbs) {
+  .controller('MothersEditVisitCtrl', function ($scope, $injector, $routeParams, $location, breadcrumbs) {
         var FormValidation = $injector.get("FormValidationHelper"),
             Mother  =    $injector.get("Mother"),
-            Child   =    $injector.get("Child"),
-            Alerts  =    $injector.get("Alerts");
+            Visit   =    $injector.get("Visit"),
+            Volunteer =  $injector.get("Volunteer"),
+            Alerts  =    $injector.get("Alerts"),
+            $accessor =  $injector.get("$accessor");
 
-        $scope.currentChild = {};
+        $accessor($scope);
 
-        $scope.form = new FormValidation($scope, 'childForm');
+        $scope.visit = {}
 
         $scope.mother = Mother.get(
             {id: $routeParams.id},
             function(mom){
-                var child = _.find(mom.children, {_id: $routeParams.cid});
+                var visit = _.find(mom.visits, {_id: $routeParams.vid});
 
-                if(child.birthDate)
-                    child.birthDate = $scope.helpers.date.format(child.birthDate);
+                if(visit.startDate)
+                    visit.startDate = $scope.helpers.date.format(visit.startDate);
 
-                $scope.currentChild = child;
+                if(visit.endDate)
+                    visit.endDate = $scope.helpers.date.format(visit.endDate);
+
+                $scope.visit = visit;
             },
             function(){
                 Alerts.addError('Unable to find the mother.');
@@ -29,18 +34,18 @@ angular.module('webApp')
         {
             if(!$scope.form.isFormValid()) return;
 
-            var child = new Child($scope.currentChild);
+            var visit = new Visit($scope.visit);
 
-            child.$update(
+            visit.$update(
                 {
                     mid: $scope.mother._id,
-                    id: $scope.currentChild._id
+                    id: $scope.visit._id
                 },
                 function(){
-                    Alerts.addSuccess('Child information was updated successfully');
-                    $location.path(['/mothers', $scope.mother._id, 'children'].join('/'));
+                    Alerts.addSuccess('Visit information was updated successfully');
+                    $location.path(['/mothers', $scope.mother._id, 'visits'].join('/'));
                 }, function(){
-                    Alerts.addError('Unable to update child.  Please review the form and try again.');
+                    Alerts.addError('Unable to update visit.  Please review the form and try again.');
                 });
         }
   });

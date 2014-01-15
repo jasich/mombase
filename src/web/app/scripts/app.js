@@ -5,7 +5,8 @@ angular.module('webApp', [
   'ngResource',
   'ngSanitize',
   'ngTable',
-  'ngRoute'
+  'ngRoute',
+  'localytics.directives' //chosen directive
 ])
   .config(["$routeProvider", function ($routeProvider) {
     $routeProvider
@@ -119,6 +120,11 @@ angular.module('webApp', [
             templateUrl: 'views/mothers/new-visit.html',
             controller: 'MothersNewVisitCtrl',
             label: 'New Visit'
+        })
+        .when('/mothers/:id/visits/edit/:vid', {
+            templateUrl: 'views/mothers/edit-visit.html',
+            controller: 'MothersEditVisitCtrl',
+            label: 'Edit Visit'
         })
       .when('/mothers/:id/visits', {
         templateUrl: 'views/mothers/visits.html',

@@ -1,0 +1,89 @@
+<fieldset class="form-group-collection">
+    <legend>General Info</legend>
+    <div class='form-group row'>
+
+        <div class='col-md-6' ng-class='{"has-error": form.isFieldInvalid("startDate")}'>
+            <label>Started At</label>
+            <input ng-required="true" type='date' name='startDate' class='form-control' ng-model='visit.startDate'/>
+        </div>
+
+        <div class='col-md-6'>
+            <label>Ended At</label>
+            <input type='date' name='endDate' class='form-control' ng-model='visit.endDate'/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Volunteers</label>
+        <select class="form-control"
+                chosen
+                width="'100%'"
+                allow-single-deselect="true"
+                data-placeholder="Select Volunteers"
+                no-results-text="'No Volunteer Found'"
+                multiple
+                ng-model="visit.volunteers"
+                ng-options="volunteer.email as volunteer | name for volunteer in volunteers">
+            <option value=""></option>
+        </select>
+    </div>
+    <div class='form-group'>
+        <label>Challenges</label>
+        <textarea type='text' placeholder="Enter challenges that occurred during visit..." name='challenges' rows='3' class='form-control' ng-model='visit.challenges'>
+        </textarea>
+    </div>
+</fieldset>
+
+
+
+<fieldset class="form-group-collection">
+    <legend>Children's Moods</legend>
+
+    <div class="form-group row">
+        <div class='col-md-6'>
+            <label>Name</label>
+            <input type='text' name='name' class='form-control' ng-model='currentMood.name'/>
+        </div>
+
+        <div class='col-md-4'>
+            <label>Mood</label>
+            <div class="input-group">
+                <input type='text' name='mood' class='form-control' ng-model='currentMood.mood'/>
+                <div class="input-group-btn">
+                    <a type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Moods <span class="caret"></span></a>
+                    <ul class="dropdown-menu pull-right">
+                        <li ng-repeat="mood in commonMoods">
+                            <a ng-click="setMoodText(mood)">{{mood}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-2 text-center">
+            <label class="block">&nbsp;</label>
+
+            <a class="btn btn-default btn-block" ng-click="addMood()">Add Mood</a>
+        </div>
+    </div>
+
+    <div class="list-group">
+        <a class="list-group-item" ng-repeat="child in visit.moods">
+            <button type="button" class="close" aria-hidden="true"
+                    confirm-click="Are you sure you want to remove this mood?"
+                    ng-click='removeMoodAt($index)'>&times;</button>
+
+            <b>{{child.name}}</b> was <i>{{child.mood}}</i>
+        </a>
+    </div>
+
+    <div class='well empty-message text-center' ng-hide='visit.moods.length'>
+        No moods have been added yet.
+    </div>
+</fieldset>
+
+<div class='form-actions'>
+    <div class='form-actions'>
+        <button class='btn btn-primary' ng-disabled='!form.isFormValid()'>Save Visit</button>
+        <a class='btn btn-link margin-left-5' onclick='window.history.back()'>Cancel</a>
+    </div>
+</div>
