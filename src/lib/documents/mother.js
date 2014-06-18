@@ -25,6 +25,7 @@ var motherSchema = mongoose.Schema({
   createdDate: Date,
   serviceStartedDate: Date,
   serviceEndedDate: Date,
+  referredBy: String,
 
   // Children
   children: [ {
@@ -75,6 +76,8 @@ var motherSchema = mongoose.Schema({
 
   // Medical Information (May be removed due to HIPPA Reasons)
   restrictions: [String],
+  smoking: String,
+  pets: String,
   pediatrition: [String],
   ethnicity: String,
   emergencyContact: {
