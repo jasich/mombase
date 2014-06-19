@@ -91,6 +91,10 @@ angular.module('webApp')
       }
     };
 
+    $scope.hvlVisited = $scope.mother.communication &&
+        $scope.mother.communication.requestForServices &&
+        !!$scope.mother.communication.requestForServices.response;
+
     $scope.delete = function() {
       Mother.delete({id:$scope.mother._id},
         _.partial(_.bind($scope.$emit,$scope), 'mother:delete', $scope.mother._id),
