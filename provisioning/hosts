@@ -1,5 +1,5 @@
 [servers:children]
-vagrant
+production
 
 [vagrant]
 192.168.111.222
