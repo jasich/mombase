@@ -13,7 +13,11 @@ angular.module('webApp')
 
     $scope.formatDate = function(date)
     {
-      return $filter('date')(date, 'yyyy-MM-dd');
+      if (!date) { return ""; }
+      date = new Date(date);
+      var localOffset = date.getTimezoneOffset() * 60000;
+      var offsettedDate = new Date(date.getTime() + localOffset);
+      return $filter('date')(offsettedDate, 'yyyy-MM-dd');
     }
 
     $scope.getLanguageName = function(code)
@@ -30,13 +34,18 @@ angular.module('webApp')
 
     $scope.mother = Mother.get({id: $routeParams.id}, function(mom){
       $scope.mother.birthdate = $scope.formatDate($scope.mother.birthdate);
+      $scope.mother.serviceStartedDate = $scope.formatDate($scope.mother.serviceStartedDate);
+      $scope.mother.serviceEndedDate = $scope.formatDate($scope.mother.serviceEndedDate);
+
       if($scope.mother.communication){
-        $scope.mother.communication.requestForServices.sent = $scope.formatDate($scope.mother.communication.requestForServices.sent);
-        $scope.mother.communication.requestForServices.response = $scope.formatDate($scope.mother.communication.requestForServices.response);
+        if ($scope.mother.communication.requestForServices) {
+          $scope.mother.communication.requestForServices.sent = $scope.formatDate($scope.mother.communication.requestForServices.sent);
+          $scope.mother.communication.requestForServices.response = $scope.formatDate($scope.mother.communication.requestForServices.response);
+        }
 
         if ($scope.mother.communication.waiver) {
-          $scope.mother.communication.waiver.sent = $scope.formatDate($scope.mother.waiver.requestForServices.sent);
-          $scope.mother.communication.waiver.response = $scope.formatDate($scope.mother.waiver.requestForServices.response);
+          $scope.mother.communication.waiver.sent = $scope.formatDate($scope.mother.communication.waiver.sent);
+          $scope.mother.communication.waiver.response = $scope.formatDate($scope.mother.communication.waiver.response);
         }
       }
 
@@ -60,19 +69,42 @@ angular.module('webApp')
       });
     });
 
+    var cleanupEmptyDates = function(mother, fieldname) {
+      if (mother[fieldname] === "0NaN-NaN-NaN" || mother[fieldname] === "") {
+        mother[fieldname] = null;
+      }
+    }
 
     $scope.update = function() {
+      $scope.errMessage = "";
       //$scope.mother.address.state = $scope.selectedState.abbreviation;
-      $scope.mother.availability = $scope.selectedAvailability.value;
+      if ($scope.selectedAvailability) {
+        $scope.mother.availability = $scope.selectedAvailability.value;
+      } else {
+        delete $scope.mother['availbility'];
+      }
       //$scope.mother.languages = _.map($scope.selectedLanguages, function(l) { return l.abbr });
 
       var motherUpdate = function () {
+        cleanupEmptyDates($scope.mother, 'birthdate');
+        cleanupEmptyDates($scope.mother, 'serviceEndedDate');
+        cleanupEmptyDates($scope.mother, 'serviceStartedDate');
+
         var mother = new Mother($scope.mother);
         mother.$update(function(){
           Alerts.addSuccess("Mother was saved successfully");
           $location.path('/mothers');
-        }, function(){
-          Alerts.addError("Unable to save the mother information.  Please review the form and try again.");
+        }, function(resp){
+          if (resp.data.name == "ValidationError") {
+            var badFields = [];
+            for (var field in resp.data.errors) {
+              badFields.push(field);
+            }
+
+            $scope.errMessage = "Unable to save. Please fix the following fields: " + badFields.join(', ');
+          } else {
+            $scope.errMessage = "Unable to save. " + resp.data.message;
+          }
         });
       };
 

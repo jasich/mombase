@@ -9,7 +9,13 @@ exports.create = function( req, res ){
   var body = req.body;
 
   motherService.save( body, function( err, mother ) {
-    if ( err ) return res.send( 500, 'failure');
+    if ( err ) {
+      if (err.name !== "ValidationError") {
+        return res.send( 500, {message: err.message});
+      } else {
+        return res.send( 500, err);
+      }
+    }
 
     res.send(mother);
   });

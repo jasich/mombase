@@ -19,7 +19,7 @@ MotherService.prototype = {
     var mother = new Mother( data );
 
     Mother.findOne( { email: mother.email }, function( err, result ) {
-      if( result ) {
+      if( result && mother.email ) {
         cb && cb( new Error('Duplicate Mother') );
       } else {
         mother.save( cb );
@@ -76,7 +76,7 @@ MotherService.prototype = {
             mother.primaryVolunteer = mother.volunteers[0];
           }else{
             mother.primaryVolunteer = '';
-          }         
+          }
         }
 
         self.update(mother.toObject(), cb);
@@ -92,5 +92,3 @@ if ( !that ) {
 }
 
 module.exports = that;
-
-

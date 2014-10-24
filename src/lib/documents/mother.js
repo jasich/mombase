@@ -7,7 +7,7 @@ var motherSchema = mongoose.Schema({
   nickName: String,
   lastName: {type: String, required: true},
   birthdate: Date,
-  email: {type: String, unique: true},
+  email: String,
   phone: String,
 
   // Address Information
@@ -75,10 +75,10 @@ var motherSchema = mongoose.Schema({
   languages: [String],
 
   // Medical Information (May be removed due to HIPPA Reasons)
-  restrictions: [String],
+  restrictions: String,
   smoking: String,
   pets: String,
-  pediatrition: [String],
+  pediatrician: String,
   ethnicity: String,
   emergencyContact: {
     firstName: {type: String },

@@ -55,28 +55,24 @@ angular.module('webApp')
 							'Google geoloc API status=' + jsonObj.status +
 							', Results = ' + res
 						);
-						defer.resolve(null);
-						$rootScope.$digest();
+						defer.reject("Failed to get geolocation data");
+					} else {
+						// pipe the data back
+						defer.resolve({
+							lat: res[0].geometry.location.lat,
+							lng: res[0].geometry.location.lng
+						});
 					}
-					
-					// pipe the data back
-					defer.resolve({
-						lat: res[0].geometry.location.lat,
-						lng: res[0].geometry.location.lng
-					});
-					$rootScope.$digest();
 				}
 				else{
-					ErrorHandler.Log(service, 'Data cannot be parsed as JSON');	
-					defer.resolve(null);
-					$rootScope.$digest();
+					ErrorHandler.Log(service, 'Data cannot be parsed as JSON');
+					defer.reject("Could not parse data");
 				}
 
 			},
 			error: function(xhr, status){
-				ErrorHandler.Log(service, 'HTTP error occured (' + status + ')');	
-				defer.resolve(null);
-				$rootScope.$digest();
+				ErrorHandler.Log(service, 'HTTP error occured (' + status + ')');
+				defer.reject("Failed to get response");
 			}
 		});
 

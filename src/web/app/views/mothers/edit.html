@@ -17,14 +17,14 @@
         <div class='row'>
             <div class='col-md-6'>
                 <div class="form-group" ng-class="{'has-error': isFieldInvalid('firstName')}">
-                    <label>First Name</label>
+                    <label>First Name*</label>
                     <input type='text' name='firstName' ng-required='true' class='form-control' ng-model='mother.firstName'/>
                 </div>
 
             </div>
             <div class='col-md-6'>
                 <div class="form-group" ng-class="{'has-error': isFieldInvalid('lastName')}">
-                    <label>Last Name</label>
+                    <label>Last Name*</label>
                     <input type='text' name='lastName' ng-required='true' class='form-control' ng-model='mother.lastName'/>
                 </div>
             </div>
@@ -43,7 +43,7 @@
 
             <div class='col-md-6'>
                 <label>Birthdate</label>
-                <input type='date' name='birthDate' ng-required='true' class='form-control' ng-model='mother.birthdate'/>
+                <input type='date' name='birthDate' class='form-control' ng-model='mother.birthdate'/>
             </div>
 
             <div class='col-md-6'>
@@ -59,7 +59,7 @@
             </div>
             <div class='col-md-6' ng-class="{'has-error': isFieldInvalid('phone')}">
                 <label>Phone</label>
-                <input type='text' name='phone' ng-required='true' class='form-control' ng-model='mother.phone'/>
+                <input type='text' name='phone' class='form-control' ng-model='mother.phone'/>
             </div>
         </div>
 
@@ -68,7 +68,7 @@
             <legend>Address</legend>
             <div class='form-group' ng-class="{'has-error': isFieldInvalid('line1')}">
                 <label>Street</label>
-                <input type='text' name='line1' ng-required='true' class='form-control' ng-model='mother.address.line1'/>
+                <input type='text' name='line1' class='form-control' ng-model='mother.address.line1'/>
             </div>
 
             <div class='form-group'>
@@ -86,17 +86,17 @@
             <div class='form-group row margin-top-20'>
                 <div class='col-md-6' ng-class="{'has-error': isFieldInvalid('city')}">
                     <label>City</label>
-                    <input type='text' name='city' ng-required='true' class='form-control' ng-model='mother.address.city'/>
+                    <input type='text' name='city' class='form-control' ng-model='mother.address.city'/>
                 </div>
                 <div class='col-md-4' ng-class="{'has-error': isFieldInvalid('state')}">
                     <label>State</label>
-                    <select name='state' ng-model='mother.address.state' ng-required='true' ng-options='st.abbreviation as st.name for st in states' class='form-control'>
+                    <select name='state' ng-model='mother.address.state' ng-options='st.abbreviation as st.name for st in states' class='form-control'>
                         <option value=''>Select State</option>
                     </select>
                 </div>
                 <div class='col-md-2' ng-class="{'has-error': isFieldInvalid('zip')}">
                     <label>Zip</label>
-                    <input type='text' name='zip' ng-required='true' class='form-control' ng-model='mother.address.zip'/>
+                    <input type='text' name='zip' class='form-control' ng-model='mother.address.zip'/>
                 </div>
             </div>
             <div class='form-group row margin-top-20'>
@@ -122,12 +122,12 @@
             <div class='form-group row' ng-class="{'has-error': isFieldInvalid('erFirstName')}">
                 <div class='col-md-6'>
                     <label>First Name</label>
-                    <input type='text' ng-required="true" name='erFirstName' class='form-control' ng-model='mother.emergencyContact.firstName'/>
+                    <input type='text' name='erFirstName' class='form-control' ng-model='mother.emergencyContact.firstName'/>
                 </div>
 
                 <div class='col-md-6' ng-class="{'has-error': isFieldInvalid('erLastName')}">
                     <label>Last Name</label>
-                    <input type='text' ng-required="true" name='erLastName' class='form-control' ng-model='mother.emergencyContact.lastName'/>
+                    <input type='text' name='erLastName' class='form-control' ng-model='mother.emergencyContact.lastName'/>
                 </div>
             </div>
 
@@ -171,7 +171,7 @@
             <div class='form-group row'>
                 <div class='col-md-12'>
                     <label>Availability</label>
-                    <select ng-model='selectedAvailability' required ng-options='av.name for av in availabilityCodes' class='form-control'>
+                    <select ng-model='selectedAvailability' ng-options='av.name for av in availabilityCodes' class='form-control'>
                         <option value=''>Select Availability</option>
                     </select>
                 </div>
@@ -242,8 +242,12 @@
             </div>
         </fieldset>
 
+        <div style="color: red;">
+          {{errMessage}}
+        </div>
+
         <div class='form-actions'>
-            <button class='btn btn-primary' ng-disabled='!isFormValid()'>Save Mother</button>
+            <button class='btn btn-primary'>Save Mother</button>
             <a class='btn btn-link margin-left-5' href="#/mothers">Cancel</a>
         </div>
     </form>
