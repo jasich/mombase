@@ -36,7 +36,7 @@ var motherSchema = mongoose.Schema({
     gender: Boolean, // Male: True - Female: False
     birthDate: Date,
     receivingServices: Boolean,
-    specialNeeds: String,
+    specialNeeds: Boolean,
     siblings: String,
 
     baby: {
