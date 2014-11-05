@@ -9,23 +9,23 @@
             <div class='form-group row'>
                 <div class='col-md-6'>
                     <label>First Name</label>
-                    <input type='text' name='firstName' ng-required='true' class='form-control' ng-model='volunteer.firstName'/>
+                    <input type='text' name='firstName*' ng-required='true' class='form-control' ng-model='volunteer.firstName'/>
                 </div>
 
                 <div class='col-md-6'>
                     <label>Last Name</label>
-                    <input type='text' name='lastName' ng-required='true' class='form-control' ng-model='volunteer.lastName'/>
+                    <input type='text' name='lastName*' ng-required='true' class='form-control' ng-model='volunteer.lastName'/>
                 </div>
             </div>
 
             <div class='form-group row'>
                 <div class='col-md-6'>
                     <label>Email</label>
-                    <input type='email' name='email' ng-required='true' class='form-control' ng-model='volunteer.email'/>
+                    <input type='email' name='email' class='form-control' ng-model='volunteer.email'/>
                 </div>
                 <div class='col-md-6'>
                     <label>Cell Phone</label>
-                    <input type='text' name='cellPhone' ng-required='true' class='form-control' ng-model='volunteer.phone'/>
+                    <input type='text' name='cellPhone' class='form-control' ng-model='volunteer.phone'/>
                 </div>
             </div>
 
@@ -35,23 +35,23 @@
                 <legend>Address</legend>
                 <div class='form-group'>
                     <label>Street</label>
-                    <input type='text' name='address' ng-required='true' class='form-control' ng-model='volunteer.address.line1'/>
+                    <input type='text' name='address' class='form-control' ng-model='volunteer.address.line1'/>
                 </div>
 
                 <div class='form-group row margin-top-20'>
                     <div class='col-md-6'>
                         <label>City</label>
-                        <input type='text' name='city' ng-required='true' class='form-control' ng-model='volunteer.address.city'/>
+                        <input type='text' name='city' class='form-control' ng-model='volunteer.address.city'/>
                     </div>
                     <div class='col-md-4'>
                         <label>State</label>
-                        <select ng-model='volunteer.address.state' ng-required='true' ng-options='st.abbreviation as st.name for st in states' class='form-control'>
+                        <select ng-model='volunteer.address.state' ng-options='st.abbreviation as st.name for st in states' class='form-control'>
                             <option value=''>Select State</option>
                         </select>
                     </div>
                     <div class='col-md-2'>
                         <label>Zip</label>
-                        <input type='text' name='zip' ng-required='true' class='form-control' ng-model='volunteer.address.zip'/>
+                        <input type='text' name='zip' class='form-control' ng-model='volunteer.address.zip'/>
                     </div>
                 </div>
             </fieldset>
@@ -111,9 +111,12 @@
             </fieldset>
         </div>
 
+        <div style="color: red;">
+          {{errMessage}}
+        </div>
 
         <div class='form-actions'>
-            <button class='btn btn-primary' ng-disabled='!isFormValid()'>Save Volunteer</button>
+            <button class='btn btn-primary'>Save Volunteer</button>
             <a class='btn btn-link margin-left-5' href="#/volunteers">Cancel</a>
         </div>
     </form>

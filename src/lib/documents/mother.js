@@ -3,23 +3,31 @@ var mongoose = require('mongoose');
 var motherSchema = mongoose.Schema({
 
   // Contact Information
-  firstName: {type: String, required: true},
+  firstName: {
+    type: String,
+    required: true
+  },
   nickName: String,
-  lastName: {type: String, required: true},
+  lastName: {
+    type: String,
+    required: true
+  },
   birthdate: Date,
   email: String,
   phone: String,
 
   // Address Information
   address: {
-    line1 : String,
-    line2 : String,
-    city : String,
+    line1: String,
+    line2: String,
+    city: String,
     county: String,
-    zip : Number,
-    state : String
+    zip: Number,
+    state: String
   },
-  loc: { type : [Number] },
+  loc: {
+    type: [Number]
+  },
 
   // Important Dates
   createdDate: Date,
@@ -28,10 +36,16 @@ var motherSchema = mongoose.Schema({
   referredBy: String,
 
   // Children
-  children: [ {
-    firstName: String,
+  children: [{
+    firstName: {
+      type: String,
+      required: true
+    },
     nickName: String,
-    lastName: String,
+    lastName: {
+      type: String,
+      required: true
+    },
 
     gender: Boolean, // Male: True - Female: False
     birthDate: Date,
@@ -67,7 +81,7 @@ var motherSchema = mongoose.Schema({
   },
 
   // Communications
-  availability:  Number,  // 0 = Any, 1 = AM, 2 = PM
+  availability: Number, // 0 = Any, 1 = AM, 2 = PM
   howDidYouFind: String,
   referralDetails: String,
 
@@ -81,9 +95,13 @@ var motherSchema = mongoose.Schema({
   pediatrician: String,
   ethnicity: String,
   emergencyContact: {
-    firstName: {type: String },
+    firstName: {
+      type: String
+    },
     nickName: String,
-    lastName: {type: String },
+    lastName: {
+      type: String
+    },
     email: String,
     phone: String
   },
@@ -100,7 +118,10 @@ var motherSchema = mongoose.Schema({
     }],
     challenges: String,
     volunteers: [String],
-    startDate: Date,
+    startDate: {
+      type: Date,
+      required: true
+    },
     endDate: Date
   }],
 
