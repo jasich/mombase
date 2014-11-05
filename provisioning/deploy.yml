@@ -1,14 +1,13 @@
 ---
-- hosts: servers
-  gather_facts: false
-  user: root
+- hosts: production
+  remote_user: root
 
   tasks:
   - name: Pull source from github
-    git: repo=${repo} dest=${src_root}
+    git: "repo={{ repo }} dest={{ src_root }}"
 
   - name: Build application
-    shell: cd ${src_root} && make build
+    shell: "cd {{ src_root }} && make build"
 
   - name: Dump pm2
     raw: pm2 dump
@@ -17,7 +16,7 @@
     raw: pm2 kill
 
   - name: Start node application
-    raw: pm2 start ${src_root}/src/api/app.js -i max
+    raw: "pm2 start {{ src_root }}/src/api/app.js -i max"
 
   - name: Ensure admin user present
-    raw: ${src_root}/src/bin/admin_user
+    raw: "{{ src_root }}/src/bin/admin_user"
